@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cn('antialiased min-w-[640px]', fontPretendard.className)}`}
+        className={`${cn('antialiased', fontPretendard.className)}`}
       >
         <Navbar/>
         {children}
