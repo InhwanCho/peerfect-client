@@ -17,17 +17,16 @@ export default function Navbar() {
   };
 
   return (
-    // Navbar를 항상 화면 상단에 고정시키고 z-index를 추가
-    <header className="w-full bg-[#111111] flex justify-center select-none fixed top-0 left-0 z-50">
+    <header className="w-full bg-[#111111] flex justify-center select-none sticky top-0  z-10">
       <div className="md:w-[80%] px-6 md:px-0 h-[90px] flex justify-between items-center">
-        <div className="justify-start items-center gap-[86px] flex">
+        <div className="justify-start items-center  gap-12 sm:gap-[86px] flex">
           <Link href={'/'} className="w-[170px] h-[55px] flex items-center">
             <picture>
               <source srcSet="/assets/nav/main_logo.webp" type="image/webp" />
               <img src="/assets/nav/main_logo.png" alt="logo image" />
             </picture>
           </Link>
-          <div className="flex items-center gap-[17px]">
+          <div className="flex items-center gap-3 sm:gap-4">
             <nav className="flex items-center">
               <div className="pr-3 flex items-center cursor-pointer relative" onClick={toggleChallengeDropdown}>
                 <div className="text-white md:text-base lg:text-lg font-semibold pr-4 whitespace-nowrap">챌린지</div>
@@ -42,7 +41,7 @@ export default function Navbar() {
                 </div>
               )}
             </nav>
-            <Link href="/work" className="pl-4 pr-[52px] flex items-center">
+            <Link href="/work" className="pl-4 pr-8 sm:pr-[52px] flex items-center">
               <div className="text-white md:text-base lg:text-lg font-semibold whitespace-nowrap">작업물</div>
             </Link>
           </div>
@@ -63,7 +62,7 @@ export default function Navbar() {
             )}
           </div>
           <div className="flex items-center">
-            <Link href="/auth/register" className="text-white text-base font-semibold">
+            <Link href="/auth" className="text-white text-base font-semibold">
               <span className="text-nowrap">로그인 / </span>
               <span>회원가입</span>
             </Link>
