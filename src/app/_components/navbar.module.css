@@ -1,0 +1,11 @@
+
+.notificationArrow::after {
+  content: '';
+  position: absolute;
+  top: -8px; /* 화살표 위치 */
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 8px solid white; /* 화살표 색상 */
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}

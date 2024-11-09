@@ -1,5 +1,4 @@
 import { cn } from "../_components/lib/utils";
-import FormLayout from "./_components/formlayout";
 import styles from "./authlayout.module.css";
 
 export default function AuthLayout({
@@ -7,7 +6,7 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log(styles.authLayoutHeroImage);
+  
   return (
     <div
       className={cn(styles.authLayoutHeroImage, "relative")}
