@@ -29,12 +29,12 @@ export default function EmailVerification({
       >
         다른 방법으로 로그인
       </button>
-      {/* <button
+      <button
         className="w-full bg-purple-600 text-white text-lg rounded-lg py-3 mt-4"
         onClick={onProceedToSignup}
       >
-        임시 인증완료
-      </button> */}
+        임시 - 인증완료 버튼
+      </button>
     </div>
   );
 }

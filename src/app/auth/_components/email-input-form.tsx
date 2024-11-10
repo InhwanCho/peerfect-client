@@ -1,5 +1,5 @@
+import { CloseIcon } from "@/app/_components/icons/icons";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { CloseIcon } from "./close-icon";
 
 interface EmailInputFormProps {
   emailValue: string;
@@ -27,14 +27,14 @@ export default function EmailInputForm({
       </h2>
       <div className="relative w-full mb-8">
         {emailValue && (
-          <label className="absolute left-4 top-2 text-gray-500 text-xs">
+          <label className="absolute left-4 top-3 text-gray-500 text-xs">
             이메일
           </label>
         )}
         <input
           type="email"
           placeholder={!emailValue ? "이메일" : ""}
-          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-white rounded-lg border ${errors.email ? "border-red-500" : "border-gray-300"} text-gray-800 focus:outline-none`}
+          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-white rounded-lg border ${errors.email ? "border-red-500" : isValid ? "border-purple-500" : "border-gray-300"} text-gray-800 focus:outline-none`}
           {...register("email", {
             required: "이메일을 입력해주세요.",
             pattern: {

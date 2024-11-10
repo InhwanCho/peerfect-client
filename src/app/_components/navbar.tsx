@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import ArrowIcon from "./icons/arrow-icon";
 
 export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
@@ -29,10 +30,7 @@ export default function Navbar() {
             <nav className="flex items-center">
               <div className="pr-3 flex items-center cursor-pointer relative" onClick={toggleChallengeDropdown}>
                 <div className="text-white md:text-base lg:text-lg font-semibold pr-4 whitespace-nowrap">챌린지</div>
-                <picture className={`transform transition-all ${isChallengeOpen ? "rotate-180" : "rotate-0"}`}>
-                  <source srcSet="/assets/nav/arrow_down.webp" type="image/webp" />
-                  <img src="/assets/nav/arrow_down.png" alt="arrow down image" />
-                </picture>
+                <ArrowIcon isOpen={isChallengeOpen} color="#FFFFFF" />
               </div>
               {isChallengeOpen && (
                 <div className="absolute top-[90px] bg-white shadow-lg p-4">
