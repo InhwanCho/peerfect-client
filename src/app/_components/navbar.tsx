@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { cn } from "./lib/utils";
-import styles from "./navbar.module.css";
 
 export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
@@ -86,9 +84,8 @@ export default function Navbar() {
 
           </div>
           <div className="flex items-center">
-            <Link href="/auth" className="text-white text-base font-semibold">
-              <span className="text-nowrap">로그인 </span>
-              <span className="sm:inline-flex hidden">/ 회원가입</span>
+            <Link href="/auth" className="text-white text-base font-semibold hidden lg:inline-flex">
+              <span className="text-nowrap">로그인 / 회원가입</span>              
             </Link>
           </div>
           <picture className="cursor-pointer lg:hidden">
