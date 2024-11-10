@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <header className="w-full bg-[#111111] flex justify-center select-none sticky top-0 z-10">
-      <div className="lg:w-[65%] px-6 md:px-0 h-[90px] flex justify-between items-center ">
+      <div className="lg:w-[90%] xl:w-[75%] w-full px-8 h-[90px] flex justify-between items-center ">
         <div className="justify-start items-center gap-12 sm:gap-[86px] flex">
           <Link href={'/'} className="w-[120px] sm:w-[170px] h-[55px] flex items-center">
             <picture>
@@ -27,7 +27,7 @@ export default function Navbar() {
               <img src="/assets/nav/main_logo.png" alt="logo image" />
             </picture>
           </Link>
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="lg:flex hidden items-center gap-3">
             <nav className="flex items-center">
               <div className="pr-3 flex items-center cursor-pointer relative" onClick={toggleChallengeDropdown}>
                 <div className="text-white md:text-base lg:text-lg font-semibold pr-4 whitespace-nowrap">챌린지</div>
@@ -91,6 +91,10 @@ export default function Navbar() {
               <span className="sm:inline-flex hidden">/ 회원가입</span>
             </Link>
           </div>
+          <picture className="cursor-pointer lg:hidden">
+            <source srcSet="/assets/nav/menu_more.webp" type="image/webp" />
+            <img alt="see more button" src="/assets/nav/menu_more.png" className="w-6 h-6" />            
+          </picture>
         </div>
       </div>
     </header>

@@ -6,10 +6,10 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
+
   return (
     <div
-      className={cn(styles.authLayoutHeroImage, "relative")}
+      className={cn("relative", styles.authLayoutHeroImage)}
     >
       <div className="absolute top-[40%] left-[8%] xl:left-[16%] hidden lg:flex flex-col space-y-6 items-center">
         <picture>
