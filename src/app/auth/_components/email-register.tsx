@@ -15,19 +15,19 @@ export default function EmailRegister({ onSwitchAuthType }: EmailRegisterProps) 
     mode: "onBlur",
   });
 
-  const [isVerified, setIsVerified] = useState(false); // 인증 화면 전환 상태
-  const [isSignupScreen, setIsSignupScreen] = useState(false); // 회원가입 화면 전환 상태
-  const [verifiedEmail, setVerifiedEmail] = useState(""); // 유효성이 통과된 이메일 저장
-  const emailValue = watch("email"); // 현재 이메일 입력값 추적
+  const [isVerified, setIsVerified] = useState(false);
+  const [isSignupScreen, setIsSignupScreen] = useState(false);
+  const [verifiedEmail, setVerifiedEmail] = useState("");
+  const emailValue = watch("email");
 
   const onSubmit = (data: { email: string }) => {
     console.log("Valid email:", data.email);
-    setVerifiedEmail(data.email); // 유효성 통과된 이메일 저장
-    setIsVerified(true); // 인증 성공 시 화면 전환
+    setVerifiedEmail(data.email); 
+    setIsVerified(true); 
   };
 
   const handleClearInput = () => {
-    setValue("email", ""); // react-hook-form의 값 초기화
+    setValue("email", "");
   };
 
   if (isSignupScreen) {

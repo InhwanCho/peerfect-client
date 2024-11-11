@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import FormLayout from "./_components/formlayout";
+import FormLayout from "./_components/form-layout";
 import SocialButton from "./_components/social-button";
 import EmailRegister from "./_components/email-register";
 
@@ -12,9 +12,7 @@ export default function AuthPage() {
     <FormLayout>
       {authType === "email" ? (
         // 이메일 로그인 폼
-        <>
-          <EmailRegister onSwitchAuthType={() => setAuthType("social")} />
-        </>
+        <EmailRegister onSwitchAuthType={() => setAuthType("social")} />
       ) : (
         // 소셜 로그인 UI
         <>
@@ -30,7 +28,6 @@ export default function AuthPage() {
               onClick={() => setAuthType("email")}
             />
           </div>
-
         </>
       )}
     </FormLayout>

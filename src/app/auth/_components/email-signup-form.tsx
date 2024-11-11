@@ -1,3 +1,4 @@
+import { TermsModal } from "@/app/_components/common/modals/terms-modal";
 import ArrowIcon from "@/app/_components/icons/arrow-icon";
 import CheckIcon from "@/app/_components/icons/check-icon";
 import CheckMarkIcon from "@/app/_components/icons/check-mark-icon";
@@ -7,19 +8,32 @@ interface SignupFormProps {
   verifiedEmail: string;
 }
 
+enum JobOptions {
+  UIUXDesigner = "UI/UX 디자이너",
+  FrontEndDeveloper = "Front-end 개발자"
+}
+
 export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedJob, setSelectedJob] = useState("직군 선택");
+  const [selectedJob, setSelectedJob] = useState<JobOptions | null>(null); 
   const [nickname, setNickname] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState<"required" | "optional">("required");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  const handleJobSelection = (job: string) => {
+  const handleJobSelection = (job: JobOptions) => { 
     setSelectedJob(job);
     setIsDropdownOpen(false);
   };
 
-  // 드롭다운 외부 클릭 또는 'Esc' 키 감지
+  const openModal = (content: "required" | "optional") => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => setIsModalOpen(false);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -27,18 +41,9 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
       }
     };
 
-    const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsDropdownOpen(false);
-      }
-    };
-
     document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscKey);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscKey);
     };
   }, []);
 
@@ -46,7 +51,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
     <div className="flex flex-col items-center justify-center h-screen text-center w-full">
       <h2 className="text-2xl font-semibold text-black mb-6">회원가입</h2>
       <div className="w-full max-w-md mx-auto space-y-6">
-
+        
         {/* 이메일 인증된 표시 */}
         <div className="text-left">
           <label className="block text-sm font-medium text-gray-700 mb-1">이메일</label>
@@ -65,28 +70,28 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
           <label className="block text-sm font-medium text-gray-700 mb-1">직군 선택</label>
           <div
             onClick={toggleDropdown}
-            className={`flex items-center justify-between text-sm w-full border rounded-lg p-3 text-gray-800 h-[70px] cursor-pointer select-none ${isDropdownOpen ? "border-purple-500" : selectedJob !== "직군을 선택해주세요." ? "border-purple-500" : "border-gray-300"
+            className={`flex items-center justify-between text-sm w-full border rounded-lg p-3 text-gray-800 h-[70px] cursor-pointer select-none ${isDropdownOpen ? "border-purple-500" : selectedJob !== null ? "border-purple-500" : "border-gray-300"
             }`}
           >
-            <span>{selectedJob}</span>
+            <span>{selectedJob ?? "직군 선택"}</span>
             <ArrowIcon isOpen={isDropdownOpen} color="#B5B5B5" />
           </div>
           {isDropdownOpen && (
             <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
               <div
-                onClick={() => handleJobSelection("UI/UX 디자이너")}
+                onClick={() => handleJobSelection(JobOptions.UIUXDesigner)}
                 className="p-1 cursor-pointer text-left group"
               >
                 <div className="rounded-md p-3 transition-all bg-white group-hover:bg-[#F9F4FF]">
-                  <span className="group-hover:text-[#8530F1] text-sm">UI/UX 디자이너</span>
+                  <span className="group-hover:text-[#8530F1] text-sm">{JobOptions.UIUXDesigner}</span>
                 </div>
               </div>
               <div
-                onClick={() => handleJobSelection("Front-end 개발자")}
+                onClick={() => handleJobSelection(JobOptions.FrontEndDeveloper)}
                 className="p-1 cursor-pointer text-left group"
               >
                 <div className="rounded-md p-3 transition-all bg-white group-hover:bg-[#F9F4FF]">
-                  <span className="group-hover:text-[#8530F1] text-sm">Front-end 개발자</span>
+                  <span className="group-hover:text-[#8530F1] text-sm">{JobOptions.FrontEndDeveloper}</span>
                 </div>
               </div>
             </div>
@@ -126,7 +131,6 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
         <div className="text-left">
           <div className="flex justify-between items-center mb-2.5">
             <div className="flex items-center">
-              {/* <Checkbox /> */}
               <CheckMarkIcon />
               <label className="pl-2 text-sm font-medium text-gray-700">약관 전체 동의</label>
             </div>
@@ -136,12 +140,16 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
             <div className="flex items-center text-gray-400">
               <CheckIcon />
               <span className="text-sm pl-2">[필수] 피어펙트 서비스 이용 회원 약관</span>
-              <button className="text-slate-400 text-xs ml-auto underline">내용 보기</button>
+              <button className="text-slate-400 text-xs ml-auto underline" onClick={() => openModal("required")}>
+                내용 보기
+              </button>
             </div>
             <div className="flex items-center text-gray-400">
               <CheckIcon />
               <span className="text-sm pl-2">[선택] 마케팅 정보 수신</span>
-              <button className="text-slate-400 text-xs ml-auto underline">내용 보기</button>
+              <button className="text-slate-400 text-xs ml-auto underline" onClick={() => openModal("optional")}>
+                내용 보기
+              </button>
             </div>
           </div>
         </div>
@@ -151,6 +159,9 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
           회원가입
         </button>
       </div>
+
+      {/* 모달 창 */}
+      {isModalOpen && <TermsModal onClose={closeModal} content={modalContent} />}
     </div>
   );
 }

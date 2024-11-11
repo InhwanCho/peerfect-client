@@ -11,8 +11,8 @@ export default function AuthLayout({
     <div
       className={cn("relative", styles.authLayoutHeroImage)}
     >
-      <div className="absolute top-[40%] left-[8%] xl:left-[16%] hidden lg:flex flex-col space-y-6 items-center">
-        <picture>
+      <div className="absolute top-[40%] left-[8%] xl:left-[12%] 2xl:left-[16%] hidden lg:flex flex-col space-y-6 items-center">
+        <picture className="w-4/5 xl:w-full">
           <source srcSet="/assets/auth/auth_hero_logo.webp" type="image/webp" />
           <img src="/assets/auth/auth_hero_logo.png" alt="logo image" />
         </picture>
