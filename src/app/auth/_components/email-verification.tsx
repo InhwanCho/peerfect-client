@@ -10,7 +10,7 @@ export default function EmailVerification({
   onSwitchAuthType
 }: EmailVerificationProps) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen px-6 text-center w-full">
+    <div className="flex flex-col items-center justify-center h-screen text-center w-full">
       <h2 className="text-2xl font-semibold text-black mb-6">이메일 인증</h2>
       <div className="my-10 text-gray-600 whitespace-nowrap text-sm">
         <p className="mb-0.5">입력하신 메일 주소로 인증 메일이 발송되었습니다.</p>

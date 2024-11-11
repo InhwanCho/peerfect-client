@@ -1,4 +1,6 @@
-import { CloseIcon } from "@/app/_components/icons/icons";
+
+
+import { CloseIcon } from "@/app/_components/icons/close-icon";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface EmailInputFormProps {
@@ -55,7 +57,7 @@ export default function EmailInputForm({
             onClick={handleClearInput}
             className="absolute right-4 top-1/2 transform -translate-y-1/2"
           >
-            <CloseIcon />
+            <CloseIcon color="red"/>
           </button>
         )}
         {errors.email && typeof errors.email.message === "string" && (
