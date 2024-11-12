@@ -1,30 +1,41 @@
-export default function CheckIcon({
-  color,
-  className,
-  isTransparent = false,
-}: {
-  color?:'purple';
-  className?: string;
-  isTransparent?: boolean;
-}) {
+interface CheckIconProps {
+  checked: boolean;
+}
+
+export default function CheckIcon({ checked }: CheckIconProps) {
   return (
     <svg
       width="20"
       height="20"
-      viewBox="0 0 24 24"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
     >
-      {!isTransparent && <circle cx="12" cy="12" r="12" fill="#ffffff" />}
-      <path
-        d="M16 8L10.5 15L8 12.5"
-        
-        stroke= {color === "purple" ? "#8530F1" : "#B5B5B5"}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      <rect
+        x="0.5"
+        y="0.5"
+        width="19"
+        height="19"
+        rx="5.5"
+        // stroke={checked ? "#8530F1" : "#B5B5B5"}
+        fill="none"
       />
+      {checked ? (
+        <path
+          d="M5 10.5L8.33333 14L15 7"
+          stroke="#8530F1"
+          strokeWidth="1.66667"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ) :
+        <path
+          d="M5 10.5L8.33333 14L15 7"
+          stroke="#B5B5B5"
+          strokeWidth="1.66667"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />}
     </svg>
   );
 }

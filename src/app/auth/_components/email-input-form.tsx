@@ -36,8 +36,8 @@ export default function EmailInputForm({
         )}
         <input
           type="email"
-          placeholder={!emailValue ? "이메일" : ""}
-          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-white rounded-lg border ${
+          placeholder={!emailValue ? "이메일을 입력해주세요." : ""}
+          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-white rounded-lg border placeholder:text-sm ${
             errors.email
               ? "border-red-500"
               : isValid

@@ -1,8 +1,8 @@
 import { TermsModal } from "@/app/_components/common/modals/terms-modal";
 import ArrowIcon from "@/app/_components/icons/arrow-icon";
 import CheckIcon from "@/app/_components/icons/check-icon";
-import CheckMarkIcon from "@/app/_components/icons/check-mark-icon";
 import { useState, useEffect, useRef } from "react";
+import TermsAgreement from "./terms-agrrment";
 
 interface SignupFormProps {
   verifiedEmail: string;
@@ -10,19 +10,27 @@ interface SignupFormProps {
 
 enum JobOptions {
   UIUXDesigner = "UI/UX 디자이너",
-  FrontEndDeveloper = "Front-end 개발자"
+  FrontEndDeveloper = "Front-end 개발자",
 }
 
 export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedJob, setSelectedJob] = useState<JobOptions | null>(null); 
+  const [selectedJob, setSelectedJob] = useState<JobOptions | null>(null);
   const [nickname, setNickname] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<"required" | "optional">("required");
+  const [modalContent, setModalContent] = useState<"required" | "optional">(
+    "required"
+  );
+  const [agreements, setAgreements] = useState({
+    all: false,
+    required: false,
+    optional: false,
+  });
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  const handleJobSelection = (job: JobOptions) => { 
+  const handleJobSelection = (job: JobOptions) => {
     setSelectedJob(job);
     setIsDropdownOpen(false);
   };
@@ -34,9 +42,30 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
 
   const closeModal = () => setIsModalOpen(false);
 
+  // 약관 동의 상태 관리
+  useEffect(() => {
+    if (agreements.required && agreements.optional) {
+      setAgreements((prev) => ({ ...prev, all: true }));
+    } else {
+      setAgreements((prev) => ({ ...prev, all: false }));
+    }
+  }, [agreements.required, agreements.optional]);
+
+  const handleAgreeAll = () => {
+    const newAllValue = !agreements.all;
+    setAgreements({
+      all: newAllValue,
+      required: newAllValue,
+      optional: newAllValue,
+    });
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -47,30 +76,54 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
     };
   }, []);
 
+  const isFormValid =
+    selectedJob !== null && nickname.trim() !== "" && agreements.required;
+
+  const handleSignUp = () => {
+    console.log({
+      verifiedEmail,
+      nickname,
+      selectedJob,
+      agreeRequired: agreements.required,
+      agreeOptional: agreements.optional,
+    });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen text-center w-full">
       <h2 className="text-2xl font-semibold text-black mb-6">회원가입</h2>
       <div className="w-full max-w-md mx-auto space-y-6">
-        
         {/* 이메일 인증된 표시 */}
         <div className="text-left">
-          <label className="block text-sm font-medium text-gray-700 mb-1">이메일</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            이메일
+          </label>
           <div className="flex items-center border border-purple-500 rounded-lg px-4 py-3 h-[70px] relative">
-            <label className="absolute left-4 top-3 text-gray-500 text-xs">이메일</label>
+            <label className="absolute left-4 top-3 text-gray-500 text-xs">
+              이메일
+            </label>
             <p className="pt-6 bg-white text-gray-800">{verifiedEmail}</p>
             <div className="absolute right-4">
-              <CheckIcon color="purple" />
+              <CheckIcon checked={true} />
             </div>
           </div>
-          <p className="text-purple-500 text-xs mt-1 ml-1">인증된 이메일입니다.</p>
+          <p className="text-purple-500 text-xs mt-1 ml-1">
+            인증된 이메일입니다.
+          </p>
         </div>
 
         {/* 직군 선택 드롭다운 */}
         <div className="text-left relative" ref={dropdownRef}>
-          <label className="block text-sm font-medium text-gray-700 mb-1">직군 선택</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            직군 선택
+          </label>
           <div
             onClick={toggleDropdown}
-            className={`flex items-center justify-between text-sm w-full border rounded-lg p-3 text-gray-800 h-[70px] cursor-pointer select-none ${isDropdownOpen ? "border-purple-500" : selectedJob !== null ? "border-purple-500" : "border-gray-300"
+            className={`flex items-center justify-between text-sm w-full border rounded-lg p-3 text-gray-800 h-[70px] cursor-pointer select-none ${isDropdownOpen
+              ? "border-purple-500"
+              : selectedJob !== null
+                ? "border-purple-500"
+                : "border-gray-300"
             }`}
           >
             <span>{selectedJob ?? "직군 선택"}</span>
@@ -83,7 +136,9 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
                 className="p-1 cursor-pointer text-left group"
               >
                 <div className="rounded-md p-3 transition-all bg-white group-hover:bg-[#F9F4FF]">
-                  <span className="group-hover:text-[#8530F1] text-sm">{JobOptions.UIUXDesigner}</span>
+                  <span className="group-hover:text-[#8530F1] text-sm">
+                    {JobOptions.UIUXDesigner}
+                  </span>
                 </div>
               </div>
               <div
@@ -91,7 +146,9 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
                 className="p-1 cursor-pointer text-left group"
               >
                 <div className="rounded-md p-3 transition-all bg-white group-hover:bg-[#F9F4FF]">
-                  <span className="group-hover:text-[#8530F1] text-sm">{JobOptions.FrontEndDeveloper}</span>
+                  <span className="group-hover:text-[#8530F1] text-sm">
+                    {JobOptions.FrontEndDeveloper}
+                  </span>
                 </div>
               </div>
             </div>
@@ -128,34 +185,20 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
         </div>
 
         {/* 약관 동의 */}
-        <div className="text-left">
-          <div className="flex justify-between items-center mb-2.5">
-            <div className="flex items-center">
-              <CheckMarkIcon />
-              <label className="pl-2 text-sm font-medium text-gray-700">약관 전체 동의</label>
-            </div>
-            <ArrowIcon isOpen={false} color="#B5B5B5" />
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-center text-gray-400">
-              <CheckIcon />
-              <span className="text-sm pl-2">[필수] 피어펙트 서비스 이용 회원 약관</span>
-              <button className="text-slate-400 text-xs ml-auto underline" onClick={() => openModal("required")}>
-                내용 보기
-              </button>
-            </div>
-            <div className="flex items-center text-gray-400">
-              <CheckIcon />
-              <span className="text-sm pl-2">[선택] 마케팅 정보 수신</span>
-              <button className="text-slate-400 text-xs ml-auto underline" onClick={() => openModal("optional")}>
-                내용 보기
-              </button>
-            </div>
-          </div>
-        </div>
+        <TermsAgreement
+          agreements={agreements}
+          setAgreements={setAgreements}
+          openModal={openModal}
+          handleAgreeAll={handleAgreeAll}
+        />
 
         {/* 회원가입 버튼 */}
-        <button className="w-full bg-gray-200 text-gray-500 text-lg rounded-lg py-3 font-medium mt-4">
+        <button
+          className={`w-full ${isFormValid ? "bg-purple-500 text-white" : "bg-gray-200 text-gray-500"
+          } rounded-lg py-3 font-medium mt-4 text-base sm:text-lg`}
+          disabled={!isFormValid}
+          onClick={handleSignUp}
+        >
           회원가입
         </button>
       </div>

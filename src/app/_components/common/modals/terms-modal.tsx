@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import XIcon from "../../icons/x-icon";
 
 interface ModalProps {
   onClose: () => void;
@@ -24,9 +25,10 @@ export function TermsModal({ onClose, content }: ModalProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
       <div className="bg-white rounded-lg w-11/12 max-w-md p-6 relative" onClick={(e) => e.stopPropagation()}>
-        <button className="absolute top-4 right-4 text-gray-600" onClick={onClose}>
-          X
+        <button className="absolute top-3 right-3 text-gray-700" onClick={onClose} aria-label="Close">
+          <XIcon/>
         </button>
+
         <h2 className="text-xl font-semibold mb-4 pb-1.5">
           {content === "required" ? "Peerfect 이용약관 동의" : "마케팅 정보 수신 동의"}
         </h2>

@@ -55,7 +55,7 @@ export default function SocialButton({ provider, onClick, showRecentBadge = fals
           )}
         </picture>
       }
-      <span className={`${settings.textColor} font-semibold w-[160px]`}>{settings.label}</span>
+      <span className={`${settings.textColor} font-semibold w-[140px] sm:w-[160px] text-sm sm:text-base`}>{settings.label}</span>
     </button>
   );
 }
