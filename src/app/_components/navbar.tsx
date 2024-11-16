@@ -60,7 +60,7 @@ export default function Navbar() {
                 <div className="absolute bg-white w-[436px] -left-[170px] rounded-lg border shadow-lg">
                   <div className="p-4 flex justify-between items-center border-b">
                     <p className="text-gray-900 font-semibold">읽지 않은 알림 (1)</p>
-                    <button className="text-purple-500 text-sm font-medium">모두 읽기</button>
+                    <button className="text-[#8530F1] text-sm font-medium">모두 읽기</button>
                   </div>
 
                   {/* 알림 목록 */}

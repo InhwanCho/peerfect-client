@@ -8,7 +8,7 @@ interface SwitchAuthButtonProps {
 export default function SwitchAuthButton({ onClick, className }: SwitchAuthButtonProps) {
   return (
     <button
-      className={cn("w-full text-[#9E9E9E] text-sm font-medium underline", className)}
+      className={cn("text-[#9E9E9E] text-sm font-medium", className)}
       onClick={onClick}
     >
       다른 방법으로 로그인

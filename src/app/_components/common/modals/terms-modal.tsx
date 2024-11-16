@@ -4,7 +4,7 @@ import XIcon from "../../icons/x-icon";
 
 interface ModalProps {
   onClose: () => void;
-  content: "required" | "optional";
+  content: "required" | "optional" | "all";
 }
 
 // 모달 컴포넌트

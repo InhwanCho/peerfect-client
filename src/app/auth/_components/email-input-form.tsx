@@ -1,15 +1,13 @@
-import ClearInputButton from "@/app/_components/common/clear-input-button";
-import ErrorMessage from "@/app/_components/common/error-message";
+import Message from "@/app/_components/common/error-message";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import SwitchAuthButton from "./switch-auth-button";
-
+import Link from "next/link";
 
 interface EmailInputFormProps {
   emailValue?: string;
   errors: FieldErrors;
   isValid: boolean;
   onSubmit: () => void;
-  handleClearInput: () => void;
   register: UseFormRegister<{ email: string }>;
   onSwitchAuthType: () => void;
 }
@@ -19,16 +17,15 @@ export default function EmailInputForm({
   errors,
   isValid,
   onSubmit,
-  handleClearInput,
   register,
   onSwitchAuthType,
 }: EmailInputFormProps) {
   return (
-    <form onSubmit={onSubmit} className="w-full">
-      <h2 className="text-center text-black text-xl lg:text-2xl font-semibold mb-[60px]">
+    <form onSubmit={onSubmit} className="w-full flex flex-col justify-evenly h-[66vh]">
+      <h2 className="text-center text-black text-xl lg:text-2xl font-semibold">
         이메일로 계속하기
       </h2>
-      <div className="relative w-full mb-8">
+      <div className="relative w-full">
         {emailValue && (
           <label className="absolute left-4 top-3 text-gray-500 text-xs">
             이메일
@@ -37,12 +34,11 @@ export default function EmailInputForm({
         <input
           type="email"
           placeholder={!emailValue ? "이메일을 입력해주세요." : ""}
-          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-white rounded-lg border placeholder:text-sm ${
-            errors.email
-              ? "border-red-500"
-              : isValid
-                ? "border-purple-500"
-                : "border-gray-300"
+          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-white rounded-lg border placeholder:text-sm ${errors.email
+            ? "border-red-500"
+            : isValid
+              ? "border-[#8530F1]"
+              : "border-gray-300"
           } text-gray-800 focus:outline-none`}
           {...register("email", {
             required: "이메일을 입력해주세요.",
@@ -58,21 +54,32 @@ export default function EmailInputForm({
             },
           })}
         />
-        {emailValue && <ClearInputButton onClick={handleClearInput} />}
-        <ErrorMessage message={errors.email?.message as string} />
-      </div>
-      <button
-        type="submit"
-        className={`w-full h-12 rounded-lg font-semibold mb-6 mt-20 ${
-          !isValid
+        <Message
+          message={
+            errors.email
+              ? (errors.email.message as string)
+              : isValid
+                ? "사용 가능한 이메일입니다."
+                : ""
+          }
+          type={errors.email ? "error" : isValid ? "success" : undefined}
+        />
+        <button
+          type="submit"
+          className={`w-full h-12 rounded-lg font-semibold mb-4 mt-20 ${!isValid
             ? "bg-gray-200 text-[#9E9E9E] cursor-not-allowed"
             : "bg-[#8530F1] text-white"
-        }`}
-        disabled={!isValid}
-      >
+          }`}
+          disabled={!isValid}
+        >
         인증 후 로그인
-      </button>
-      <SwitchAuthButton onClick={onSwitchAuthType} />
+        </button>
+        <div className="flex justify-between">
+          <SwitchAuthButton onClick={onSwitchAuthType} />
+          <Link href="" className="text-[#8530F1] text-sm font-medium">회원가입</Link>
+        </div>
+      </div>
+      
     </form>
   );
 }

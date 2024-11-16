@@ -1,10 +1,10 @@
-// TermsAgreement.jsx
-import React, { useEffect } from 'react';
 import ArrowIcon from "@/app/_components/icons/arrow-icon";
 import CheckIcon from "@/app/_components/icons/check-icon";
 import CheckMarkIcon from "@/app/_components/icons/check-mark-icon";
+import { cn } from "@/app/_components/lib/utils";
 
 interface TermsAgreementProps {
+  className?: string;
   agreements: {
     all: boolean;
     required: boolean;
@@ -22,39 +22,39 @@ interface TermsAgreementProps {
 }
 
 export default function TermsAgreement({
+  className,
   agreements,
   setAgreements,
   openModal,
   handleAgreeAll,
 }: TermsAgreementProps) {
   return (
-    <div className="text-left">
-      <div className="flex justify-between items-center mb-2.5">
+    <div className={cn("text-left select-none", className)}>
+      <div
+        className="flex justify-between items-center mb-2.5 cursor-pointer"
+        onClick={handleAgreeAll}
+      >
         <div className="flex items-center">
-          <div onClick={handleAgreeAll} className="cursor-pointer">
-            <CheckMarkIcon checked={agreements.all} />
-          </div>
-          <label className="pl-2 text-sm font-medium text-gray-700">
+          <CheckMarkIcon checked={agreements.all} />
+          <label className="pl-2 text-sm font-medium text-gray-700 cursor-pointer">
             약관 전체 동의
           </label>
         </div>
-        <ArrowIcon isOpen={false} color="#B5B5B5" />
+        {/* <ArrowIcon isOpen={false} color="#B5B5B5" /> */}
       </div>
       <div className="space-y-2">
-        <div className="flex items-center text-gray-700">
-          <div
-            onClick={() =>
-              setAgreements((prev) => ({
-                ...prev,
-                required: !prev.required,
-              }))
-            }
-            className="cursor-pointer"
-          >
-            <CheckIcon checked={agreements.required} />
-          </div>
+        <div
+          className="flex items-center text-gray-700 cursor-pointer"
+          onClick={() =>
+            setAgreements((prev) => ({
+              ...prev,
+              required: !prev.required,
+            }))
+          }
+        >
+          <CheckIcon checked={agreements.required} />
           <span
-            className={`text-sm pl-2 ${
+            className={`text-sm pl-2 cursor-pointer ${
               agreements.required ? "text-[#8530F1]" : "text-gray-700"
             }`}
           >
@@ -62,25 +62,26 @@ export default function TermsAgreement({
           </span>
           <button
             className="text-slate-400 text-xs ml-auto underline"
-            onClick={() => openModal("required")}
+            onClick={(e) => {
+              e.stopPropagation(); // 부모 이벤트 버블링 방지
+              openModal("required");
+            }}
           >
             내용 보기
           </button>
         </div>
-        <div className="flex items-center text-gray-700">
-          <div
-            onClick={() =>
-              setAgreements((prev) => ({
-                ...prev,
-                optional: !prev.optional,
-              }))
-            }
-            className="cursor-pointer"
-          >
-            <CheckIcon checked={agreements.optional} />
-          </div>
+        <div
+          className="flex items-center text-gray-700 cursor-pointer"
+          onClick={() =>
+            setAgreements((prev) => ({
+              ...prev,
+              optional: !prev.optional,
+            }))
+          }
+        >
+          <CheckIcon checked={agreements.optional} />
           <span
-            className={`text-sm pl-2 ${
+            className={`text-sm pl-2 cursor-pointer ${
               agreements.optional ? "text-[#8530F1]" : "text-gray-700"
             }`}
           >
@@ -88,7 +89,10 @@ export default function TermsAgreement({
           </span>
           <button
             className="text-slate-400 text-xs ml-auto underline"
-            onClick={() => openModal("optional")}
+            onClick={(e) => {
+              e.stopPropagation(); // 부모 이벤트 버블링 방지
+              openModal("optional");
+            }}
           >
             내용 보기
           </button>

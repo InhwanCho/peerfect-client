@@ -11,12 +11,12 @@ export default function AuthLayout({
     <div
       className={cn("relative", styles.authLayoutHeroImage)}
     >
-      <div className="absolute top-[40%] left-[8%] xl:left-[12%] 2xl:left-[16%] hidden lg:flex flex-col space-y-6 items-center">
-        <picture className="w-4/5 xl:w-full">
+      <div className="absolute top-[40%] left-[1%] lg:left-[5%] xl:left-[12%] 2xl:left-[16%] hidden lg:flex flex-col space-y-6 items-center">
+        <picture className="lg:w-3/5 xl:w-4/5 2xl:w-full">
           <source srcSet="/assets/auth/auth_hero_logo.webp" type="image/webp" />
           <img src="/assets/auth/auth_hero_logo.png" alt="logo image" />
         </picture>
-        <p className="text-[#9c92cc] text-lg tracking-widest">Grow Together, Be Perfect</p>
+        <p className="text-[#9c92cc] text-sm lg:text-lg tracking-widest">Grow Together, Be Perfect</p>
       </div>
       {children}
     </div>

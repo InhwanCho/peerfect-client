@@ -38,23 +38,31 @@ export default function SocialButton({ provider, onClick, showRecentBadge = fals
 
   return (
     <button
-      className={`flex relative items-center justify-center w-full h-12 ${settings.bgColor} rounded-2xl mb-4 shadow drop-shadow-sm`}
+      className={`flex relative items-center justify-center w-full h-12 ${settings.bgColor} rounded-2xl shadow drop-shadow-sm`}
       onClick={onClick}
     >
       {provider !== 'email' &&
-        <picture className="w-6 h-6 mr-2 ">
+        <picture className="w-6 h-6 mr-2 relative">
           <source srcSet={settings.iconWebpSrc} type="image/webp" />
           <img src={settings.iconSrc} alt={`${provider} Icon`} className="w-6 h-6" />
           {showRecentBadge && (
             <>
-              <div className="absolute -top-[18px] left-1/2 w-3 h-3 bg-purple-500 transform rotate-45 z-0 pointer-events-none"></div>
-              <div className="absolute w-20 -top-8 left-[51%] transform -translate-x-1/2 bg-purple-500 text-white text-xs font-semibold py-1 px-2 rounded-full before:absolute before:-bottom-1 before:left-1/2 before:transform before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-purple-500 pointer-events-none">
+              <div className="absolute -top-6 left-[31%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
+              <div className="absolute w-28 -top-[52px] left-1/2 transform -translate-x-1/2 bg-[#8530F1] text-white text-sm font-semibold py-2 rounded-full pointer-events-none">
                 최근 로그인
               </div>
             </>
           )}
         </picture>
       }
+      {showRecentBadge && (
+        <>
+          <div className="absolute -top-4 left-[49%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
+          <div className="absolute w-28 -top-[44px] left-1/2 transform -translate-x-1/2 bg-[#8530F1] text-white text-sm font-semibold py-2 rounded-full pointer-events-none">
+                최근 로그인
+          </div>
+        </>
+      )}
       <span className={`${settings.textColor} font-semibold w-[140px] sm:w-[160px] text-sm sm:text-base`}>{settings.label}</span>
     </button>
   );

@@ -11,8 +11,8 @@ interface EmailRegisterProps {
 }
 
 export default function EmailRegister({ onSwitchAuthType }: EmailRegisterProps) {
-  const { register, handleSubmit, formState: { errors, isValid }, setValue, watch } = useForm<{ email: string }>({
-    mode: "onBlur",
+  const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm<{ email: string }>({
+    mode: "onChange",
   });
 
   const [isVerified, setIsVerified] = useState(false);
@@ -24,10 +24,6 @@ export default function EmailRegister({ onSwitchAuthType }: EmailRegisterProps) 
     console.log("Valid email:", data.email);
     setVerifiedEmail(data.email); 
     setIsVerified(true); 
-  };
-
-  const handleClearInput = () => {
-    setValue("email", "");
   };
 
   if (isSignupScreen) {
@@ -53,7 +49,6 @@ export default function EmailRegister({ onSwitchAuthType }: EmailRegisterProps) 
       errors={errors}
       isValid={isValid}
       onSubmit={handleSubmit(onSubmit)}
-      handleClearInput={handleClearInput}
       register={register}
       onSwitchAuthType={onSwitchAuthType}
     />

@@ -1,8 +1,18 @@
-interface ErrorMessageProps {
+interface MessageProps {
   message?: string;
+  type?: "error" | "success";
 }
 
-export default function ErrorMessage({ message }: ErrorMessageProps) {
+export default function Message({ message, type }: MessageProps) {
   if (!message) return null;
-  return <p className="text-red-500 text-xs mt-0.5 absolute top-[76px] left-1">{message}</p>;
+
+  const textColor = type === "error" ? "text-red-500" : "text-[#8530F1]";
+
+  return (
+    <p
+      className={`text-xs mt-0.5 absolute top-[76px] left-1 ${textColor}`}
+    >
+      {message}
+    </p>
+  );
 }
