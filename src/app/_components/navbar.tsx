@@ -114,14 +114,14 @@ export default function Navbar() {
       >
         {/* 배경 블러 처리 */}
         <div
-          className={`fixed inset-0 bg-black/30 backdrop-blur-[6px] transition-opacity duration-500 ${isDrawerOpen ? "opacity-100" : "opacity-0"
+          className={`fixed inset-0 bg-black/30 backdrop-blur-[6px] transition-opacity duration-[400ms] ${isDrawerOpen ? "opacity-100" : "opacity-0"
           }`}
           onClick={closeDrawer}
         />
 
         {/* 드로어 메뉴 */}
         <div
-          className={`fixed top-0 right-0 h-full border-l border-[#333] bg-[#111111] w-[330px] z-20 transform transition-transform duration-500 ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed top-0 right-0 h-full border-l border-[#333] bg-[#111111] w-[330px] z-20 transform transition-transform duration-[400ms] ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex justify-end p-8">
