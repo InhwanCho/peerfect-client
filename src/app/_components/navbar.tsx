@@ -124,7 +124,7 @@ export default function Navbar() {
           className={`fixed top-0 right-0 h-full border-l border-[#333] bg-[#111111] w-[330px] z-20 transform transition-transform duration-500 ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex justify-end p-9">
+          <div className="flex justify-end p-8">
             <button onClick={closeDrawer}>
               <XIcon color="white" />
             </button>
