@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import Link from "next/link";
@@ -5,6 +6,7 @@ import { useState } from "react";
 import ArrowIcon from "./icons/arrow-icon";
 import XIcon from "./icons/x-icon";
 import MenuMoreIcon from "./icons/menu-more-icon";
+import { MainLogo } from "./icons/logo-icon";
 
 export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
@@ -32,12 +34,7 @@ export default function Navbar() {
       <header className="w-full bg-[#111111] flex justify-center select-none sticky top-0 z-10">
         <div className="lg:w-[90%] xl:w-[75%] w-full px-8 h-[90px] flex justify-between items-center">
           <div className="justify-start items-center gap-12 sm:gap-[86px] flex">
-            <Link href="/" className="w-[120px] sm:w-[170px] h-[55px] flex items-center">
-              <picture>
-                <source srcSet="/assets/nav/main_logo.webp" type="image/webp" />
-                <img src="/assets/nav/main_logo.png" alt="logo image" />
-              </picture>
-            </Link>
+            <MainLogo />
             <div className="lg:flex hidden items-center gap-3">
               <nav className="flex items-center">
                 <div

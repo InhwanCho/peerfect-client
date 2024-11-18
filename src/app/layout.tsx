@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth scroll-pt-[100px]">
       <body
         className={`${cn('antialiased', fontPretendard.className)}`}
       >
