@@ -9,7 +9,7 @@ export const MainLogo = () => (
     </picture>
     <picture>
       <source srcSet="/assets/auth/auth_hero_logo.png" type="image/webp"/>
-      <img src="/assets/auth/auth_hero_logo.png" alt="logo image" className="w-[100px]"/>
+      <img src="/assets/auth/auth_hero_logo.png" alt="logo image" className="w-[110px]"/>
     </picture>
   </Link>
 );
