@@ -1,17 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { cn } from "@/app/_components/lib/utils";
+
 interface SocialButtonProps {
+  className?: string;
   provider: 'kakao' | 'google' | 'apple' | 'email';
   onClick?: () => void;
   showRecentBadge?: boolean;
 }
 
-export default function SocialButton({ provider, onClick, showRecentBadge = false }: SocialButtonProps) {
+export default function SocialButton({ className, provider, onClick, showRecentBadge = false }: SocialButtonProps) {
   const settings = {
     kakao: {
       iconSrc: '/assets/auth/kakao_logo.png',
       iconWebpSrc: '/assets/auth/kakao_logo.webp',
-      bgColor: 'bg-[#FEE500]',
+      bgColor: 'bg-[#FFE05C]',
       textColor: 'text-black',
       label: '카카오 계정으로 계속하기',
     },
@@ -38,7 +41,7 @@ export default function SocialButton({ provider, onClick, showRecentBadge = fals
 
   return (
     <button
-      className={`flex relative items-center justify-center w-full h-12 ${settings.bgColor} rounded-2xl shadow drop-shadow-sm`}
+      className={cn(`flex relative items-center justify-center w-full h-[70px] ${settings.bgColor} rounded-2xl shadow-lg border border-gray-200 border-opacity-50`, className)}
       onClick={onClick}
     >
       {provider !== 'email' &&
@@ -47,19 +50,19 @@ export default function SocialButton({ provider, onClick, showRecentBadge = fals
           <img src={settings.iconSrc} alt={`${provider} Icon`} className="w-6 h-6" />
           {showRecentBadge && (
             <>
-              <div className="absolute -top-6 left-[31%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
-              <div className="absolute w-28 -top-[52px] left-1/2 transform -translate-x-1/2 bg-[#8530F1] text-white text-sm font-semibold py-2 rounded-full pointer-events-none">
+              <div className="absolute -top-5 left-[25%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
+              <div className="absolute w-28 -top-[46px] left-[40%] transform -translate-x-1/2 bg-[#8530F1] text-white font-semibold p-1.5 rounded-full pointer-events-none">
                 최근 로그인
               </div>
             </>
           )}
         </picture>
       }
-      {showRecentBadge && (
+      {provider === 'email' && showRecentBadge && (
         <>
-          <div className="absolute -top-4 left-[49%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
-          <div className="absolute w-28 -top-[44px] left-1/2 transform -translate-x-1/2 bg-[#8530F1] text-white text-sm font-semibold py-2 rounded-full pointer-events-none">
-                최근 로그인
+          <div className="absolute -top-0 left-[49%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
+          <div className="absolute w-28 -top-[26px] left-[50%] transform -translate-x-1/2 bg-[#8530F1] text-white font-semibold p-1.5 rounded-full pointer-events-none">
+            최근 로그인
           </div>
         </>
       )}

@@ -66,7 +66,7 @@ export default function EmailInputForm({
         />
         <button
           type="submit"
-          className={`w-full h-12 rounded-lg font-semibold mb-4 mt-20 ${!isValid
+          className={`w-full h-[70px] rounded-lg font-semibold mb-4 mt-20 ${!isValid
             ? "bg-gray-200 text-[#9E9E9E] cursor-not-allowed"
             : "bg-[#8530F1] text-white"
           }`}

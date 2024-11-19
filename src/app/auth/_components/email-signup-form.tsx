@@ -99,13 +99,12 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
                 maxLength={12}
                 value={nickname}
                 onChange={handleNicknameChange}
-                className={`w-full border rounded-lg p-3 text-gray-800 h-[70px] focus:outline-none placeholder:text-sm ${
-                  error
+                className={`w-full border rounded-lg p-3 text-gray-800 h-[70px] focus:outline-none placeholder:text-sm ${error
                     ? "border-red-500"
                     : isNicknameValid
                       ? "border-[#8530F1]"
                       : "border-gray-300"
-                }`}
+                  }`}
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs">
                 {nickname.length > 0 ? (
@@ -119,11 +118,10 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
             <button
               type="button"
               disabled={!isNicknameValid}
-              className={`rounded-lg font-medium h-[70px] w-[120px] text-sm ${
-                isNicknameValid
+              className={`rounded-lg font-medium h-[70px] w-[120px] text-sm ${isNicknameValid
                   ? "bg-[#8530F1] text-white"
                   : "bg-gray-200 text-gray-500 cursor-not-allowed"
-              }`}
+                }`}
             >
               중복확인
             </button>
@@ -149,9 +147,8 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
 
       {/* 회원가입 버튼 */}
       <button
-        className={`w-full ${
-          isFormValid ? "bg-[#8530F1] text-white" : "bg-gray-200 text-gray-500 cursor-not-allowed"
-        } rounded-lg py-3 font-medium mt-4 text-base sm:text-lg`}
+        className={`w-full h-[70px] ${isFormValid ? "bg-[#8530F1] text-white" : "bg-gray-200 text-gray-500 cursor-not-allowed"
+          } rounded-lg py-3 font-medium mt-4 text-base sm:text-lg`}
         disabled={!isFormValid}
         onClick={() => console.log("회원가입")}
       >

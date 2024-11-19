@@ -1,9 +1,9 @@
 export default function HowToParticipate() {
   return (
     <section>
-      <h2 className="text-xl font-bold text-[#8530F1] pb-20">참여 방법</h2>
+      <h2 className="text-xl font-bold text-[#8530F1] pb-8 md:pb-20">참여 방법</h2>
       {/* <p className="text-2xl font-semibold text-gray-900 mb-6 text-center">참여 방법 서술</p> */}
-      <div className="grid grid-cols-3 min-h-[300px]">
+      <div className="md:grid grid-cols-3 min-h-[300px] flex flex-col gap-y-10">
         {/* Step 1 */}
         <div className="flex flex-col items-center justify-between">
           <div className="flex flex-col items-center mb-6">
@@ -20,7 +20,7 @@ export default function HowToParticipate() {
 
           <p className="text-gray-700 text-base text-center">
             원하는 프로젝트를 선택하세요.
-          </p>
+          </p>                  
         </div>
         {/* Step 2 */}
         <div className="flex flex-col items-center justify-between">

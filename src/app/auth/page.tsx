@@ -19,12 +19,13 @@ export default function AuthPage() {
           <h2 className="text-center text-black text-xl lg:text-2xl font-semibold">
             로그인
           </h2>
-          <div className="flex flex-col gap-y-8 w-full">
-            <SocialButton provider="kakao" />
+          <div className="flex flex-col gap-y-3 w-full">
+            <SocialButton provider="kakao" showRecentBadge/>
             <SocialButton provider="google"  />
             {/* <SocialButton provider="apple" showRecentBadge /> */}
             <SocialButton
               showRecentBadge
+              className="mt-1"
               provider="email"
               onClick={() => setAuthType("email")}
             />

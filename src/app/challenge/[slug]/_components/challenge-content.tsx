@@ -21,8 +21,7 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
     <section className="px-4 md:px-16 lg:px-24 w-full flex justify-center">
       <article className="flex-1 space-y-8 md:space-y-14 lg:space-y-20 mb-20">
         {/* 탭 메뉴 */}
-        <TabMenu activeTab={activeTab} setActiveTab={setActiveTab} />
-        
+        <TabMenu activeTab={activeTab} setActiveTab={setActiveTab} />        
         {/* 탭에 따라 콘텐츠 표시 */}
         {activeTab === "챌린지설명" && (
           <>
