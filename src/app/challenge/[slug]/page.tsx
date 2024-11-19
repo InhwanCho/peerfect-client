@@ -6,12 +6,12 @@ interface ChallengeDetailPageProps {
 }
 
 export default async function ChallengeDetailPage({ params }: ChallengeDetailPageProps) {
-  const { slug } = await params
+  const { slug } = await params;
 
   return (
     <main>
       <ChallengeHeader slug={slug} />
-      <ChallengeContent slug={slug}/>
+      <ChallengeContent slug={slug} />
     </main>
   );
 }

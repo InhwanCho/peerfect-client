@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { ArrowSquareIcon } from "@/app/_components/icons/arrow-square-icon";
 import { useState } from "react";

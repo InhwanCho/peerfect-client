@@ -1,7 +1,7 @@
 import ArrowIcon from "@/app/_components/icons/arrow-icon";
 
-const timeSpent = '2일'
-const createdDate = '2024-01-02'
+const timeSpent = '2일';
+const createdDate = '2024-01-02';
 
 export default function ReviewSection() {
 
