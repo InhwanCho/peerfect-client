@@ -51,7 +51,7 @@ export default function SocialButton({ className, provider, onClick, showRecentB
           {showRecentBadge && (
             <>
               <div className="absolute -top-5 left-[25%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
-              <div className="absolute w-28 -top-[46px] left-[40%] transform -translate-x-1/2 bg-[#8530F1] text-white font-semibold p-1.5 rounded-full pointer-events-none">
+              <div className="absolute w-28 -top-[46px] left-[40%] transform -translate-x-1/2 bg-[#8530F1] text-white font-semibold p-1.5 rounded-full text-sm sm:text-base pointer-events-none">
                 최근 로그인
               </div>
             </>
@@ -61,7 +61,7 @@ export default function SocialButton({ className, provider, onClick, showRecentB
       {provider === 'email' && showRecentBadge && (
         <>
           <div className="absolute -top-0 left-[49%] w-3 h-3 bg-[#8530F1] transform rotate-45 z-0 pointer-events-none"></div>
-          <div className="absolute w-28 -top-[26px] left-[50%] transform -translate-x-1/2 bg-[#8530F1] text-white font-semibold p-1.5 rounded-full pointer-events-none">
+          <div className="absolute w-28 -top-[26px] left-[50%] transform -translate-x-1/2 bg-[#8530F1] text-white font-semibold p-1.5 rounded-full text-sm sm:text-base pointer-events-none">
             최근 로그인
           </div>
         </>

@@ -25,7 +25,7 @@ export default function AuthPage() {
             {/* <SocialButton provider="apple" showRecentBadge /> */}
             <SocialButton
               showRecentBadge
-              className="mt-1"
+              className="mt-2"
               provider="email"
               onClick={() => setAuthType("email")}
             />
