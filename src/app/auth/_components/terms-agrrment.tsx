@@ -1,4 +1,3 @@
-import ArrowIcon from "@/app/_components/icons/arrow-icon";
 import CheckIcon from "@/app/_components/icons/check-icon";
 import CheckMarkIcon from "@/app/_components/icons/check-mark-icon";
 import { cn } from "@/app/_components/lib/utils";
@@ -35,7 +34,7 @@ export default function TermsAgreement({
         onClick={handleAgreeAll}
       >
         <div className="flex items-center">
-          <CheckMarkIcon checked={agreements.all} />
+          <CheckMarkIcon type={agreements.all ? "checked" : "unchecked"} />
           <label className="pl-2 text-sm font-medium text-gray-700 cursor-pointer">
             약관 전체 동의
           </label>
@@ -54,9 +53,8 @@ export default function TermsAgreement({
         >
           <CheckIcon checked={agreements.required} />
           <span
-            className={`text-sm pl-2 cursor-pointer ${
-              agreements.required ? "text-gray-900 font-medium" : "text-gray-400"
-            }`}
+            className={`text-sm pl-2 cursor-pointer ${agreements.required ? "text-gray-900 font-medium" : "text-gray-400"
+              }`}
           >
             [필수] 피어펙트 서비스 이용 회원 약관
           </span>
@@ -81,9 +79,8 @@ export default function TermsAgreement({
         >
           <CheckIcon checked={agreements.optional} />
           <span
-            className={`text-sm pl-2 cursor-pointer ${
-              agreements.optional ? "text-gray-900 font-medium" : "text-gray-400"
-            }`}
+            className={`text-sm pl-2 cursor-pointer ${agreements.optional ? "text-gray-900 font-medium" : "text-gray-400"
+              }`}
           >
             [선택] 마케팅 정보 수신
           </span>

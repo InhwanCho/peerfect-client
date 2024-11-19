@@ -6,8 +6,9 @@ export default function WorkGallery() {
   });
 
   return (
-    <section>
-      <div className="mb-8">
+    <section className="pr-6">
+      <img src="/assets/challenge/otherworks.webp" alt="서로의 작업물을 공유하고, 피드백을 나눠 보세요" className="w-full" />
+      <div className="mb-8 mt-20">
         <h2 className="text-xl font-bold text-gray-900 mb-6">작업물 n개</h2>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-20 gap-x-8">

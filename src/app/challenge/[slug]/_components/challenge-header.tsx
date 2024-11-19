@@ -12,7 +12,7 @@ export default function ChallengeHeader({
   return (
     <header className="m-5 md:m-20 rounded-3xl shadow-md">
       <img      
-        src="/assets/challenge/ui_challenge.png"
+        src="/assets/challenge/ui_challenge.webp"
         alt="ui challenge hero image"
         className="w-full phone:min-h-[120px]"
       />

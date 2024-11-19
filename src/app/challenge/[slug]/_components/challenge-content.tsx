@@ -8,6 +8,7 @@ import SideInfo from "./side-info";
 import TabMenu from "./tab-menu";
 import WorkPreview from "./work-preview";
 import WorkGallery from "./work-gallery";
+import ChallengeRequirements from "./challenge-requirements";
 
 
 interface ChallengeContentProps {
@@ -26,6 +27,7 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
         {activeTab === "챌린지설명" && (
           <>
             <ChallengeDescription />
+            <ChallengeRequirements/>
             <WorkPreview />
             <HowToParticipate />
             <ReviewSection />
