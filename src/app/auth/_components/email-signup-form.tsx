@@ -71,10 +71,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
       <h2 className="text-2xl font-semibold text-black mb-6">회원가입</h2>
       <div className="w-full max-w-md mx-auto space-y-6">
         {/* 이메일 인증된 표시 */}
-        <div className="text-left">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            이메일
-          </label>
+        <div>
           <div className="flex items-center border border-[#8530F1] rounded-lg px-4 py-3 h-[70px] relative">
             <label className="absolute left-4 top-3 text-gray-500 text-xs">
               이메일
@@ -99,13 +96,12 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
                 maxLength={12}
                 value={nickname}
                 onChange={handleNicknameChange}
-                className={`w-full border rounded-lg p-3 text-gray-800 h-[70px] focus:outline-none placeholder:text-sm ${
-                  error
+                className={`w-full border rounded-lg p-3 text-gray-800 h-[70px] focus:outline-none placeholder:text-sm ${error
                     ? "border-red-500"
                     : isNicknameValid
                       ? "border-[#8530F1]"
                       : "border-gray-300"
-                }`}
+                  }`}
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs">
                 {nickname.length > 0 ? (
@@ -119,11 +115,10 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
             <button
               type="button"
               disabled={!isNicknameValid}
-              className={`rounded-lg font-medium h-[70px] w-[120px] text-sm ${
-                isNicknameValid
+              className={`rounded-lg font-medium h-[70px] w-[120px] text-sm ${isNicknameValid
                   ? "bg-[#8530F1] text-white"
                   : "bg-gray-200 text-gray-500 cursor-not-allowed"
-              }`}
+                }`}
             >
               중복확인
             </button>
@@ -149,11 +144,10 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
 
       {/* 회원가입 버튼 */}
       <button
-        className={`w-full h-[70px] ${
-          isFormValid
+        className={`w-full h-[70px] ${isFormValid
             ? "bg-[#8530F1] text-white"
             : "bg-gray-200 text-gray-500 cursor-not-allowed"
-        } rounded-lg py-3 font-medium mt-4 text-base sm:text-lg`}
+          } rounded-lg py-3 font-medium mt-4 text-base sm:text-lg`}
         disabled={!isFormValid}
         onClick={() => console.log("회원가입")}
       >

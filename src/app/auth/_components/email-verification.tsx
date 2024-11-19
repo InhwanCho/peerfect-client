@@ -13,7 +13,7 @@ export default function EmailVerification({
   onSwitchAuthType
 }: EmailVerificationProps) {
   return (
-    <div className="w-full flex flex-col justify-evenly items-center h-[45vh]">
+    <div className="w-full flex flex-col justify-evenly items-center h-full">
       {/* <div className="flex flex-col items-center justify-between text-center w-full"> */}
       <h2 className="text-2xl font-semibold text-black">이메일 인증</h2>
       <div className="w-full text-center">

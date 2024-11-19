@@ -55,7 +55,7 @@ export default function TermsAgreement({
           <CheckIcon checked={agreements.required} />
           <span
             className={`text-sm pl-2 cursor-pointer ${
-              agreements.required ? "text-[#8530F1]" : "text-gray-700"
+              agreements.required ? "text-gray-900 font-medium" : "text-gray-400"
             }`}
           >
             [필수] 피어펙트 서비스 이용 회원 약관
@@ -82,7 +82,7 @@ export default function TermsAgreement({
           <CheckIcon checked={agreements.optional} />
           <span
             className={`text-sm pl-2 cursor-pointer ${
-              agreements.optional ? "text-[#8530F1]" : "text-gray-700"
+              agreements.optional ? "text-gray-900 font-medium" : "text-gray-400"
             }`}
           >
             [선택] 마케팅 정보 수신
