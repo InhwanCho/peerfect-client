@@ -19,7 +19,7 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
   const [activeTab, setActiveTab] = useState("챌린지설명");
 
   return (
-    <section className="px-4 md:px-16 lg:px-24 w-full flex justify-center">
+    <section className="w-full flex justify-center">
       <article className="flex-1 space-y-8 md:space-y-14 lg:space-y-20 mb-20">
         {/* 탭 메뉴 */}
         <TabMenu activeTab={activeTab} setActiveTab={setActiveTab} />

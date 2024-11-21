@@ -17,7 +17,7 @@ export default function WorkGallery() {
             key={index}
             className="relative bg-gray-100 rounded-lg shadow overflow-hidden"
           >
-            <div className="w-full h-40 bg-gray-200"></div>
+            <div className="w-full h-60 bg-gray-200"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
             <div className="absolute bottom-2 left-2 text-white">
               <h3 className="text-sm font-semibold">{work.title}</h3>

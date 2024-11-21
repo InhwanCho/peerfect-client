@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const MainLogo = () => (
   <Link href="/" className="w-[150px] sm:w-[170px] flex items-center">
-    <picture className="mr-5">
+    <picture className="mr-5 w-[56px] h-[55px]">
       <source srcSet="/assets/nav/logo.webp" type="image/webp" />
       <img src="/assets/nav/logo.png" alt="logo image" className="mr-4" />
     </picture>

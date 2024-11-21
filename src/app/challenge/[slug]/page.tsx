@@ -9,7 +9,7 @@ export default async function ChallengeDetailPage({ params }: ChallengeDetailPag
   const { slug } = await params;
 
   return (
-    <main>
+    <main className="max-w-7xl mt-20 w-full mx-auto px-5 xl:px-0 md:px-20">
       <ChallengeHeader slug={slug} />
       <ChallengeContent slug={slug} />
     </main>

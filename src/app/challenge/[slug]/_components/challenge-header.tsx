@@ -10,8 +10,8 @@ export default function ChallengeHeader({
   const title = searchParams.get("title") || "임시 제목입니다";
 
   return (
-    <header className="m-5 md:m-20 rounded-3xl shadow-md">
-      <img      
+    <header className="rounded-3xl shadow-md mb-16">
+      <img
         src="/assets/challenge/ui_challenge.webp"
         alt="ui challenge hero image"
         className="w-full phone:min-h-[120px]"
