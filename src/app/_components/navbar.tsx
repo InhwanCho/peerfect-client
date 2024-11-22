@@ -3,10 +3,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import ArrowIcon from "./icons/arrow-icon";
-import XIcon from "./icons/x-icon";
 import MenuMoreIcon from "./icons/menu-more-icon";
 import { MainLogo } from "./icons/logo-icon";
+import SvgArrowDown from "./icons/icon_components/ArrowDown";
+import SvgX from "./icons/icon_components/X";
+import SvgBell from "./icons/icon_components/Bell";
 
 export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
@@ -31,7 +32,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="w-full bg-[#111111] flex justify-center select-none sticky top-0 z-10">
+      <header className="w-full bg-black flex justify-center select-none sticky top-0 z-10">
         <div className="lg:w-[90%] xl:w-[75%] w-full px-8 h-[90px] flex justify-between items-center">
           <div className="justify-start items-center gap-12 sm:gap-[86px] flex">
             <MainLogo />
@@ -44,10 +45,11 @@ export default function Navbar() {
                   <div className="text-white md:text-base lg:text-lg font-semibold pr-4 whitespace-nowrap">
                     챌린지
                   </div>
-                  <ArrowIcon isOpen={isChallengeOpen} color="#FFFFFF" />
+                  <SvgArrowDown isOpen={isChallengeOpen} fillColor="#FFFFFF" props={{ width: 24, height: 24 }} />
                 </div>
                 {isChallengeOpen && (
-                  <div className="absolute top-[90px] bg-white shadow-lg p-4">
+                  <div className="absolute top-[90px] bg-background-primary shadow-card p-4">
+                    {/* 수정 이유: 배경 색상 `background.primary`와 그림자 `card` 스타일 적용 */}
                     <div>챌린지 나중에 추가</div>
                   </div>
                 )}
@@ -60,19 +62,17 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-[30px]">
-            <div className="relative">
-              <picture onClick={toggleNotification} className="cursor-pointer relative">
-                <source srcSet="/assets/nav/bell.webp" type="image/webp" />
-                <img alt="alarm bell" src="/assets/nav/bell.png" className="w-6 h-6" />
-                <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[#111111]" />
-              </picture>
+            <div className="relative flex items-center">
+              <button onClick={toggleNotification} className="cursor-pointer relative">
+                <SvgBell fillColor="#FFFFFF" props={{width:24,height:24}}/>
+              </button>
               {isNotificationOpen && (
                 <div className="absolute top-[76px] left-1 right-0">
                   <div className="absolute -top-2 w-4 h-4 bg-white transform rotate-45 z-10"></div>
-                  <div className="absolute bg-white w-[436px] -left-[170px] rounded-lg border shadow-lg">
-                    <div className="p-4 flex justify-between items-center border-b">
+                  <div className="absolute bg-background-primary w-[436px] -left-[170px] rounded-lg border shadow-card">
+                    <div className="p-4 flex justify-between items-center border-b border-gray-300">
                       <p className="text-gray-900 font-semibold">읽지 않은 알림 (1)</p>
-                      <button className="text-[#8530F1] text-sm font-medium">모두 읽기</button>
+                      <button className="text-main-primary text-sm font-medium">모두 읽기</button>
                     </div>
                     <div className="divide-y">
                       {[0, 0, 0].map((_, i) => (
@@ -82,8 +82,8 @@ export default function Navbar() {
                             <p className="text-gray-900 text-sm font-medium">
                               닉네임입력 님이 내 작업물에 피드백을 남겼습니다.
                             </p>
-                            <p className="text-gray-500 text-xs mt-1">피드백 내용 입력</p>
-                            <p className="text-gray-400 text-xs mt-4">n분 전</p>
+                            <p className="text-text-secondary text-xs mt-1">피드백 내용 입력</p>
+                            <p className="text-text-tertiary text-xs mt-4">n분 전</p>
                           </div>
                         </div>
                       ))}
@@ -106,52 +106,41 @@ export default function Navbar() {
 
       {/* 드로어 메뉴 */}
       <div
-        className={`fixed inset-0 z-10 ${isDrawerOpen ? "pointer-events-auto" : "pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-10 ${isDrawerOpen ? "pointer-events-auto" : "pointer-events-none"}`}
       >
-        {/* 배경 블러 처리 */}
         <div
-          className={`fixed inset-0 bg-black/30 backdrop-blur-[6px] transition-opacity duration-[400ms] ${isDrawerOpen ? "opacity-100" : "opacity-0"
-          }`}
+          className={`fixed inset-0 bg-black/30 backdrop-blur-[6px] transition-opacity duration-[400ms] ${isDrawerOpen ? "opacity-100" : "opacity-0"}`}
           onClick={closeDrawer}
         />
-
-        {/* 드로어 메뉴 */}
         <div
-          className={`fixed top-0 right-0 h-full border-l border-[#333] bg-[#111111] w-[330px] z-20 transform transition-transform duration-[400ms] ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`fixed top-0 right-0 h-full border-l border-gray-700 bg-black w-[330px] z-20 transform transition-transform duration-[400ms] ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <div className="flex justify-end p-8">
             <button onClick={closeDrawer}>
-              <XIcon color="white" />
+              <SvgX props={{ width: 24, height: 24 }} fillColor="#FFFFFF" />
             </button>
           </div>
           <nav className="flex flex-col items-start px-8 pt-2 text-white">
-            {/* 상단 디자이너 정보 */}
             <div className="w-full flex items-start pb-6 border-b border-gray-700">
-              <div className="text-[#8530F1] font-semibold">디자이너</div>
+              <div className="text-main-primary font-semibold">디자이너</div>
               <span className="pl-2.5 font-medium">(이름)님</span>
             </div>
-
-            {/* 메뉴 항목 */}
             <div className="w-full flex flex-col space-y-6 pt-6">
-              {/* 챌린지 드롭다운 */}
               <div className="w-full relative">
                 <button
                   className="w-full flex justify-between items-center text-lg font-medium cursor-pointer"
                   onClick={toggleChallengeDropdown}
                 >
                   챌린지
-                  <ArrowIcon isOpen={isChallengeOpen} color="#FFFFFF" />
+                  <SvgArrowDown isOpen={isChallengeOpen} fillColor="#FFFFFF" props={{ width: 24, height: 24 }} />
                 </button>
                 {isChallengeOpen && (
-                  <ul className="mt-2 bg-[#1A1A1A] rounded-md shadow-lg w-full py-2">
-                    <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">챌린지 1 임시 디자인</li>
-                    <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">챌린지 2</li>
+                  <ul className="mt-2 bg-gray-900 rounded-md shadow-card w-full py-2">
+                    <li className="px-4 py-2 hover:bg-gray-800 cursor-pointer">챌린지 1 임시 디자인</li>
+                    <li className="px-4 py-2 hover:bg-gray-800 cursor-pointer">챌린지 2</li>
                   </ul>
                 )}
               </div>
-              {/* 작업물 링크 */}
               <Link
                 href="/work"
                 onClick={closeDrawer}

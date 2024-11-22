@@ -16,12 +16,12 @@ export default function AuthPage() {
       ) : (
         // 소셜 로그인 UI
         <>
-          <h2 className="text-center text-black text-xl lg:text-2xl font-semibold">
+          <h2 className="text-center text-text-primary text-xl lg:text-2xl font-semibold">
             로그인
           </h2>
           <div className="flex flex-col gap-y-3 w-full">
-            <SocialButton provider="kakao" showRecentBadge/>
-            <SocialButton provider="google"  />
+            <SocialButton provider="kakao" showRecentBadge />
+            <SocialButton provider="google" />
             {/* <SocialButton provider="apple" showRecentBadge /> */}
             <SocialButton
               showRecentBadge

@@ -22,7 +22,9 @@ export default function AuthLayout({
           <source srcSet="/assets/auth/auth_hero_logo.webp" type="image/webp" />
           <img src="/assets/auth/auth_hero_logo.png" alt="logo image" />
         </picture>
-        <p className="text-[#9c92cc] text-sm lg:text-lg tracking-widest">Grow Together, Be Perfect</p>
+        {/* text-[#9c92cc] */}
+        <p className="text-[#9c92cc] text-sm lg:text-lg tracking-widest">
+          Grow Together, Be Perfect</p>
       </div>
       {children}
     </div>

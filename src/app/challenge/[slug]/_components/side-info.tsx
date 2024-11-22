@@ -11,7 +11,7 @@ export default function SideInfo({ slug }: SideInfoProps) {
   const title = searchParams.get("title") || "임시 제목입니다";
   return (
     <aside className="min-w-[300px] max-w-[340px] hidden xl:block ml-16">
-      <div className="sticky top-32 bg-white shadow-lg border border-gray-200 border-opacity-50 rounded-lg p-6 py-8">
+      <div className="sticky top-32 bg-white card-container rounded-lg p-6 py-8">
         <div>
           <p className="text-sm text-gray-900 mb-1">#챌린지 {slug}</p>
           <h2 className="text-xl font-bold text-gray-900">{title}</h2>

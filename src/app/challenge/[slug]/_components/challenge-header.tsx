@@ -17,8 +17,8 @@ export default function ChallengeHeader({
         className="w-full phone:min-h-[120px]"
       />
       <div className="py-5 px-8 md:px-14">
-        <h2 className="text-lg font-semibold text-[#8530F1]">#챌린지 {slug}</h2>
-        <h1 className="text-2xl font-semibold mt-1 text-gray-900">{title}</h1>
+        <h2 className="text-lg font-semibold text-main-primary">#챌린지 {slug}</h2>
+        <h1 className="text-2xl font-semibold mt-1 text-text-primary">{title}</h1>
       </div>
     </header>
   );

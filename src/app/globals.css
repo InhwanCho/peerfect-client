@@ -8,11 +8,6 @@
   }
 }
 
-:root {
-  --backgroundbg00-white: rgba(255, 255, 255, 1);
-  --black: rgba(17, 17, 17, 1);
-  --brand-color: rgba(133, 48, 241, 1);
-  --gray-50: rgba(250, 250, 250, 1);
-  --primary: rgba(133, 48, 241, 1);
+.card-container{
+  @apply border border-gray-200 border-opacity-40 shadow-card
 }
-

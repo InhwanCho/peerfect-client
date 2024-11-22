@@ -22,24 +22,25 @@ export default function EmailInputForm({
 }: EmailInputFormProps) {
   return (
     <form onSubmit={onSubmit} className="w-full flex flex-col justify-evenly h-[66vh]">
-      <h2 className="text-center text-black text-xl lg:text-2xl font-semibold">
+      <h2 className="text-center text-text-primary text-xl lg:text-2xl font-semibold">
         이메일로 계속하기
-      </h2>
+      </h2>      
       <div className="relative w-full">
         {emailValue && (
-          <label className="absolute left-4 top-3 text-gray-500 text-xs">
+          <label className="absolute left-4 top-3 text-text-secondary text-xs">
             이메일
           </label>
-        )}
+        )}        
         <input
           type="email"
           placeholder={!emailValue ? "이메일을 입력해주세요." : ""}
-          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-white rounded-lg border placeholder:text-sm ${errors.email
-            ? "border-red-500"
-            : isValid
-              ? "border-[#8530F1]"
-              : "border-gray-300"
-          } text-gray-800 focus:outline-none`}
+          className={`w-full h-[70px] ${emailValue ? "pt-6" : ""} px-4 bg-background-primary rounded-lg border placeholder:text-sm ${
+            errors.email
+              ? "border-role-negative"
+              : isValid
+                ? "border-main-primary"
+                : "border-gray-300"
+          } text-text-primary focus:outline-none`}
           {...register("email", {
             required: "이메일을 입력해주세요.",
             pattern: {
@@ -54,6 +55,7 @@ export default function EmailInputForm({
             },
           })}
         />
+        
         <Message
           message={
             errors.email
@@ -66,20 +68,23 @@ export default function EmailInputForm({
         />
         <button
           type="submit"
-          className={`w-full h-[70px] rounded-lg font-semibold mb-4 mt-20 ${!isValid
-            ? "bg-gray-200 text-[#9E9E9E] cursor-not-allowed"
-            : "bg-[#8530F1] text-white"
+          className={`w-full h-[70px] rounded-lg font-semibold mb-4 mt-20 ${
+            !isValid
+              ? "bg-background-secondary text-text-caption cursor-not-allowed"
+              : "bg-main-primary text-white"
           }`}
           disabled={!isValid}
         >
-        인증 후 로그인
-        </button>
+          인증 후 로그인
+        </button>        
         <div className="flex justify-between">
           <SwitchAuthButton onClick={onSwitchAuthType} />
-          <Link href="" className="text-[#8530F1] text-sm font-medium">회원가입</Link>
+          <Link href="" className="text-main-primary text-sm font-medium">
+            회원가입
+          </Link>
+          
         </div>
       </div>
-      
     </form>
   );
 }
