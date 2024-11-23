@@ -89,8 +89,7 @@ const config: Config = {
         bold: "700",
       },
     },
-  },
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require("@tailwindcss/typography")],
+  },  
+  plugins: [],
 };
 export default config;
