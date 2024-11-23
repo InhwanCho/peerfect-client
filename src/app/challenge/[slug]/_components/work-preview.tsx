@@ -1,6 +1,6 @@
 'use client';
 
-import SvgSquareArrowRight from "@/app/_components/icons/icon_components/SquareArrowRight";
+import SvgSquareArrowRight from "@/app/_components/icons/M/SquareArrowRight";
 import { useState } from "react";
 
 export default function WorkPreview() {
@@ -26,11 +26,7 @@ export default function WorkPreview() {
 
   return (
     <section>
-      <div className="bg-background-secondary/80 p-8 rounded-lg">
-        {/* 
-          수정 이유: 기존 `bg-[#F5F5F5]`을 Tailwind 설정의 `background.secondary`로 변경하여 일관성을 유지.
-          변경 전: bg-[#F5F5F5]
-        */}
+      <div className="bg-background-secondary/80 p-8 rounded-lg">        
         <button
           className="flex items-center"
           onClick={(e) => {
@@ -38,14 +34,10 @@ export default function WorkPreview() {
             setIsModalOpen(true);
           }}
         >
-          <SvgSquareArrowRight width={24} height={24} />
+          <SvgSquareArrowRight />
           <span className="pl-2 text-text-caption font-medium">
             클릭하여 확대
-          </span>
-          {/* 
-            수정 이유: 기존 `text-[#9E9E9E]`을 Tailwind 설정의 `text.caption`으로 변경하여 서브 텍스트 스타일 일관성을 유지.
-            변경 전: text-[#9E9E9E]
-          */}
+          </span>          
         </button>
         <img
           onClick={(e) => {
@@ -66,13 +58,13 @@ export default function WorkPreview() {
           <div
             className="relative bg-background-primary rounded-lg h-[90vh] w-[75vw]"
             onClick={(e) => e.stopPropagation()}
-          >            
+          >
             <button
               className="absolute top-4 right-4 text-text-secondary text-2xl"
               onClick={closeModal}
             >
               ✕
-            </button>            
+            </button>
             <div className="w-full h-full flex items-center justify-center">
               <img
                 src={tem_images[currentImage]}

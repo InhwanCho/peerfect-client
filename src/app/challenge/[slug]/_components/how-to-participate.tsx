@@ -1,9 +1,12 @@
+import MouseIcon from "@/app/_components/icons/mouse-icon";
+import UploadImageIcon from "@/app/_components/icons/upload-image-icon";
+
 export default function HowToParticipate() {
   return (
     <section>
       <h2 className="text-xl font-bold text-main-primary pb-8 md:pb-20">참여 방법</h2>
       {/* <p className="text-2xl font-semibold text-text-primary mb-6 text-center">참여 방법 서술</p> */}
-      <div className="md:grid grid-cols-3 min-h-[300px] flex flex-col gap-y-10">
+      <div className="md:grid grid-cols-3 min-h-[300px] flex flex-col gap-y-12">
         {/* Step 1 */}
         <div className="flex flex-col items-center justify-between">
           <div className="flex flex-col items-center mb-6">
@@ -29,15 +32,11 @@ export default function HowToParticipate() {
             </div>
             <p className="mt-4 text-text-primary font-semibold text-xl">참여하기 버튼 클릭</p>
           </div>
-          <div className="w-[160px] p-4 bg-main-primary rounded-full inline-flex justify-center items-center relative">
+          <div className="w-[160px] p-4 bg-main-primary rounded-full inline-flex justify-center items-center relative mb-6 md:mb-0">
             <div className="text-center text-white text-[16px] font-semibold leading-[22.4px] break-words">
               참여하기
             </div>
-            <img
-              src="/assets/challenge/arrow_select.png"
-              alt="참여하기 버튼"
-              className="w-7 h-auto mb-6 absolute right-0 -bottom-10"
-            />
+            <MouseIcon className="w-7 h-auto mb-6 absolute right-1 -bottom-10" />
           </div>
           <p className="text-text-primary text-base text-center">
             프로젝트 페이지에서<br />
@@ -53,11 +52,7 @@ export default function HowToParticipate() {
             </div>
             <p className="mt-4 text-text-primary font-semibold text-xl">과제 업로드</p>
           </div>
-          <img
-            src="/assets/challenge/upload_img.png"
-            alt="과제 업로드"
-            className="w-[100px] h-auto mb-6"
-          />
+          <UploadImageIcon className="w-[100px] h-auto mb-6" />
           <p className="text-text-primary text-base text-center">
             과제를 완료한 후, 업로드하세요.
           </p>

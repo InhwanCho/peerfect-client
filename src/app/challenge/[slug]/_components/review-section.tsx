@@ -1,4 +1,4 @@
-import SvgArrowDown from "@/app/_components/icons/icon_components/ArrowDown";
+import SvgArrowDown from "@/app/_components/icons/S/ArrowDown";
 
 const timeSpent = '2일';
 const createdDate = '2024-01-02';
@@ -7,10 +7,12 @@ export default function ReviewSection() {
   return (
     <section id="review">
       <header className="flex justify-between">
-        <h2 className="text-xl font-bold text-text-primary mb-6">후기 n개</h2>
+        <h2 className="text-xl font-bold text-text-primary mb-6">후기
+          <span className="text-text-tertiary"> 5개</span>
+        </h2>
         <button className="flex pr-4 items-center">
           <span className="pr-4 text-text-primary">최신순</span>
-          <SvgArrowDown isOpen={false} fillColor="#222222" props={{ width: 18, height: 18 }} />
+          <SvgArrowDown isOpen={false} filledColor="#222222"/>
         </button>
       </header>
       <div className="space-y-4">

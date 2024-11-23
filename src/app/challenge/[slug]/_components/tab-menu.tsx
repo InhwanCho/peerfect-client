@@ -12,12 +12,12 @@ export default function TabMenu({ activeTab, setActiveTab }: TabMenuProps) {
 
   return (
     <nav className="w-full">
-      <ul className="flex border-b border-gray-200 text-text-caption lg:w-fit w-full">
+      <ul className="flex border-b-2 border-gray-200 text-text-caption lg:w-fit w-full">
         {tabs.map((tab) => (
           <li
             key={tab.id}
-            className={`cursor-pointer w-full lg:w-[160px] py-2 text-sm font-medium text-center ${activeTab === tab.id
-              ? "text-main-primary border-b-2 border-main-primary font-semibold"
+            className={`cursor-pointer w-full lg:w-[160px] py-2 text-sm font-medium transition-colors text-center ${activeTab === tab.id
+              ? "text-main-primary border-b-2 border-main-primary font-semibold -mb-[2px]"
               : "hover:text-text-primary"
             }`}
             onClick={() => setActiveTab(tab.id)}
@@ -27,5 +27,7 @@ export default function TabMenu({ activeTab, setActiveTab }: TabMenuProps) {
         ))}
       </ul>
     </nav>
+
+
   );
 }

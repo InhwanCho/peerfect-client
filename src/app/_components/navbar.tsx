@@ -5,9 +5,9 @@ import Link from "next/link";
 import { useState } from "react";
 import MenuMoreIcon from "./icons/menu-more-icon";
 import { MainLogo } from "./icons/logo-icon";
-import SvgArrowDown from "./icons/icon_components/ArrowDown";
-import SvgX from "./icons/icon_components/X";
-import SvgBell from "./icons/icon_components/Bell";
+import SvgArrowDown from "./icons/M/ArrowDown";
+import SvgBell from "./icons/M/Bell";
+import SvgX from "./icons/M/X";
 
 export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
@@ -45,7 +45,7 @@ export default function Navbar() {
                   <div className="text-white md:text-base lg:text-lg font-semibold pr-4 whitespace-nowrap">
                     챌린지
                   </div>
-                  <SvgArrowDown isOpen={isChallengeOpen} fillColor="#FFFFFF" props={{ width: 24, height: 24 }} />
+                  <SvgArrowDown isOpen={isChallengeOpen} filledColor="#FFFFFF" props={{ width: 22, height: 22 }}/>
                 </div>
                 {isChallengeOpen && (
                   <div className="absolute top-[90px] bg-background-primary shadow-card p-4">
@@ -64,7 +64,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2 sm:gap-[30px]">
             <div className="relative flex items-center">
               <button onClick={toggleNotification} className="cursor-pointer relative">
-                <SvgBell fillColor="#FFFFFF" props={{width:24,height:24}}/>
+                <SvgBell filledColor="#FFFFFF" props={{ width: 24, height: 24 }} />
               </button>
               {isNotificationOpen && (
                 <div className="absolute top-[76px] left-1 right-0">
@@ -76,7 +76,7 @@ export default function Navbar() {
                     </div>
                     <div className="divide-y">
                       {[0, 0, 0].map((_, i) => (
-                        <div key={i} className="flex items-center p-4 gap-4">
+                        <div key={isChallengeOpen ? 'open' : 'closed'} className="flex items-center p-4 gap-4">
                           <div className="w-[76px] h-[76px] bg-gray-200 rounded-md"></div>
                           <div className="flex-1">
                             <p className="text-gray-900 text-sm font-medium">
@@ -115,9 +115,9 @@ export default function Navbar() {
         <div
           className={`fixed top-0 right-0 h-full border-l border-gray-700 bg-black w-[330px] z-20 transform transition-transform duration-[400ms] ${isDrawerOpen ? "translate-x-0" : "translate-x-full"}`}
         >
-          <div className="flex justify-end p-8">
+          <div className="flex justify-end p-9">
             <button onClick={closeDrawer}>
-              <SvgX props={{ width: 24, height: 24 }} fillColor="#FFFFFF" />
+              <SvgX filledColor="#FFFFFF" props={{ width: 22, height: 22 }}/>
             </button>
           </div>
           <nav className="flex flex-col items-start px-8 pt-2 text-white">
@@ -132,7 +132,7 @@ export default function Navbar() {
                   onClick={toggleChallengeDropdown}
                 >
                   챌린지
-                  <SvgArrowDown isOpen={isChallengeOpen} fillColor="#FFFFFF" props={{ width: 24, height: 24 }} />
+                  <SvgArrowDown isOpen={isChallengeOpen} filledColor="#FFFFFF" props={{ width: 24, height: 24 }} />
                 </button>
                 {isChallengeOpen && (
                   <ul className="mt-2 bg-gray-900 rounded-md shadow-card w-full py-2">
