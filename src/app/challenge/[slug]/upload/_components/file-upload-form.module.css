@@ -1,0 +1,44 @@
+/* 공통 스타일 */
+.fileUploadForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  min-height: 300px;
+  flex: 1;
+  border-radius: 1rem;
+  background: white;
+}
+
+/* 1280px 이하: 기존 border-dashed 스타일 */
+@media (max-width: 1280px) {
+  .fileUploadForm {
+    border: 2px dashed #e0e0e0; /* 기본 border 색상 */
+  }
+  .fileUploadForm.fileUploaded {
+    border: 2px dashed #8530F1; /* 업로드 후 변경된 border 색상 */
+  }
+  .dragging {
+    border: 2px dashed #8530F1; 
+  }
+}
+
+/* 1280px 이상: 이미지 테두리 스타일 */
+@media (min-width: 1281px) {
+  .fileUploadForm {
+    border: none;
+    background-image: url('/assets/challenge/border.png'); /* 업로드 전 이미지 */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .fileUploadForm.fileUploaded {
+    border: none;
+    background-image: url('/assets/challenge/border2.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .dragging {
+    background-image: url('/assets/challenge/border2.png'); 
+  }
+}

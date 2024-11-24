@@ -1,11 +1,10 @@
 import CustomButton from "@/app/_components/common/custom-button";
 import InputField from "@/app/_components/common/input-field";
 import TextAreaField from "@/app/_components/common/textarea-field";
-import UploadForm from "@/app/_components/common/upload-form";
-import SvgBoxArrowUp from "@/app/_components/icons/M/BoxArrowUp";
+import UploadForm from "@/app/challenge/[slug]/upload/_components/upload-form";
 import SvgArrowRight from "@/app/_components/icons/S/ArrowRight";
-import SvgFilledStar from "@/app/_components/icons/S/FilledStar";
 import React from "react";
+import FileUploadForm from "./_components/file-upload-form";
 
 interface UploadPageProps {
   params: Promise<{ slug: string }>;
@@ -29,20 +28,7 @@ export default async function UploadPage({ params }: UploadPageProps) {
       {/* Upload Section */}
       <section className="flex flex-col xl:flex-row px-8 md:px-14 w-full gap-x-10 gap-y-10">
         {/* File Upload Box */}
-        <div className="border-2 border-dashed border-gray-300 rounded-lg flex flex-col justify-center items-center p-8 min-h-[300px] flex-1">
-          <p className="mt-4 text-gray-600 text-center">
-            첨부할 파일을 끌어오거나, <br />
-            파일 선택 버튼을 눌러주세요
-          </p>
-          <button className="flex items-center mt-4 px-6 py-2 border border-main-primary rounded-full text-main-primary bg-main-purple-7 transition hover:bg-main-purple-6/90">
-            <span className="pr-2.5"><SvgBoxArrowUp /></span>
-            파일 선택
-          </button>
-          <p className="mt-2 text-[#ACACAC] text-sm">
-            첨부 가능한 파일 크기는 최대 10MB입니다.
-          </p>
-        </div>
-
+        <FileUploadForm/>        
         {/* Form Section */}
         <div className="space-y-4 w-full xl:w-[510px]">
           <InputField type="text" placeholder="제목을 입력해주세요." className="" />
