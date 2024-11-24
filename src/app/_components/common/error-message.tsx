@@ -1,16 +1,20 @@
-interface MessageProps {
+import { cn } from "../lib/utils";
+
+interface ErrorMessageProps {
   message?: string;
   type?: "error" | "success";
+  className?: string;
 }
 
-export default function Message({ message, type }: MessageProps) {
+export default function ErrorMessage({ message, type, className }: ErrorMessageProps) {
   if (!message) return null;
 
-  const textColor = type === "error" ? "text-red-500" : "text-[#8530F1]";
+  const textColor = type === "error" ? "text-role-negative" : "text-main-primary";
+
 
   return (
     <p
-      className={`text-xs mt-0.5 absolute top-[76px] left-1 ${textColor}`}
+      className={cn(`text-sm ${textColor}`, className)}
     >
       {message}
     </p>

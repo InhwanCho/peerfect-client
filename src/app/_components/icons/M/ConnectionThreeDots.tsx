@@ -1,5 +1,4 @@
-import * as React from "react";
-import type { SVGProps } from "react";
+
 import { SvgProps } from "../types/svg-type";
 const SvgConnectionThreeDots = ({ className, props, filledColor = "#1C1A1E" }: SvgProps) => (
   <svg

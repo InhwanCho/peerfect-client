@@ -43,16 +43,15 @@ export default function Navbar() {
                   onClick={toggleChallengeDropdown}
                 >
                   <div className="text-white md:text-base lg:text-lg font-semibold pr-4 whitespace-nowrap">
-                    챌린지
+                    <Link href={'/challenge/002'}>챌린지</Link>
                   </div>
                   <SvgArrowDown isOpen={isChallengeOpen} filledColor="#FFFFFF" props={{ width: 22, height: 22 }}/>
                 </div>
-                {isChallengeOpen && (
-                  <div className="absolute top-[90px] bg-background-primary shadow-card p-4">
-                    {/* 수정 이유: 배경 색상 `background.primary`와 그림자 `card` 스타일 적용 */}
+                {/* {isChallengeOpen && (
+                  <div className="absolute top-[90px] bg-background-primary shadow-card p-4">                    
                     <div>챌린지 나중에 추가</div>
                   </div>
-                )}
+                )} */}
               </nav>
               <Link href="/work" className="pl-4 pr-8 sm:pr-[52px] flex items-center">
                 <div className="text-white md:text-base lg:text-lg font-semibold whitespace-nowrap">

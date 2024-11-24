@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { TermsModal } from "@/app/_components/common/modals/terms-modal";
 import CheckIcon from "@/app/_components/icons/check-icon";
 import TermsAgreement from "./terms-agrrment";
+import CustomButton from "@/app/_components/common/custom-button";
 
 interface SignupFormProps {
   verifiedEmail: string;
@@ -72,7 +73,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
       <div className="w-full max-w-md mx-auto space-y-6">
         {/* 이메일 인증된 표시 */}
         <div>
-          <div className="flex items-center border border-main-primary rounded-lg px-4 py-3 h-[70px] relative">
+          <div className="flex items-center border border-main-primary rounded-2xl px-4 py-3 h-[70px] relative">
             <label className="absolute left-4 top-3 text-text-secondary text-xs">
               이메일
             </label>
@@ -81,7 +82,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
               <CheckIcon checked={true} />
             </div>
           </div>
-          <p className="text-main-primary text-xs mt-1 ml-1">
+          <p className="text-main-primary text-sm mt-1 ml-1">
             인증된 이메일입니다.
           </p>
         </div>
@@ -95,12 +96,12 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
                 maxLength={12}
                 value={nickname}
                 onChange={handleNicknameChange}
-                className={`w-full border rounded-lg p-3 text-text-primary h-[70px] focus:outline-none placeholder:text-sm ${error
+                className={`w-full border rounded-2xl p-3 text-text-primary h-[70px] focus:outline-none placeholder:text-sm ${error
                   ? "border-role-negative"
                   : isNicknameValid
                     ? "border-main-primary"
                     : "border-gray-300"
-                }`}
+                  }`}
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-tertiary text-xs">
                 {nickname.length > 0 ? (
@@ -113,21 +114,14 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
                 /12
               </span>
             </div>
-            <button
-              type="button"
-              disabled={!isNicknameValid}
-              className={`rounded-lg font-medium h-[70px] w-[120px] text-sm ${isNicknameValid
-                ? "bg-main-primary text-white"
-                : "bg-background-secondary text-text-caption cursor-not-allowed"
-              }`}
-            >
+            <CustomButton type="button" size="xs" color={isNicknameValid ? "purple" : "gray"}>
               중복확인
-            </button>
+            </CustomButton>
           </div>
           {error ? (
             <p className="text-xs text-left text-role-negative mt-1 ml-1">{error}</p>
           ) : (
-            <p className="text-xs text-left text-text-secondary mt-1 ml-1">
+            <p className="text-xs text-left text-gray-400 mt-1 ml-1">
               공백 및 특수문자를 제외한 영문, 한글만 사용 가능합니다.
             </p>
           )}
@@ -144,16 +138,11 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
       </div>
 
       {/* 회원가입 버튼 */}
-      <button
-        className={`w-full h-[70px] ${isFormValid
-          ? "bg-main-primary text-white"
-          : "bg-background-secondary text-text-caption cursor-not-allowed"
-        } rounded-lg py-3 font-medium mt-4 text-base sm:text-lg`}
-        disabled={!isFormValid}
-        onClick={() => console.log("회원가입")}
+      <CustomButton disabled={!isFormValid} onClick={() => console.log("회원가입")}
+        color={isFormValid ? "purple" : "gray"}
       >
         회원가입
-      </button>
+      </CustomButton>
 
       {/* 모달 창 */}
       {isModalOpen && <TermsModal onClose={closeModal} content={modalContent} />}

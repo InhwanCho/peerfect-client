@@ -35,7 +35,7 @@ export default function TermsAgreement({
       >
         <div className="flex items-center">
           <CheckMarkIcon type={agreements.all ? "checked" : "unchecked"} />
-          <label className={`pl-2 text-sm font-medium ${agreements.optional?"text-text-primary" :"text-text-secondary"} cursor-pointer`}>
+          <label className={`pl-2 text-sm font-medium ${agreements.optional?"text-text-primary" :"text-gray-500"} cursor-pointer`}>
             약관 전체 동의
           </label>          
         </div>
@@ -52,7 +52,7 @@ export default function TermsAgreement({
         >
           <CheckIcon checked={agreements.required} />
           <span
-            className={`text-sm pl-2 cursor-pointer ${agreements.required ? "text-text-primary font-medium" : "text-text-caption"
+            className={`text-sm pl-2 cursor-pointer ${agreements.required ? "text-text-primary font-medium" : "text-gray-400"
             }`}
           >
             [필수] 피어펙트 서비스 이용 회원 약관
@@ -78,7 +78,7 @@ export default function TermsAgreement({
         >
           <CheckIcon checked={agreements.optional} />
           <span
-            className={`text-sm pl-2 cursor-pointer ${agreements.optional ? "text-text-primary font-medium" : "text-text-caption"
+            className={`text-sm pl-2 cursor-pointer ${agreements.optional ? "text-text-primary font-medium" : "text-gray-400"
             }`}
           >
             [선택] 마케팅 정보 수신

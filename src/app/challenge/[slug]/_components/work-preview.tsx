@@ -1,6 +1,8 @@
 'use client';
 
 import SvgSquareArrowRight from "@/app/_components/icons/M/SquareArrowRight";
+import SvgLeft from "@/app/_components/icons/XL/Left";
+import SvgRight from "@/app/_components/icons/XL/Right";
 import { useState } from "react";
 
 export default function WorkPreview() {
@@ -26,7 +28,7 @@ export default function WorkPreview() {
 
   return (
     <section>
-      <div className="bg-background-secondary/80 p-8 rounded-lg">        
+      <div className="bg-background-secondary p-8 rounded-lg">        
         <button
           className="flex items-center"
           onClick={(e) => {
@@ -51,12 +53,12 @@ export default function WorkPreview() {
       </div>
 
       {isModalOpen && (
-        <div
+        <div          
           className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
           onClick={closeModal}
         >
           <div
-            className="relative bg-background-primary rounded-lg h-[90vh] w-[75vw]"
+            className="relative bg-background-primary rounded-lg h-[80vh] px-[180px] w-[1280px]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -73,16 +75,16 @@ export default function WorkPreview() {
               />
             </div>
             <button
-              className="absolute left-[-30px] top-1/2 transform -translate-y-1/2 text-white text-3xl"
+              className="absolute -left-[120px] top-1/2 transform -translate-y-1/2 text-white text-3xl"
               onClick={handlePrev}
             >
-              ❮
+              <SvgLeft width={80} height={80}/>
             </button>
             <button
-              className="absolute right-[-30px] top-1/2 transform -translate-y-1/2 text-white text-3xl"
+              className="absolute right-[-120px] top-1/2 transform -translate-y-1/2 text-white text-3xl"
               onClick={handleNext}
             >
-              ❯
+              <SvgRight width={80} height={80}/>
             </button>
           </div>
         </div>

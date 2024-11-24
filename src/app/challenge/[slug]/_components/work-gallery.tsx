@@ -15,7 +15,7 @@ export default function WorkGallery() {
         alt="서로의 작업물을 공유하고, 피드백을 나눠 보세요"
         className="w-full"
       />
-      <header className="flex justify-between mb-8 mt-20">
+      <header className="flex justify-between mb-[60px] mt-20">
         <h2 className="text-xl font-bold text-text-primary mb-6">후기
           <span className="text-text-tertiary"> 5개</span>
         </h2>
