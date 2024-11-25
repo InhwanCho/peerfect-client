@@ -4,6 +4,7 @@ import { TermsModal } from "@/app/_components/common/modals/terms-modal";
 import CheckIcon from "@/app/_components/icons/check-icon";
 import TermsAgreement from "./terms-agrrment";
 import CustomButton from "@/app/_components/common/custom-button";
+import { NicknameInput } from "@/app/_components/common/nickname-input";
 
 interface SignupFormProps {
   verifiedEmail: string;
@@ -89,42 +90,16 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
         {/* 닉네임 입력 및 중복 확인 */}
         <div>
           <div className="flex items-center space-x-2 mt-1 relative">
-            <div className="w-full relative">
-              <input
-                type="text"
-                placeholder="닉네임을 입력해주세요."
-                maxLength={12}
-                value={nickname}
-                onChange={handleNicknameChange}
-                className={`w-full border rounded-2xl p-3 text-text-primary h-[70px] focus:outline-none placeholder:text-sm ${error
-                  ? "border-role-negative"
-                  : isNicknameValid
-                    ? "border-main-primary"
-                    : "border-gray-300"
-                  }`}
-              />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-tertiary text-xs">
-                {nickname.length > 0 ? (
-                  <span className={`${isNicknameValid ? "text-text-primary" : "text-role-negative"}`}>
-                    {nickname.length}
-                  </span>
-                ) : (
-                  "0"
-                )}
-                /12
-              </span>
-            </div>
+            <NicknameInput            
+              nicknameValue={nickname}
+              onChange={handleNicknameChange}
+              isNicknameValid={isNicknameValid}
+              error={error}
+            />
             <CustomButton type="button" size="xs" color={isNicknameValid ? "purple" : "gray"}>
               중복확인
             </CustomButton>
-          </div>
-          {error ? (
-            <p className="text-xs text-left text-role-negative mt-1 ml-1">{error}</p>
-          ) : (
-            <p className="text-xs text-left text-gray-400 mt-1 ml-1">
-              공백 및 특수문자를 제외한 영문, 한글만 사용 가능합니다.
-            </p>
-          )}
+          </div>          
         </div>
 
         {/* 약관 동의 */}
