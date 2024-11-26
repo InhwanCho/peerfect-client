@@ -5,13 +5,18 @@ import { NicknameInput } from "../_components/common/nickname-input";
 import CustomButton from "../_components/common/custom-button";
 import CustomToggle from "../_components/common/custom-toggle";
 
+export enum MenuState {
+  Profile = "profile",
+  Notification = "notification",
+  MyChallenge = "myChallenge",
+}
 
 export default function Mypage() {
-  const [nickname, setNickname] = useState('뽀'); // 닉네임 상태
-  const [error, setError] = useState(""); // 에러 메시지 상태
-  const [selectedMenu, setSelectedMenu] = useState<'profile' | 'notification'>('profile'); // 메뉴 상태
-  const [marketingEnabled, setMarketingEnabled] = useState(false); // 마케팅 토글 상태
-  const [feedbackEnabled, setFeedbackEnabled] = useState(false); // 댓글 알림 토글 상태
+  const [nickname, setNickname] = useState('뽀');
+  const [error, setError] = useState("");
+  const [selectedMenu, setSelectedMenu] = useState<MenuState>(MenuState.Profile);
+  const [marketingEnabled, setMarketingEnabled] = useState(false);
+  const [feedbackEnabled, setFeedbackEnabled] = useState(false);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -39,17 +44,23 @@ export default function Mypage() {
       <section className="bg-gray-50 min-h-[calc(100vh-250px-90px)]">
         <div className="mx-auto px-20 2xl:px-0 2xl:w-[60%] py-[80px] lg:flex">
           {/* 왼쪽 메뉴 */}
-          <aside className="w-[220px] h-[252px] bg-background-primary card-container rounded-2xl pl-8 pt-[60px] mr-[110px]">
+          <aside className="w-[220px] h-[252px] bg-background-primary card-container rounded-2xl pl-8 pt-[60px] mr-[110px] transition-colors">
             <ul className="space-y-4 text-subtitle2">
               <li
-                className={`cursor-pointer ${selectedMenu === 'profile' ? 'text-main-primary' : 'text-gray-400'}`}
-                onClick={() => setSelectedMenu('profile')}
+                className={`cursor-pointer ${selectedMenu === MenuState.Profile ? 'text-main-primary' : 'text-gray-400'}`}
+                onClick={() => setSelectedMenu(MenuState.Profile)}
               >
                 프로필 설정
               </li>
               <li
-                className={`cursor-pointer ${selectedMenu === 'notification' ? 'text-main-primary' : 'text-gray-400'}`}
-                onClick={() => setSelectedMenu('notification')}
+                className={`cursor-pointer ${selectedMenu === MenuState.MyChallenge ? 'text-main-primary' : 'text-gray-400'}`}
+                onClick={() => setSelectedMenu(MenuState.MyChallenge)}
+              >
+                나의 챌린지 과정
+              </li>
+              <li
+                className={`cursor-pointer ${selectedMenu === MenuState.Notification ? 'text-main-primary' : 'text-gray-400'}`}
+                onClick={() => setSelectedMenu(MenuState.Notification)}
               >
                 알림 설정
               </li>
@@ -57,7 +68,7 @@ export default function Mypage() {
           </aside>
 
           {/* 섹션 내용 */}
-          {selectedMenu === 'profile' && (
+          {selectedMenu === MenuState.Profile && (
             <section className="w-full flex-1 bg-background-primary card-container rounded-2xl px-16 pb-20">
               <h4 className="text-h4 pt-12">프로필 정보</h4>
               <div className="flex w-full px-3 pt-8">
@@ -97,7 +108,14 @@ export default function Mypage() {
             </section>
           )}
 
-          {selectedMenu === 'notification' && (
+          {selectedMenu === MenuState.MyChallenge && (
+            <section className="w-full flex-1 bg-background-primary card-container rounded-2xl px-16 pb-20">
+              <h4 className="text-h4 pt-12">나의 챌린지 과정</h4>
+              {/* 나의 챌린지 과정 내용 추가 */}
+            </section>
+          )}
+
+          {selectedMenu === MenuState.Notification && (
             <section className="w-full flex-1 bg-background-primary card-container rounded-2xl px-16 pb-20">
               <h4 className="text-h4 pt-12">알림설정</h4>
               <div className="pt-10 space-y-8">
@@ -109,6 +127,7 @@ export default function Mypage() {
                     </p>
                   </div>
                   <CustomToggle
+                    variant="switch"
                     isActive={marketingEnabled}
                     onToggle={() => setMarketingEnabled(!marketingEnabled)}
                   />
@@ -121,6 +140,7 @@ export default function Mypage() {
                     </p>
                   </div>
                   <CustomToggle
+                    variant="switch"
                     isActive={feedbackEnabled}
                     onToggle={() => setFeedbackEnabled(!feedbackEnabled)}
                   />

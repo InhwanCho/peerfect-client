@@ -70,7 +70,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
 
   return (
     <>
-      <h2 className="text-2xl font-semibold text-text-primary mb-6">회원가입</h2>
+      <h4 className="text-xl lg:text-h4 font-semibold text-text-primary mb-6">회원가입</h4>
       <div className="w-full max-w-md mx-auto space-y-6">
         {/* 이메일 인증된 표시 */}
         <div>

@@ -15,9 +15,9 @@ export default function EmailVerification({
 }: EmailVerificationProps) {
   return (
     <div className="w-full flex flex-col justify-evenly items-center h-full">
-      <h2 className="text-2xl font-semibold text-text-primary">이메일 인증</h2>
+      <h4 className="text-xl lg:text-h4 font-semibold text-text-primary">이메일 인증</h4>
       <div className="w-full text-center">
-        <div className="whitespace-nowrap text-sm mt-[110px] mb-16 text-text-primary">
+        <div className="whitespace-nowrap text-sm mt-[110px] mb-16 text-[#000000]">
           <p className="mb-0.5">입력하신 메일 주소로 인증 메일이 발송되었습니다.</p>
           <p>수신된 링크를 클릭하여 서비스에 로그인 할 수 있습니다.</p>
           <p className="text-gray-500 text-sm pt-2.5">10분 이내에 인증을 완료해주세요.</p>

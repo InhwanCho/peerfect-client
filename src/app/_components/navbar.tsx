@@ -42,7 +42,7 @@ export default function Navbar() {
                   className="pr-3 flex items-center cursor-pointer relative"
                   onClick={toggleChallengeDropdown}
                 >
-                  <div className="text-white md:text-base lg:text-lg font-semibold pr-4 whitespace-nowrap">
+                  <div className="text-white md:text-base lg:text-subtitle2 font-semibold pr-4 whitespace-nowrap">
                     <Link href={'/challenge/002'}>챌린지</Link>
                   </div>
                   <SvgArrowDown isOpen={isChallengeOpen} filledColor="#FFFFFF" props={{ width: 22, height: 22 }}/>
@@ -52,12 +52,7 @@ export default function Navbar() {
                     <div>챌린지 나중에 추가</div>
                   </div>
                 )} */}
-              </nav>
-              <Link href="/work" className="pl-4 pr-8 sm:pr-[52px] flex items-center">
-                <div className="text-white md:text-base lg:text-lg font-semibold whitespace-nowrap">
-                  작업물
-                </div>
-              </Link>
+              </nav>              
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-[30px]">
@@ -93,7 +88,7 @@ export default function Navbar() {
             </div>
             <div className="flex items-center">
               <Link href="/auth" className="text-white text-base font-semibold hidden lg:inline-flex">
-                <span className="text-nowrap">로그인 / 회원가입</span>
+                <span className="text-nowrap md:text-base lg:text-subtitle2 font-semibold">로그인 / 회원가입</span>
               </Link>
             </div>
             <button className="cursor-pointer lg:hidden" onClick={toggleDrawer}>

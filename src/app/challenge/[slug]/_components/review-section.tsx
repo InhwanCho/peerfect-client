@@ -1,3 +1,4 @@
+import SvgFilledStar from "@/app/_components/icons/M/FilledStar";
 import SvgArrowDown from "@/app/_components/icons/S/ArrowDown";
 
 const timeSpent = '2일';
@@ -12,7 +13,7 @@ export default function ReviewSection() {
         </h2>
         <button className="flex pr-4 items-center">
           <span className="pr-4 text-text-primary">최신순</span>
-          <SvgArrowDown isOpen={false} filledColor="#222222"/>
+          <SvgArrowDown isOpen={false} filledColor="#222222" />
         </button>
       </header>
       <div className="space-y-4">
@@ -28,10 +29,12 @@ export default function ReviewSection() {
               <p className="text-text-secondary text-sm">{createdDate}</p>
             </div>
             <div>
-              <p className="text-text-secondary text-sm">
-                소요시간 <span className="font-semibold text-text-primary">{timeSpent}</span>
+              <p className="text-text-secondary text-sm flex items-center">
+                소요시간 <span className="font-semibold text-text-primary pl-1.5">{timeSpent}</span>
                 <span className="pl-8">난이도</span>
-                <span className="ml-2 text-yellow-500">⭐⭐⭐⭐⭐</span>
+                <span className="pl-2.5 flex gap-x-1">
+                  <SvgFilledStar /><SvgFilledStar /><SvgFilledStar /><SvgFilledStar /><SvgFilledStar />
+                </span>
               </p>
             </div>
             {/* 후기 내용 */}

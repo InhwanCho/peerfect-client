@@ -52,7 +52,7 @@ export default function SocialButton({ className, provider, onClick, showRecentB
           {showRecentBadge && (
             <>
               <div className="absolute -top-5 left-[25%] w-3 h-3 bg-main-primary transform rotate-45 z-0 pointer-events-none"></div>
-              <div className="absolute w-28 -top-[46px] left-[40%] transform -translate-x-1/2 bg-main-primary text-white font-semibold p-1.5 rounded-full text-sm sm:text-base pointer-events-none">
+              <div className="absolute w-28 -top-[46px] left-[40%] transform -translate-x-1/2 bg-main-primary text-white font-semibold p-1.5 rounded-full text-buttonS md:text-buttonM pointer-events-none">
                 최근 로그인
               </div>              
             </>
@@ -62,12 +62,12 @@ export default function SocialButton({ className, provider, onClick, showRecentB
       {provider === 'email' && showRecentBadge && (
         <>
           <div className="absolute -top-0 left-[49%] w-3 h-3 bg-main-primary transform rotate-45 z-0 pointer-events-none"></div>
-          <div className="absolute w-28 -top-[26px] left-[50%] transform -translate-x-1/2 bg-main-primary text-white font-semibold p-1.5 rounded-full text-sm sm:text-base pointer-events-none">
+          <div className="absolute w-28 -top-[26px] left-[50%] transform -translate-x-1/2 bg-main-primary text-white font-semibold p-1.5 rounded-full text-buttonS md:text-buttonM pointer-events-none">
             최근 로그인
           </div>          
         </>
       )}
-      <span className={`${settings.textColor} font-semibold w-[140px] sm:w-[160px] text-sm sm:text-base`}>
+      <span className={`${settings.textColor} font-semibold w-[140px] sm:w-[160px] text-buttonS md:text-buttonM`}>
         {settings.label}
       </span>
     </button>

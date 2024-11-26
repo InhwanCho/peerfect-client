@@ -23,9 +23,9 @@ export default function EmailInputForm({
 }: EmailInputFormProps) {
   return (
     <form onSubmit={onSubmit} className="w-full flex flex-col justify-evenly h-[66vh]">
-      <h2 className="text-center text-text-primary text-xl lg:text-2xl font-semibold">
+      <h4 className="text-center text-text-primary text-xl lg:text-h4 font-semibold">
         이메일로 계속하기
-      </h2>
+      </h4>
       <div className="relative w-full">
         {emailValue && (
           <label className="absolute left-4 top-3 text-text-secondary text-xs">
