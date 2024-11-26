@@ -4,12 +4,7 @@ import { useState } from "react";
 import { NicknameInput } from "../_components/common/nickname-input";
 import CustomButton from "../_components/common/custom-button";
 import CustomToggle from "../_components/common/custom-toggle";
-
-export enum MenuState {
-  Profile = "profile",
-  Notification = "notification",
-  MyChallenge = "myChallenge",
-}
+import { MenuState } from "../types/types";
 
 export default function Mypage() {
   const [nickname, setNickname] = useState('뽀');
