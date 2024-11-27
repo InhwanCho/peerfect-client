@@ -16,9 +16,9 @@ export default function TabMenu({ activeTab, setActiveTab }: TabMenuProps) {
         {tabs.map((tab) => (
           <li
             key={tab.id}
-            className={`cursor-pointer w-full lg:w-[160px] py-2 text-sm font-medium transition-colors text-center ${activeTab === tab.id
+            className={`cursor-pointer w-full lg:w-[145px] py-2.5 font-medium transition-colors text-buttonS md:text-buttonM text-center ${activeTab === tab.id
               ? "text-main-primary border-b-2 border-main-primary font-semibold -mb-[2px]"
-              : "hover:text-text-primary"
+              : "hover:text-main-primary"
             }`}
             onClick={() => setActiveTab(tab.id)}
           >

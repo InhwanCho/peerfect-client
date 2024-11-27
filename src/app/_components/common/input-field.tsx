@@ -11,7 +11,7 @@ export default function InputField({ className, props, placeholder, type }: Inpu
   return (
     <input
       type={type} placeholder={placeholder}
-      className={cn("w-full h-[70px] px-4 border-gray-400 bg-background-primary rounded-2xl border placeholder:text-sm placeholder-gray-400 focus:outline-none focus:border-main-primary", className)} 
+      className={cn("w-full h-[70px] px-5 border-gray-400 bg-background-primary rounded-2xl border placeholder:text-sm placeholder-gray-400 focus:outline-none focus:border-main-primary", className)} 
       {...props} />
   );
 }

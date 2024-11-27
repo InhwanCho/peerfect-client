@@ -28,14 +28,14 @@ export default function EmailInputForm({
       </h4>
       <div className="relative w-full">
         {emailValue && (
-          <label className="absolute left-4 top-3 text-text-secondary text-xs">
+          <label className="absolute left-5 top-3 text-text-secondary text-xs">
             이메일
           </label>
         )}
         <input
           type="email"
           placeholder={!emailValue ? "이메일을 입력해주세요." : ""}
-          className={`${emailValue ? "pt-6" : ""} w-full h-[70px] px-4 bg-background-primary rounded-2xl border  placeholder:text-sm placeholder:text-gray-400 ${errors.email
+          className={`${emailValue ? "pt-6" : ""} w-full h-[70px] px-5 bg-background-primary rounded-2xl border  placeholder:text-sm placeholder:text-gray-400 ${errors.email
             ? "border-role-negative"
             : isValid
               ? "border-main-primary"

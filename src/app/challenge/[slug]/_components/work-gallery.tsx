@@ -6,6 +6,7 @@ import { useState } from "react";
 import CustomModal from "@/app/_components/common/modals/custom-modal";
 import SvgFilledStar from "@/app/_components/icons/M/FilledStar";
 import CustomToggle from "@/app/_components/common/custom-toggle";
+import WorkCard from "@/app/_components/common/work-card";
 
 interface WorkData {
   id: number;
@@ -84,20 +85,7 @@ export default function WorkGallery() {
       </header>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-20 gap-x-10">
         {dummyData.map((work, index) => (
-          <div
-            key={work.id}
-            className="relative bg-background-secondary rounded-lg shadow overflow-hidden cursor-pointer"
-            onClick={() => handleOpenModal(index)}
-          >
-            <div className="w-[280px] h-[280px] bg-background-tertiary"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-            <div className="absolute bottom-2 left-2 text-white">
-              <h3 className="text-sm font-semibold">{work.title}</h3>
-              <p className="text-xs pt-2">
-                <span className="text-main-primary font-medium pr-1">{work.designer}</span> {work.user}
-              </p>
-            </div>
-          </div>
+          <WorkCard key={work.id} work={work} onClick={() => handleOpenModal(index)} />
         ))}
       </div>
       <PageNation />
@@ -110,7 +98,7 @@ export default function WorkGallery() {
           onClose={closeModal}
           onNext={handleNext}
           onPrev={handlePrev}
-        >          
+        >
           <CustomToggle
             isActive={isDesignSelected}
             onToggle={handleToggle}

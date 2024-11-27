@@ -35,7 +35,10 @@ export default function Navbar() {
       <header className="w-full bg-black flex justify-center select-none sticky top-0 z-10">
         <div className="lg:w-[90%] xl:w-[75%] w-full px-8 h-[90px] flex justify-between items-center">
           <div className="justify-start items-center gap-12 sm:gap-[86px] flex">
-            <MainLogo />
+            {/* <MainLogo /> */}
+            <Link className="w-[177px] h-[55px]" href='/' >
+              <img src="/assets/nav/logo-with-text.png" alt="logo" />
+            </Link>
             <div className="lg:flex hidden items-center gap-3">
               <nav className="flex items-center">
                 <div
@@ -45,14 +48,14 @@ export default function Navbar() {
                   <div className="text-white md:text-base lg:text-subtitle2 font-semibold pr-4 whitespace-nowrap">
                     <Link href={'/challenge/002'}>챌린지</Link>
                   </div>
-                  <SvgArrowDown isOpen={isChallengeOpen} filledColor="#FFFFFF" props={{ width: 22, height: 22 }}/>
+                  <SvgArrowDown isOpen={isChallengeOpen} filledColor="#FFFFFF" props={{ width: 22, height: 22 }} />
                 </div>
                 {/* {isChallengeOpen && (
                   <div className="absolute top-[90px] bg-background-primary shadow-card p-4">                    
                     <div>챌린지 나중에 추가</div>
                   </div>
                 )} */}
-              </nav>              
+              </nav>
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-[30px]">
@@ -111,7 +114,7 @@ export default function Navbar() {
         >
           <div className="flex justify-end p-9">
             <button onClick={closeDrawer}>
-              <SvgX filledColor="#FFFFFF" props={{ width: 22, height: 22 }}/>
+              <SvgX filledColor="#FFFFFF" props={{ width: 22, height: 22 }} />
             </button>
           </div>
           <nav className="flex flex-col items-start px-8 pt-2 text-white">

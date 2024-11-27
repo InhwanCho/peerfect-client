@@ -74,12 +74,12 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
       <div className="w-full max-w-md mx-auto space-y-6">
         {/* 이메일 인증된 표시 */}
         <div>
-          <div className="flex items-center border border-main-primary rounded-2xl px-4 py-3 h-[70px] relative">
-            <label className="absolute left-4 top-3 text-text-secondary text-xs">
+          <div className="flex items-center border border-main-primary rounded-2xl px-5 h-[70px] relative">
+            <label className="absolute left-5 top-3 text-text-secondary text-xs">
               이메일
             </label>
             <p className="pt-6 bg-background-primary text-text-primary">{verifiedEmail}</p>
-            <div className="absolute right-4">
+            <div className="absolute right-5">
               <CheckIcon checked={true} />
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
         {/* 닉네임 입력 및 중복 확인 */}
         <div>
           <div className="flex items-center space-x-2 mt-1 relative">
-            <NicknameInput            
+            <NicknameInput
               nicknameValue={nickname}
               onChange={handleNicknameChange}
               isNicknameValid={isNicknameValid}
@@ -99,7 +99,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
             <CustomButton type="button" size="xs" color={isNicknameValid ? "purple" : "gray"}>
               중복확인
             </CustomButton>
-          </div>          
+          </div>
         </div>
 
         {/* 약관 동의 */}

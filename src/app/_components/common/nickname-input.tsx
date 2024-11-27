@@ -23,14 +23,14 @@ export function NicknameInput({
           maxLength={12}
           value={nicknameValue}
           onChange={onChange}
-          className={`w-full border rounded-2xl p-3 text-text-primary h-[70px] focus:outline-none placeholder:text-sm ${error
+          className={`w-full border rounded-2xl px-5 text-text-primary h-[70px] focus:outline-none placeholder:text-sm ${error
             ? "border-role-negative"
             : isNicknameValid
               ? "border-main-primary"
               : "border-gray-300"
             }`}
         />
-        <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-tertiary text-xs">
+        <span className="absolute right-5 top-1/2 transform -translate-y-1/2 text-text-tertiary text-xs">
           {nicknameValue.length > 0 ? (
             <span
               className={`${isNicknameValid ? "text-text-primary" : "text-role-negative"
