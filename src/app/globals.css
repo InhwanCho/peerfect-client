@@ -2,14 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .all-\[unset\] {
-    all: unset;
+@layer components {  
+  .card-container {
+    @apply border border-gray-200 border-opacity-40 shadow-card;
   }
-}
-
-.card-container {
-  @apply border border-gray-200 border-opacity-40 shadow-card;
 }
 
 /* input태그 자동완성 시 배경색 없애기 */
@@ -21,4 +17,3 @@ input:-webkit-autofill:focus {
   background-color: transparent !important;
   box-shadow: inset 0 0 0px 1000px #ffffff !important;
 }
-

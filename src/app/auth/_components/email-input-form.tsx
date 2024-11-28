@@ -28,7 +28,7 @@ export default function EmailInputForm({
       </h4>
       <div className="relative w-full">
         {emailValue && (
-          <label className="absolute left-5 top-3 text-text-secondary text-xs">
+          <label className="absolute left-5 top-3 text-text-secondary text-sm">
             이메일
           </label>
         )}

@@ -38,7 +38,6 @@ export default function CustomModal({
         >
           <SvgX />
         </button>}
-        
         {children}
 
         {onPrev && onNext &&

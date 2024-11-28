@@ -58,7 +58,7 @@ export default function TermsAgreement({
             [필수] 피어펙트 서비스 이용 회원 약관
           </span>
           <button
-            className="text-text-tertiary text-xs ml-auto underline"
+            className="text-text-tertiary text-sm ml-auto underline"
             onClick={(e) => {
               e.stopPropagation();
               openModal("required");
@@ -84,7 +84,7 @@ export default function TermsAgreement({
             [선택] 마케팅 정보 수신
           </span>
           <button
-            className="text-text-tertiary text-xs ml-auto underline"
+            className="text-text-tertiary text-sm ml-auto underline"
             onClick={(e) => {
               e.stopPropagation();
               openModal("optional");

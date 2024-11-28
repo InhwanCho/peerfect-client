@@ -34,7 +34,7 @@ export default function CustomButton({
   return (
     <button
     className={cn(
-      `${size ? sizeClass : "w-full"} h-[70px] py-3  rounded-2xl text-buttonS md:text-buttonM`,
+      `${size ? sizeClass : "w-full"} h-[70px] py-3 rounded-2xl text-buttonS md:text-buttonM`,
       colorClass,
       className
     )}

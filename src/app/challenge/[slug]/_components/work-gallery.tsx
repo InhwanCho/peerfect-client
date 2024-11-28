@@ -7,6 +7,7 @@ import CustomModal from "@/app/_components/common/modals/custom-modal";
 import SvgFilledStar from "@/app/_components/icons/M/FilledStar";
 import CustomToggle from "@/app/_components/common/custom-toggle";
 import WorkCard from "@/app/_components/common/work-card";
+import DropdownFilter from "@/app/_components/common/dropdown-filter";
 
 interface WorkData {
   id: number;
@@ -36,10 +37,17 @@ export default function WorkGallery() {
   }));
 
   const [isDesignSelected, setIsDesignSelected] = useState(true);
+  const [selectedOrder, setSelectedOrder] = useState("최신순");
+  const orderOptions = ["최신순", "인기순"];
+
+  const handleOrderChange = (order: string) => {
+    setSelectedOrder(order);
+  };
 
   const handleToggle = () => {
     setIsDesignSelected((prev) => !prev);
   };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentWork, setCurrentWork] = useState<WorkData | null>(null);
 
@@ -68,20 +76,22 @@ export default function WorkGallery() {
   };
 
   return (
-    <section className="pr-6">
+    <section>
       <img
         src="/assets/challenge/otherworks.webp"
         alt="서로의 작업물을 공유하고, 피드백을 나눠 보세요"
         className="w-full"
       />
       <header className="flex justify-between mb-[60px] mt-20">
-        <h2 className="text-xl font-bold text-text-primary mb-6">후기
-          <span className="text-text-tertiary"> {dummyData.length}개</span>
+        <h2 className="text-xl font-bold text-text-primary mb-6">
+          후기 <span className="text-text-tertiary"> {dummyData.length}개</span>
         </h2>
-        <button className="flex pr-4 items-center">
-          <span className="pr-4 text-text-primary">최신순</span>
-          <SvgArrowDown isOpen={false} filledColor="#222222" />
-        </button>
+        <DropdownFilter
+          galleryPage
+          options={orderOptions}
+          selectedOption={selectedOrder}
+          onSelect={handleOrderChange}
+        />
       </header>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-20 gap-x-10">
         {dummyData.map((work, index) => (
@@ -106,11 +116,10 @@ export default function WorkGallery() {
             activeText="디자인 작업물"
             inactiveText="피드백"
           />
-
           <div className="px-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-main-primary text-sm font-medium">
-                #챌린지 00 {`[작품] ${currentWork.title}`}
+                {`#챌린지 00 ${currentWork.title}`}
               </h3>
               <span className="text-gray-500 text-sm">{currentWork.date}</span>
             </div>

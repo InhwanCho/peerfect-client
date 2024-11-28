@@ -4,7 +4,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import MenuMoreIcon from "./icons/menu-more-icon";
-import { MainLogo } from "./icons/logo-icon";
 import SvgArrowDown from "./icons/M/ArrowDown";
 import SvgBell from "./icons/M/Bell";
 import SvgX from "./icons/M/X";
@@ -34,8 +33,7 @@ export default function Navbar() {
     <>
       <header className="w-full bg-black flex justify-center select-none sticky top-0 z-10">
         <div className="lg:w-[90%] xl:w-[75%] w-full px-8 h-[90px] flex justify-between items-center">
-          <div className="justify-start items-center gap-12 sm:gap-[86px] flex">
-            {/* <MainLogo /> */}
+          <div className="justify-start items-center gap-12 sm:gap-[86px] flex">            
             <Link className="w-[177px] h-[55px]" href='/' >
               <img src="/assets/nav/logo-with-text.png" alt="logo" />
             </Link>
@@ -65,7 +63,7 @@ export default function Navbar() {
               </button>
               {isNotificationOpen && (
                 <div className="absolute top-[76px] left-1 right-0">
-                  <div className="absolute -top-2 w-4 h-4 bg-white transform rotate-45 z-10"></div>
+                  <div className="absolute -top-2 w-4 h-4 bg-white transform rotate-45 z-10 border-t border-l"></div>
                   <div className="absolute bg-background-primary w-[436px] -left-[170px] rounded-lg border shadow-card">
                     <div className="p-4 flex justify-between items-center border-b border-gray-300">
                       <p className="text-gray-900 font-semibold">읽지 않은 알림 (1)</p>
@@ -73,14 +71,14 @@ export default function Navbar() {
                     </div>
                     <div className="divide-y">
                       {[0, 0, 0].map((_, i) => (
-                        <div key={isChallengeOpen ? 'open' : 'closed'} className="flex items-center p-4 gap-4">
+                        <div key={isChallengeOpen ? 'open' + i : 'closed' + i} className="flex items-center p-4 gap-4">
                           <div className="w-[76px] h-[76px] bg-gray-200 rounded-md"></div>
                           <div className="flex-1">
                             <p className="text-gray-900 text-sm font-medium">
                               닉네임입력 님이 내 작업물에 피드백을 남겼습니다.
                             </p>
-                            <p className="text-text-secondary text-xs mt-1">피드백 내용 입력</p>
-                            <p className="text-text-tertiary text-xs mt-4">n분 전</p>
+                            <p className="text-text-secondary text-small mt-1">피드백 내용 입력</p>
+                            <p className="text-text-tertiary text-small mt-4">n분 전</p>
                           </div>
                         </div>
                       ))}

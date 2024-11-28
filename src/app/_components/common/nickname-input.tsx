@@ -30,7 +30,7 @@ export function NicknameInput({
               : "border-gray-300"
             }`}
         />
-        <span className="absolute right-5 top-1/2 transform -translate-y-1/2 text-text-tertiary text-xs">
+        <span className="absolute right-5 top-1/2 transform -translate-y-1/2 text-text-tertiary text-sm">
           {nicknameValue.length > 0 ? (
             <span
               className={`${isNicknameValid ? "text-text-primary" : "text-role-negative"
@@ -44,9 +44,9 @@ export function NicknameInput({
           /12
         </span>
         {error ? (
-          <p className="text-xs absolute -bottom-6 left-1 text-role-negative">{error}</p>
+          <p className="text-small absolute -bottom-7 left-1 text-role-negative">{error}</p>
         ) : (
-          <p className="text-xs absolute -bottom-6 left-1 text-gray-400">
+          <p className="text-small absolute -bottom-7 left-1 text-gray-400">
             공백 및 특수문자를 제외한 영문, 한글만 사용 가능합니다.
           </p>
         )}

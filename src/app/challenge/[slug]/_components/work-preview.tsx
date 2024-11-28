@@ -27,17 +27,17 @@ export default function WorkPreview() {
     setIsModalOpen(false);
   };
 
-  useEffect(()=>{
-    const handleKeyDown = (e:KeyboardEvent)=>{
-      if (e.key === "Escape"){
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
         closeModal();
       }
     };
-    if (isModalOpen){
-      document.addEventListener("keydown",handleKeyDown)
+    if (isModalOpen) {
+      document.addEventListener("keydown", handleKeyDown)
     }
-    return ()=>{
-      document.removeEventListener("keydown",handleKeyDown)
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
     }
   }, [isModalOpen]);
 
@@ -67,7 +67,7 @@ export default function WorkPreview() {
         />
       </div>
 
-      
+
       {isModalOpen && (
         <div
           className="fixed inset-0 bg-[#111111]/80 flex items-center justify-center z-50"
@@ -88,13 +88,13 @@ export default function WorkPreview() {
                 className="object-contain w-full h-full"
               />
               <button
-                className="absolute -left-[120px] top-1/2 transform -translate-y-1/2 text-white text-3xl"
+                className={`absolute left-10 2xl:-left-[120px] top-1/2 transform -translate-y-1/2 text-white text-3xl`}
                 onClick={handlePrev}
               >
                 <SvgLeft width={80} height={80} />
               </button>
               <button
-                className="absolute right-[-120px] top-1/2 transform -translate-y-1/2 text-white text-3xl"
+                className={`absolute right-10 2xl:right-[-120px] top-1/2 transform -translate-y-1/2 text-white text-3xl`}
                 onClick={handleNext}
               >
                 <SvgRight width={80} height={80} />

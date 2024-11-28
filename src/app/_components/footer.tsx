@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { MainLogo } from "./icons/logo-icon";
 
 export default function Footer() {
   return (
     <footer className="bg-black py-8 px-4 md:px-16 h-[450px]">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-around items-center h-full">
         {/* 왼쪽 섹션 */}
-        <div className="flex items-center flex-col justify-center space-y-6">
-          {/* <MainLogo /> */}
+        <div className="flex items-center flex-col justify-center space-y-6">          
           <Link className="w-[177px] h-[55px]" href='/' >
             <img src="/assets/nav/logo-with-text.png" alt="logo" />
           </Link>

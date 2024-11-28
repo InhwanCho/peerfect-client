@@ -43,8 +43,8 @@ export default function SideInfo({ slug }: SideInfoProps) {
             </div>
           </div>
         </div>
-        <CustomButton onClick={()=>{router.push(`${slug}/upload`)}} color="purple" className="my-9">참여하기</CustomButton>        
-        <div className="flex items-center justify-between mt-4">
+        <CustomButton onClick={() => { router.push(`${slug}/upload`) }} color="purple" className="my-10">참여하기</CustomButton>
+        <div className="flex items-center justify-between">
           <button className="flex items-center justify-center w-[46%] h-[40px] py-2 border border-gray-300 rounded-lg text-sm text-gray-600">
             <SvgHeartEmpty filledColor="#AC6BFF" props={{ width: 22, height: 22 }} /> <span className="ml-2">찜하기</span>
           </button>
@@ -52,8 +52,10 @@ export default function SideInfo({ slug }: SideInfoProps) {
             <SvgConnectionThreeDots filledColor="#AC6BFF" props={{ width: 22, height: 22 }} /> <span className="ml-2">공유하기</span>
           </button>
         </div>
-        <p className="text-sm text-text-caption text-center mt-6 flex justify-center">
-          <span className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-text-primary">챌린지를 중단할래요</span>
+        <p className="text-sm text-text-caption text-center mt-6 flex justify-center ">
+          <span className="hover:underline underline-offset-4 cursor-pointer hover:text-text-primary transition-all duration-200 decoration-current">
+            챌린지를 중단할래요
+          </span>
         </p>
       </div>
     </aside>

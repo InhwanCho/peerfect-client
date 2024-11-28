@@ -75,7 +75,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
         {/* 이메일 인증된 표시 */}
         <div>
           <div className="flex items-center border border-main-primary rounded-2xl px-5 h-[70px] relative">
-            <label className="absolute left-5 top-3 text-text-secondary text-xs">
+            <label className="absolute left-5 top-3 text-text-secondary text-sm">
               이메일
             </label>
             <p className="pt-6 bg-background-primary text-text-primary">{verifiedEmail}</p>
