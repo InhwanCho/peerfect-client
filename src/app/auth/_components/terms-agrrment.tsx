@@ -1,6 +1,6 @@
 import CheckIcon from "@/app/_components/icons/check-icon";
 import CheckMarkIcon from "@/app/_components/icons/check-mark-icon";
-import { cn } from "@/app/_components/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface TermsAgreementProps {
   className?: string;

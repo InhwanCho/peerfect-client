@@ -1,4 +1,4 @@
-import { cn } from "@/app/_components/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface SwitchAuthButtonProps {
   className?: string;

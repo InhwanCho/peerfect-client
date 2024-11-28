@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { cn } from "../_components/lib/utils";
+import { cn } from "../../lib/utils";
 import styles from "./authlayout.module.css";
 
 export const metadata: Metadata = {

@@ -1,4 +1,4 @@
-import { cn } from "../../lib/utils";
+import { cn } from "../../../../lib/utils";
 import { SvgProps } from "../types/svg-type";
 
 const SvgArrowDown = ({ className, props, isOpen, filledColor = "#000" }: SvgProps) => (

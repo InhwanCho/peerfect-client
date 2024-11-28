@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { cn } from "@/app/_components/lib/utils";
+import { cn } from "@/lib/utils";
 
 interface SocialButtonProps {
   className?: string;

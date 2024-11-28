@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { cn } from "./_components/lib/utils";
+import { cn } from "../lib/utils";
 import Navbar from "./_components/navbar";
+import { Providers } from "./_components/provider/providers";
 
 export const metadata: Metadata = {
   title: "PeerFect",
@@ -24,8 +25,10 @@ export default function RootLayout({
       <body
         className={`${cn('antialiased', fontPretendard.className)}`}
       >
-        <Navbar/>
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
