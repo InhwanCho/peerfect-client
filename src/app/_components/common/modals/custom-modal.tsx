@@ -49,7 +49,7 @@ export default function CustomModal({
                 onPrev();
               }}
             >
-              <SvgLeft width={80} height={80} />
+              <SvgLeft props={{width:80,height:80}} />
             </button>
             <button
               className="absolute right-[-120px] top-1/2 transform -translate-y-1/2 text-text-primary text-3xl"
@@ -58,7 +58,7 @@ export default function CustomModal({
                 onNext();
               }}
             >
-              <SvgRight width={80} height={80} />
+              <SvgRight props={{width:80,height:80}} />
             </button>
           </>
         }
