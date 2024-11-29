@@ -58,13 +58,15 @@ export default function UploadForm() {
   }, []);
 
   return (
-    <div className="w-full 2xl:w-[510px] select-none bg-white rounded-lg flex justify-between items-center px-1">
-      <div className="flex items-center gap-x-4">
+    <div className="w-full 2xl:w-[510px] select-none bg-white rounded-lg flex flex-col phone:flex-row justify-between items-center px-1 gap-y-4 phone:gap-y-0">
+      <div className="flex items-center gap-x-2 sm:gap-x-4">
         <span className="text-gray-500 text-sm">소요시간</span>
         {/* Days Dropdown */}
         <div ref={daysDropdownRef} className="relative w-[100px]">
           <div
-            className={`h-[44px] px-3 flex items-center justify-between border rounded-2xl cursor-pointer text-sm ${selectedDays !== null ? "border-main-primary text-text-primary" : "border-gray-400 text-gray-400"
+            className={`h-[44px] px-3 flex items-center justify-between border rounded-2xl cursor-pointer text-sm ${selectedDays !== null
+              ? "border-main-primary text-text-primary"
+              : "border-gray-400 text-gray-400"
               }`}
             onClick={() => handleDropdownToggle("days")}
           >
@@ -89,7 +91,9 @@ export default function UploadForm() {
         {/* Hours Dropdown */}
         <div ref={hoursDropdownRef} className="relative w-[100px]">
           <div
-            className={`h-[44px] px-3 flex items-center justify-between border rounded-2xl cursor-pointer text-sm ${selectedHours !== null ? "border-main-primary text-text-primary" : "border-gray-400 text-gray-400"
+            className={`h-[44px] px-3 flex items-center justify-between border rounded-2xl cursor-pointer text-sm ${selectedHours !== null
+              ? "border-main-primary text-text-primary"
+              : "border-gray-400 text-gray-400"
               }`}
             onClick={() => handleDropdownToggle("hours")}
           >
@@ -113,19 +117,20 @@ export default function UploadForm() {
       </div>
 
       {/* 난이도 */}
-      <div className="flex gap-x-4 items-center">
+      <div className="flex gap-x-2 sm:gap-x-4 items-center phone:mt-0 mt-4">
         <span className="text-text-secondary text-sm">난이도</span>
         <div className="flex gap-x-1">
           {[...Array(5)].map((_, i) => (
             <SvgFilledStar
               key={i}
               className="cursor-pointer"
-              filledColor={i < selectedDifficulty ? undefined : "#E0E0E0"} 
-              props={{ onClick: () => handleStarClick(i)} }
-          />
-        ))}
+              filledColor={i < selectedDifficulty ? undefined : "#E0E0E0"}
+              props={{ onClick: () => handleStarClick(i) }}
+            />
+          ))}
         </div>
       </div>
     </div>
+
   );
 }
