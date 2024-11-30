@@ -1,14 +1,20 @@
 'use client';
-import { useState } from "react";
-import SvgLeft from "../icons/XL/Left";
-import SvgRight from "../icons/XL/Right";
+import { useState } from 'react';
+import SvgLeft from '../icons/XL/Left';
+import SvgRight from '../icons/XL/Right';
 
 interface CardCarouselProps {
-  images: string[]
+  images: string[];
 }
 
 export default function CardCarousel({ images }: CardCarouselProps) {
-  const extendedImages = [...images, ...images, ...images, ...images, ...images];
+  const extendedImages = [
+    ...images,
+    ...images,
+    ...images,
+    ...images,
+    ...images,
+  ];
   const [currentIndex, setCurrentIndex] = useState(images.length); // 현재 인덱스
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -39,10 +45,10 @@ export default function CardCarousel({ images }: CardCarouselProps) {
   const currentSlide = ((currentIndex - images.length) % images.length) + 1;
 
   return (
-    <div className="relative w-full overflow-hidden select-none hidden md:block">
+    <div className="relative hidden w-full select-none overflow-hidden md:block">
       {/* 상태 기반 슬라이드 번호 */}
-      <div className="absolute bottom-3 lg:bottom-9 bg-gray-400/10 left-8 lg:left-[8%] xl:left-[15%] z-50 lg:w-[125px] lg:h-[50px] rounded-full flex items-center justify-center">
-        <p className="px-10 py-3 text-small lg:text-subtitle2 gap-x-2.5 flex">
+      <div className="absolute bottom-3 left-8 z-50 flex items-center justify-center rounded-full bg-gray-400/10 lg:bottom-9 lg:left-[8%] lg:h-[50px] lg:w-[125px] xl:left-[15%]">
+        <p className="flex gap-x-2.5 px-10 py-3 text-small lg:text-subtitle2">
           <span className={`text-white`}>{currentSlide}</span>
           <span className="text-text-caption">/</span>
           <span className="text-text-caption">{images.length}</span>
@@ -61,7 +67,7 @@ export default function CardCarousel({ images }: CardCarouselProps) {
             key={index}
             src={image}
             alt={`Slide ${index}`}
-            className="w-full flex-shrink-0"
+            className="w-full shrink-0"
           />
         ))}
       </div>
@@ -70,6 +76,7 @@ export default function CardCarousel({ images }: CardCarouselProps) {
       <button
         className="absolute left-4 top-1/2 -translate-y-1/2"
         onClick={handlePrev}
+        aria-label="prev button"
       >
         <SvgLeft props={{ width: 80, height: 80 }} />
       </button>
@@ -78,6 +85,7 @@ export default function CardCarousel({ images }: CardCarouselProps) {
       <button
         className="absolute right-4 top-1/2 -translate-y-1/2"
         onClick={handleNext}
+        aria-label="next button"
       >
         <SvgRight props={{ width: 80, height: 80 }} />
       </button>

@@ -1,7 +1,7 @@
 'use client';
 
 import SvgBoxArrowUp from '@/app/_components/icons/M/BoxArrowUp';
-import styles from "./file-upload-form.module.css";
+import styles from './file-upload-form.module.css';
 import { useState } from 'react';
 
 interface UploadedFile {
@@ -47,7 +47,7 @@ export default function FileUploadForm() {
     setUploadedFiles([...uploadedFiles, ...newFiles]);
     setErrorMessage(null);
   };
-  
+
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDragging(true);
@@ -70,15 +70,16 @@ export default function FileUploadForm() {
 
   return (
     <div
-      className={`relative ${styles.fileUploadForm} ${uploadedFiles.length > 0 ? styles.fileUploaded : ''
-        } ${isDragging ? styles.dragging : ''}`}
+      className={`relative ${styles.fileUploadForm} ${
+        uploadedFiles.length > 0 ? styles.fileUploaded : ''
+      } ${isDragging ? styles.dragging : ''}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       {uploadedFiles.length === 0 ? (
         <>
-          <p className="mt-4 text-gray-800 text-center">
+          <p className="mt-4 text-center text-gray-800">
             첨부할 파일을 끌어오거나, <br />
             파일 선택 버튼을 눌러주세요
           </p>
@@ -92,36 +93,33 @@ export default function FileUploadForm() {
           />
           <label
             htmlFor="file-upload"
-            className="flex items-center mt-4 px-6 py-2 border border-main-primary rounded-full text-gray-600 bg-main-purple-7 transition hover:bg-main-purple-6/70 cursor-pointer"
+            className="mt-4 flex cursor-pointer items-center rounded-full border border-main-primary bg-main-purple-7 px-6 py-2 text-gray-600 transition hover:bg-main-purple-6/70"
           >
             <span className="pr-2.5">
               <SvgBoxArrowUp />
             </span>
             파일 선택
           </label>
-          <p className="mt-2 text-[#ACACAC] text-sm">
+          <p className="mt-2 text-sm text-[#ACACAC]">
             첨부 가능한 파일 크기는 최대 10MB입니다.
           </p>
           {errorMessage && (
-            <p className="mt-2 text-role-negative text-sm">{errorMessage}</p>
+            <p className="mt-2 text-sm text-role-negative">{errorMessage}</p>
           )}
         </>
       ) : (
-        <div className='w-full flex flex-col absolute top-5 left-0 select-none px-4'>
-          <div className="flex justify-end items-center text-sm text-gray-800">
-            <span className='font-bold pr-4'>용량</span>
+        <div className="absolute left-0 top-5 flex w-full select-none flex-col px-4">
+          <div className="flex items-center justify-end text-sm text-gray-800">
+            <span className="pr-4 font-bold">용량</span>
             <span>
               {(calculateTotalSize(uploadedFiles) / 1024).toFixed(2)} KB / 10MB
             </span>
           </div>
-          <div className="w-full pt-5 flex flex-col space-y-2">
+          <div className="flex w-full flex-col space-y-2 pt-5">
             {uploadedFiles.map((file, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center"
-              >
+              <div key={index} className="flex items-center justify-between">
                 <span className="text-main-purple-1">{file.name}</span>
-                <span className="text-gray-500 text-sm">
+                <span className="text-sm text-gray-500">
                   ({(file.size / 1024).toFixed(2)} KB)
                 </span>
               </div>

@@ -1,11 +1,9 @@
 'use client';
 
-import {
-  QueryClientProvider,
-} from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
-import { getQueryClient } from '@/lib/query-client'
+import { getQueryClient } from '@/lib/query-client';
 import { PropsWithChildren } from 'react';
 
 export function Providers({ children }: PropsWithChildren) {
@@ -16,7 +14,7 @@ export function Providers({ children }: PropsWithChildren) {
       <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-  )
+  );
 }
 
 // 챌린지 관련된건 HydrationBoundary으로 prefetch 진행하고,

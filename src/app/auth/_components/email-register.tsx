@@ -1,29 +1,36 @@
 'use client';
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import EmailSignupForm from "./email-signup-form";
-import EmailVerification from "./email-verification";
-import EmailInputForm from "./email-input-form";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import EmailSignupForm from './email-signup-form';
+import EmailVerification from './email-verification';
+import EmailInputForm from './email-input-form';
 
 interface EmailRegisterProps {
   onSwitchAuthType: () => void;
 }
 
-export default function EmailRegister({ onSwitchAuthType }: EmailRegisterProps) {
-  const { register, handleSubmit, formState: { errors, isValid }, watch } = useForm<{ email: string }>({
-    mode: "onChange",
+export default function EmailRegister({
+  onSwitchAuthType,
+}: EmailRegisterProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    watch,
+  } = useForm<{ email: string }>({
+    mode: 'onChange',
   });
 
   const [isVerified, setIsVerified] = useState(false);
   const [isSignupScreen, setIsSignupScreen] = useState(false);
-  const [verifiedEmail, setVerifiedEmail] = useState("");
-  const emailValue = watch("email");
+  const [verifiedEmail, setVerifiedEmail] = useState('');
+  const emailValue = watch('email');
 
   const onSubmit = (data: { email: string }) => {
-    console.log("Valid email:", data.email);
-    setVerifiedEmail(data.email); 
-    setIsVerified(true); 
+    console.log('Valid email:', data.email);
+    setVerifiedEmail(data.email);
+    setIsVerified(true);
   };
 
   if (isSignupScreen) {

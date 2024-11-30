@@ -17,10 +17,10 @@
     border: 2px dashed #e0e0e0; /* 기본 border 색상 */
   }
   .fileUploadForm.fileUploaded {
-    border: 2px dashed #8530F1; /* 업로드 후 변경된 border 색상 */
+    border: 2px dashed #8530f1; /* 업로드 후 변경된 border 색상 */
   }
   .dragging {
-    border: 2px dashed #8530F1; 
+    border: 2px dashed #8530f1;
   }
 }
 
@@ -39,6 +39,6 @@
     background-repeat: no-repeat;
   }
   .dragging {
-    background-image: url('/assets/challenge/border2.png'); 
+    background-image: url('/assets/challenge/border2.png');
   }
 }

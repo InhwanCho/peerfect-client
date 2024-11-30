@@ -1,9 +1,26 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:tailwindcss/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["tailwindcss"],
   "rules": {
     "semi": ["warn", "always"],
-    "indent": ["warn", 2],
     "@typescript-eslint/no-unused-vars": "off",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "tailwindcss/enforces-negative-arbitrary-values": "off",
+    "prettier/prettier": [
+      "warn",
+      {
+        "semi": true,
+        "singleQuote": true,
+        "jsxSingleQuote": false,
+        "trailingComma": "es5",
+        "tabWidth": 2,
+        "arrowParens": "always"
+      }
+    ]
   }
 }

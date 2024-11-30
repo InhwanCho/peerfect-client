@@ -1,6 +1,9 @@
-
-import { SvgProps } from "../types/svg-type";
-const SvgConnectionThreeDots = ({ className, props, filledColor = "#1C1A1E" }: SvgProps) => (
+import { SvgProps } from '../types/svg-type';
+const SvgConnectionThreeDots = ({
+  className,
+  props,
+  filledColor = '#1C1A1E',
+}: SvgProps) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"

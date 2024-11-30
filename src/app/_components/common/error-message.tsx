@@ -1,22 +1,20 @@
-import { cn } from "../../../lib/utils";
+import { cn } from '../../../lib/utils';
 
 interface ErrorMessageProps {
   message?: string;
-  type?: "error" | "success";
+  type?: 'error' | 'success';
   className?: string;
 }
 
-export default function ErrorMessage({ message, type, className }: ErrorMessageProps) {
+export default function ErrorMessage({
+  message,
+  type,
+  className,
+}: ErrorMessageProps) {
   if (!message) return null;
 
-  const textColor = type === "error" ? "text-role-negative" : "text-main-primary";
+  const textColor =
+    type === 'error' ? 'text-role-negative' : 'text-main-primary';
 
-
-  return (
-    <p
-      className={cn(`text-sm ${textColor}`, className)}
-    >
-      {message}
-    </p>
-  );
+  return <p className={cn(`text-sm ${textColor}`, className)}>{message}</p>;
 }

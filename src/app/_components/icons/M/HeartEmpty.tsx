@@ -1,6 +1,10 @@
-import { SvgProps } from "@/app/_components/icons/types/svg-type";
+import { SvgProps } from '@/app/_components/icons/types/svg-type';
 
-const SvgHeartEmpty = ({ props, className, filledColor = "#1A171B" }: SvgProps) => (
+const SvgHeartEmpty = ({
+  props,
+  className,
+  filledColor = '#1A171B',
+}: SvgProps) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"

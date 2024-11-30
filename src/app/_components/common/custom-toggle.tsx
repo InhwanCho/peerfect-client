@@ -17,27 +17,30 @@ export default function CustomToggle({
 }: CustomToggleProps) {
   if (variant === 'button') {
     return (
-      <div className="flex justify-center items-center py-10">
+      <div className="flex items-center justify-center py-10">
         <div
-          className={`relative flex items-center rounded-full bg-gray-300 w-[256px] h-[46px] transition-colors duration-300`}
+          className={`relative flex h-[46px] w-[256px] items-center rounded-full bg-gray-300 transition-colors duration-200`}
           onClick={onToggle}
         >
           {/* 이동하는 버튼 ui */}
           <div
-            className={`absolute w-[125px] h-[36px] bg-background-primary shadow-md rounded-full transition-transform duration-300 transform ${isActive ? 'translate-x-[5px]' : 'translate-x-[125px]'
-              }`}
+            className={`absolute h-[36px] w-[125px] rounded-full bg-background-primary shadow-md transition-transform duration-200${
+              isActive ? 'translate-x-[5px]' : 'translate-x-[125px]'
+            }`}
           ></div>
           {/* 활성화 텍스트 */}
           <span
-            className={`absolute left-[24px] font-semibold ${isActive ? 'text-gray-900' : 'text-gray-500'
-              } transition-colors duration-300`}
+            className={`absolute left-[24px] font-semibold ${
+              isActive ? 'text-gray-900' : 'text-gray-500'
+            } transition-colors duration-300`}
           >
             {activeText}
           </span>
           {/* 비활성화 텍스트 */}
           <span
-            className={`absolute right-[48px] font-semibold ${!isActive ? 'text-gray-900' : 'text-gray-500'
-              } transition-colors duration-300`}
+            className={`absolute right-[48px] font-semibold ${
+              !isActive ? 'text-gray-900' : 'text-gray-500'
+            } transition-colors duration-300`}
           >
             {inactiveText}
           </span>
@@ -49,12 +52,14 @@ export default function CustomToggle({
   return (
     <div
       onClick={onToggle}
-      className={`w-[80px] h-[42px] rounded-full flex items-center px-[4px] cursor-pointer transition-colors duration-300 ${isActive ? 'bg-main-primary' : 'bg-gray-200'
-        }`}
+      className={`flex h-[42px] w-[80px] cursor-pointer items-center rounded-full px-[4px] transition-colors duration-300 ${
+        isActive ? 'bg-main-primary' : 'bg-gray-200'
+      }`}
     >
       <div
-        className={`w-[34px] h-[34px] bg-background-primary rounded-full shadow-md transform transition-transform duration-300 ${isActive ? 'translate-x-[38px]' : 'translate-x-0'
-          }`}
+        className={`size-[34px] rounded-full bg-background-primary shadow-md transition-transform duration-300${
+          isActive ? 'translate-x-[38px]' : 'translate-x-0'
+        }`}
       ></div>
     </div>
   );

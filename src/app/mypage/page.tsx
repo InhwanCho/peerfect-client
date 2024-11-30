@@ -1,15 +1,17 @@
 'use client';
 
-import { useState } from "react";
-import { NicknameInput } from "../_components/common/nickname-input";
-import CustomButton from "../_components/common/custom-button";
-import CustomToggle from "../_components/common/custom-toggle";
-import { MenuState } from "../types/types";
+import { useState } from 'react';
+import { NicknameInput } from '../_components/common/nickname-input';
+import CustomButton from '../_components/common/custom-button';
+import CustomToggle from '../_components/common/custom-toggle';
+import { MenuState } from '../types/types';
 
 export default function Mypage() {
   const [nickname, setNickname] = useState('뽀');
-  const [error, setError] = useState("");
-  const [selectedMenu, setSelectedMenu] = useState<MenuState>(MenuState.Profile);
+  const [error, setError] = useState('');
+  const [selectedMenu, setSelectedMenu] = useState<MenuState>(
+    MenuState.Profile
+  );
   const [marketingEnabled, setMarketingEnabled] = useState(false);
   const [feedbackEnabled, setFeedbackEnabled] = useState(false);
 
@@ -18,27 +20,25 @@ export default function Mypage() {
     const isValid = /^[a-zA-Z가-힣0-9]*$/.test(value);
 
     if (!isValid) {
-      setError("특수문자는 사용할 수 없습니다.");
+      setError('특수문자는 사용할 수 없습니다.');
     } else {
-      setError("");
+      setError('');
     }
 
     setNickname(value);
   };
 
   const isNicknameValid =
-    nickname.trim().length >= 1 &&
-    nickname.trim().length <= 12 &&
-    !error;
+    nickname.trim().length >= 1 && nickname.trim().length <= 12 && !error;
 
   return (
     <main className="min-h-[calc(100vh-90px)] bg-gray-50">
-      <div className="mx-auto px-20 xl:px-0 xl:w-[70%]">
-        <h1 className="text-h2 py-[100px]">마이페이지</h1>
+      <div className="mx-auto px-20 xl:w-[70%] xl:px-0">
+        <h1 className="py-[100px] text-h2">마이페이지</h1>
         <section className="min-h-[calc(100vh-250px-90px)]">
           <div className="mx-auto w-full lg:flex">
             {/* 왼쪽 메뉴 */}
-            <aside className="w-[220px] h-[300px] bg-background-primary card-container rounded-2xl pl-8 pt-[60px] mr-[110px] transition-colors">
+            <aside className="card-container mr-[110px] h-[300px] w-[220px] rounded-2xl bg-background-primary pl-8 pt-[60px] transition-colors">
               <ul className="space-y-[48px] text-subtitle2">
                 <li
                   className={`cursor-pointer ${selectedMenu === MenuState.Profile ? 'text-main-primary' : 'text-gray-400'}`}
@@ -63,23 +63,34 @@ export default function Mypage() {
 
             {/* 섹션 내용 */}
             {selectedMenu === MenuState.Profile && (
-              <section className="w-full flex-1 bg-background-primary card-container rounded-2xl px-16 pb-20">
-                <h4 className="text-h4 pt-12">프로필 정보</h4>
+              <section className="card-container w-full flex-1 rounded-2xl bg-background-primary px-16 pb-20">
+                <h4 className="pt-12 text-h4">프로필 정보</h4>
                 <div className="flex w-full pt-8">
                   <div className="flex flex-col">
-                    <div className="size-[130px] bg-gray-200 rounded-full"></div>
-                    <button className="mt-6 p-2.5 rounded-full text-main-purple-1 border border-[#AC6BFF] text-buttonS">
+                    <div className="size-[130px] rounded-full bg-gray-200"></div>
+                    <button
+                      className="mt-6 rounded-full border border-[#AC6BFF] p-2.5 text-buttonS text-main-purple-1"
+                      aria-label="upload picture"
+                    >
                       사진업로드
                     </button>
                   </div>
-                  <div className="flex flex-col w-full h-[196px] pl-[100px] justify-center gap-y-12">
+                  <div className="flex h-[196px] w-full flex-col justify-center gap-y-12 pl-[100px]">
                     <div className="flex">
-                      <p className="w-[100px] text-gray-600 text-buttonM">이름</p>
-                      <span className="text-text-primary font-medium">김뫄뫄</span>
+                      <p className="w-[100px] text-buttonM text-gray-600">
+                        이름
+                      </p>
+                      <span className="font-medium text-text-primary">
+                        김뫄뫄
+                      </span>
                     </div>
                     <div className="flex">
-                      <p className="w-[100px] text-gray-600 text-buttonM">이메일</p>
-                      <span className="text-text-primary font-medium">asdfaf@naver.com</span>
+                      <p className="w-[100px] text-buttonM text-gray-600">
+                        이메일
+                      </p>
+                      <span className="font-medium text-text-primary">
+                        asdfaf@naver.com
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -94,7 +105,7 @@ export default function Mypage() {
                     error={error}
                   />
                 </div>
-                <div className="flex justify-center items-center">
+                <div className="flex items-center justify-center">
                   <CustomButton className="" color="gray" size="small">
                     저장하기
                   </CustomButton>
@@ -103,20 +114,22 @@ export default function Mypage() {
             )}
 
             {selectedMenu === MenuState.MyChallenge && (
-              <section className="w-full flex-1 bg-background-primary card-container rounded-2xl px-16 pb-20">
-                <h4 className="text-h4 pt-12">나의 챌린지 과정</h4>
+              <section className="card-container w-full flex-1 rounded-2xl bg-background-primary px-16 pb-20">
+                <h4 className="pt-12 text-h4">나의 챌린지 과정</h4>
                 {/* 나의 챌린지 과정 내용 추가 */}
               </section>
             )}
 
             {selectedMenu === MenuState.Notification && (
-              <section className="w-full flex-1 bg-background-primary card-container rounded-2xl px-16 pb-20">
-                <h4 className="text-h4 pt-12">알림설정</h4>
-                <div className="pt-10 space-y-8">
-                  <div className="flex justify-between items-center">
+              <section className="card-container w-full flex-1 rounded-2xl bg-background-primary px-16 pb-20">
+                <h4 className="pt-12 text-h4">알림설정</h4>
+                <div className="space-y-8 pt-10">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-gray-900 text-base font-medium">마케팅</p>
-                      <p className="text-gray-500 text-sm">
+                      <p className="text-base font-medium text-gray-900">
+                        마케팅
+                      </p>
+                      <p className="text-sm text-gray-500">
                         새로운 챌린지 및 피어펙트의 소식을 전해드려요
                       </p>
                     </div>
@@ -126,10 +139,12 @@ export default function Mypage() {
                       onToggle={() => setMarketingEnabled(!marketingEnabled)}
                     />
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-gray-900 text-base font-medium">댓글 및 피드백 알림</p>
-                      <p className="text-gray-500 text-sm">
+                      <p className="text-base font-medium text-gray-900">
+                        댓글 및 피드백 알림
+                      </p>
+                      <p className="text-sm text-gray-500">
                         작업물에 대한 피드백 및 댓글을 빠르게 확인하실 수 있어요
                       </p>
                     </div>
@@ -140,7 +155,7 @@ export default function Mypage() {
                     />
                   </div>
                 </div>
-                <div className="flex justify-center items-center mt-20">
+                <div className="mt-20 flex items-center justify-center">
                   <CustomButton className="" color="gray" size="small">
                     저장하기
                   </CustomButton>

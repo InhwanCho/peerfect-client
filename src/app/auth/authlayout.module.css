@@ -3,7 +3,7 @@
   height: calc(100vh - 90px); /* navbar 높이를 뺀 값 */
   position: relative;
   background-color: #19161d;
-  background-image: url("/assets/auth/auth-hero.webp");
+  background-image: url('/assets/auth/auth-hero.webp');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

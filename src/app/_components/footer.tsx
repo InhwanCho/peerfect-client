@@ -1,21 +1,22 @@
-/* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-black py-8 px-4 md:px-16 h-[450px]">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-around items-center h-full">
+    <footer className="h-[450px] bg-black px-4 py-8 md:px-16">
+      <div className="mx-auto flex h-full max-w-7xl flex-col items-center justify-around md:flex-row">
         {/* 왼쪽 섹션 */}
-        <div className="flex items-center flex-col justify-center space-y-6">          
-          <Link className="w-[177px] h-[55px]" href='/' >
+        <div className="flex flex-col items-center justify-center space-y-6">
+          <Link className="h-[55px] w-[177px]" href="/">
             <img src="/assets/nav/logo-with-text.png" alt="logo" />
           </Link>
-          <p className="text-white text-sm lg:text-lg tracking-widest">Grow Together, Be Perfect</p>
+          <p className="text-sm tracking-widest text-white lg:text-lg">
+            Grow Together, Be Perfect
+          </p>
           <div className="flex">
             <p className="text-sm text-text-caption">Contact.</p>
             <a
               href="mailto:email@peerfect.io"
-              className="text-sm text-text-caption hover:text-white transition pl-6"
+              className="pl-6 text-sm text-text-caption transition hover:text-white"
             >
               email@peerfect.io
             </a>
@@ -23,22 +24,22 @@ export default function Footer() {
         </div>
 
         {/* 오른쪽 섹션 */}
-        <div className="flex space-x-6 mt-6 md:mt-0">
+        <div className="mt-6 flex space-x-6 md:mt-0">
           <a
             href="#"
-            className="text-sm text-text-caption hover:text-white transition"
+            className="text-sm text-text-caption transition hover:text-white"
           >
             이용약관
           </a>
           <a
             href="#"
-            className="text-sm text-text-caption hover:text-white transition"
+            className="text-sm text-text-caption transition hover:text-white"
           >
             개인정보처리방침
           </a>
           <a
             href="#"
-            className="text-sm text-text-caption hover:text-white transition"
+            className="text-sm text-text-caption transition hover:text-white"
           >
             Team Peerfect
           </a>

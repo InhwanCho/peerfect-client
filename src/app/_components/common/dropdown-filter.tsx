@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from "react";
-import SvgArrowDown from "@/app/_components/icons/M/ArrowDown";
+import { useState } from 'react';
+import SvgArrowDown from '@/app/_components/icons/M/ArrowDown';
 
 interface DropdownFilterProps {
   options: string[];
   selectedOption: string;
   onSelect: (option: string) => void;
-  galleryPage?:boolean
+  galleryPage?: boolean;
 }
 
 export default function DropdownFilter({
@@ -30,18 +30,21 @@ export default function DropdownFilter({
   return (
     <div className="relative">
       <button
-        className="flex items-center relative px-6"
+        className="relative flex items-center px-6"
         onClick={handleDropdownToggle}
+        aria-label="dropdown button"
       >
-        <span className="pr-9 text-text-primary text-body">{selectedOption}</span>
+        <span className="pr-9 text-body text-text-primary">
+          {selectedOption}
+        </span>
         <SvgArrowDown isOpen={isDropdownOpen} filledColor="#222222" />
       </button>
       {isDropdownOpen && (
-        <ul className="absolute right-0 top-[52px] text-left transition-colors bg-background-primary border card-container rounded-2xl w-[150px] z-50">
+        <ul className="card-container absolute right-0 top-[52px] z-50 w-[150px] rounded-2xl border bg-background-primary text-left transition-colors">
           {options.map((option) => (
             <li
               key={option}
-              className={`py-3 cursor-pointer ${galleryPage? 'pl-8':'pl-[33px]'} hover:text-main-primary`}
+              className={`cursor-pointer py-3 ${galleryPage ? 'pl-8' : 'pl-[33px]'} hover:text-main-primary`}
               onClick={() => handleOptionClick(option)}
             >
               {option}

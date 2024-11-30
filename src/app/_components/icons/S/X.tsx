@@ -1,6 +1,6 @@
-import { SvgProps } from "../types/svg-type";
+import { SvgProps } from '../types/svg-type';
 
-const SvgX = ({ className, props, filledColor = "#000" }: SvgProps) => (
+const SvgX = ({ className, props, filledColor = '#000' }: SvgProps) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"

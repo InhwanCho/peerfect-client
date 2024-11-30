@@ -1,6 +1,9 @@
-
-import { SvgProps } from "../types/svg-type";
-const SvgDoubleArrowLeft = ({ className, props, filledColor = "#000" }: SvgProps) => (
+import { SvgProps } from '../types/svg-type';
+const SvgDoubleArrowLeft = ({
+  className,
+  props,
+  filledColor = '#000',
+}: SvgProps) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"

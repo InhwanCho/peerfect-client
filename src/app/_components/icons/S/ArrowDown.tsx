@@ -1,9 +1,16 @@
-
-import { cn } from "../../../../lib/utils";
-import { SvgProps } from "../types/svg-type";
-const SvgArrowDown = ({ className, props, isOpen, filledColor = "#000" }: SvgProps) => (
+import { cn } from '../../../../lib/utils';
+import { SvgProps } from '../types/svg-type';
+const SvgArrowDown = ({
+  className,
+  props,
+  isOpen,
+  filledColor = '#000',
+}: SvgProps) => (
   <svg
-    className={cn(`transform transition-all ${isOpen ? "rotate-180" : "rotate-0"}`, className)}
+    className={cn(
+      `transform transition-all ${isOpen ? 'rotate-180' : 'rotate-0'}`,
+      className
+    )}
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
     height="1em"
