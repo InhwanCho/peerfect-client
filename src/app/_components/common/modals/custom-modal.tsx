@@ -29,7 +29,7 @@ export default function CustomModal({
       onClick={onClose}
     >
       <div
-        className="relative h-[80vh] w-[1280px] rounded-lg bg-background-secondary px-[180px]"
+        className="relative h-[82vh] w-[1280px] rounded-lg bg-background-secondary px-[32px] md:px-[57px] lg:px-[82px] xl:px-[180px]"
         onClick={(e) => e.stopPropagation()}
       >
         {xButton && (

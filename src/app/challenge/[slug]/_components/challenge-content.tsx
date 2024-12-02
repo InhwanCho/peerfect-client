@@ -33,7 +33,7 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
           </>
         )}
         {activeTab === 'review' && <ReviewSection />}
-        {activeTab === '작업물' && <WorkGallery />}
+        {activeTab === '작업물' && <WorkGallery slug={slug} />}
       </article>
       {activeTab === '챌린지설명' && <SideInfo slug={slug} />}
     </section>

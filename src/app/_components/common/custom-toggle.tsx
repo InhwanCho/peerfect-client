@@ -17,14 +17,14 @@ export default function CustomToggle({
 }: CustomToggleProps) {
   if (variant === 'button') {
     return (
-      <div className="flex items-center justify-center py-10">
+      <div className="flex select-none items-center justify-center py-10 md:py-[68px]">
         <div
           className={`relative flex h-[46px] w-[256px] items-center rounded-full bg-gray-300 transition-colors duration-200`}
           onClick={onToggle}
         >
           {/* 이동하는 버튼 ui */}
           <div
-            className={`absolute h-[36px] w-[125px] rounded-full bg-background-primary shadow-md transition-transform duration-200${
+            className={`absolute h-[36px] w-[125px] rounded-full bg-background-primary shadow-md transition-transform duration-200 ${
               isActive ? 'translate-x-[5px]' : 'translate-x-[125px]'
             }`}
           ></div>

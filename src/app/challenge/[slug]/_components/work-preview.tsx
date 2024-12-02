@@ -1,6 +1,7 @@
 'use client';
 
 import SvgSquareArrowRight from '@/app/_components/icons/M/SquareArrowRight';
+import SvgX from '@/app/_components/icons/M/X';
 import SvgLeft from '@/app/_components/icons/XL/Left';
 import SvgRight from '@/app/_components/icons/XL/Right';
 import { useEffect, useState } from 'react';
@@ -81,6 +82,13 @@ export default function WorkPreview() {
                 e.stopPropagation();
               }}
             >
+              <button
+                className="absolute right-4 top-4 text-2xl text-text-primary"
+                onClick={closeModal}
+                aria-label="close button"
+              >
+                <SvgX />
+              </button>
               <img
                 src={tem_images[currentImage]}
                 alt="작업물 미리보기"

@@ -6,10 +6,12 @@ interface CustomButtonProps
   size?: 'xs' | 'small' | 'medium' | 'large';
   color: 'purple' | 'gray' | 'light-purple' | 'default';
   className?: string;
+  reviewButton?: boolean;
   children?: string | React.ReactNode;
 }
 
 export default function CustomButton({
+  reviewButton,
   size,
   color = 'gray',
   className,
@@ -35,7 +37,7 @@ export default function CustomButton({
   return (
     <button
       className={cn(
-        `${size ? sizeClass : 'w-full'} h-[70px] py-3 rounded-2xl text-buttonS md:text-buttonM`,
+        `${size ? sizeClass : 'w-full'} ${reviewButton ? 'h-[42px] rounded-full' : 'h-[70px] py-3 rounded-2xl'}   text-buttonS md:text-buttonM`,
         colorClass,
         className
       )}

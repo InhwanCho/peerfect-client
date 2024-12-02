@@ -1,12 +1,13 @@
 'use client';
 
-import PageNation from './pagenation';
 import { useState } from 'react';
 import CustomModal from '@/app/_components/common/modals/custom-modal';
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import CustomToggle from '@/app/_components/common/custom-toggle';
 import WorkCard from '@/app/_components/common/work-card';
 import DropdownFilter from '@/app/_components/common/dropdown-filter';
+import { useRouter } from 'next/navigation';
+import Pagination from './pagination';
 
 interface WorkData {
   id: number;
@@ -21,7 +22,11 @@ interface WorkData {
   link: string;
 }
 
-export default function WorkGallery() {
+interface WorkGalleryProps {
+  slug: string;
+}
+
+export default function WorkGallery({ slug }: WorkGalleryProps) {
   const dummyData: WorkData[] = Array(8)
     .fill(null)
     .map((_, index) => ({
@@ -52,9 +57,15 @@ export default function WorkGallery() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentWork, setCurrentWork] = useState<WorkData | null>(null);
 
-  const handleOpenModal = (index: number) => {
-    setCurrentWork(dummyData[index]);
-    setIsModalOpen(true);
+  const router = useRouter();
+  // const handleOpenModal = (index: number) => {
+  //   // router.push(`/challenge/11/work/12312`);
+
+  //   setCurrentWork(dummyData[index]);
+  //   setIsModalOpen(true);
+  // };
+  const handleOpenModal = (id: number) => {
+    router.push(`/challenge/${slug}/work/${id}`, { scroll: false });
   };
 
   const handleNext = () => {
@@ -109,7 +120,7 @@ export default function WorkGallery() {
           />
         ))}
       </div>
-      <PageNation />
+      <Pagination />
 
       {/* CustomModal */}
       {currentWork && (
@@ -137,9 +148,7 @@ export default function WorkGallery() {
             <h1 className="mb-2 text-h2 font-semibold text-text-primary">
               {currentWork.title}
             </h1>
-            <p className="mb-4 text-sm text-gray-600">
-              디자이너 {currentWork.designer}
-            </p>
+            <p className="mb-4 text-sm text-gray-600">{currentWork.designer}</p>
             <div className="mb-4 h-[400px] w-full rounded-lg bg-gray-200"></div>
             <p className="text-sm text-gray-600">{currentWork.description}</p>
             <div className="mt-6">
@@ -183,7 +192,7 @@ export default function WorkGallery() {
                   <p className="w-[100px] text-sm text-gray-500">작업 링크</p>
                   <a
                     href={currentWork.link}
-                    className="text-sm text-main-primary underline"
+                    className="text-body text-[#0B74F0]"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
