@@ -1,4 +1,3 @@
-// /app/challenge/[slug]/work/[id]/page.tsx
 import { Metadata } from 'next';
 import NonInterceptedWorkDetail from './_components/non-intercepted-work-detail';
 
@@ -12,7 +11,6 @@ interface WorkDetailPageProps {
 
 export default async function WorkDetailPage({ params }: WorkDetailPageProps) {
   const { id, slug } = await params;
-  console.log(params);
 
   return <NonInterceptedWorkDetail slug={slug} id={id} />;
 }

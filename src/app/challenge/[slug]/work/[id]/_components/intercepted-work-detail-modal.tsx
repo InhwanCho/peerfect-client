@@ -17,8 +17,7 @@ const currentWork = {
   title: 'Modern UI 챌린지',
   date: '2024-12-01',
   designer: '뉴비 디자이너',
-  description:
-    'This project demonstrates modern UI practices with responsive design and accessibility in mind.',
+  description: '상세 내용 블라블라...',
   tools: ['Figma', 'Sketch', 'Illustrator'],
   duration: '5 days',
   difficulty: 4,
@@ -43,7 +42,7 @@ export default function InterceptedWorkDetailModal({
       onClick={onClose}
     >
       <div
-        className="relative h-[82vh] w-[1280px] rounded-lg bg-background-secondary px-[32px] md:px-[57px] lg:px-[82px] xl:px-[180px]"
+        className="relative h-[82vh] w-[1280px] overflow-y-auto rounded-lg bg-background-secondary px-[32px] pb-14 md:px-[57px] lg:px-[82px] xl:px-[180px]"
         onClick={(e) => e.stopPropagation()}
       >
         {xButton && (

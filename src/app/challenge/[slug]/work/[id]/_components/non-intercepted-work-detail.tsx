@@ -13,8 +13,7 @@ const currentWork = {
   title: 'Modern UI 챌린지',
   date: '2024-12-01',
   designer: '뉴비 디자이너',
-  description:
-    'This project demonstrates modern UI practices with responsive design and accessibility in mind.',
+  description: '상세 내용 블라블라...',
   tools: ['Figma', 'Sketch', 'Illustrator'],
   duration: '5 days',
   difficulty: 4,

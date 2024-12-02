@@ -1,5 +1,3 @@
-// /app/@modal/(.)challenge/[slug]/work/[id]/page.tsx
-
 import InterceptedWorkDetailModal from '@/app/challenge/[slug]/work/[id]/_components/intercepted-work-detail-modal';
 
 interface WorkDetailModalProps {
