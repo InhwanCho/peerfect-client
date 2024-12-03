@@ -15,7 +15,7 @@ const currentWork = {
   designer: '뉴비 디자이너',
   description: '상세 내용 블라블라...',
   tools: ['Figma', 'Sketch', 'Illustrator'],
-  duration: '5 days',
+  duration: '5일',
   difficulty: 4,
   link: 'https://example.com/project/modern-ui-design',
 };
@@ -37,18 +37,18 @@ export default function NonInterceptedWorkDetail({
       <h1 className="mb-2 text-h2 font-semibold text-text-primary">
         {currentWork.title}
       </h1>
-      <p className="mb-4 text-sm text-gray-600">{currentWork.designer}</p>
-      <div className="mb-4 h-[600px] w-full rounded-lg bg-gray-200"></div>
+      <p className="text-sm text-gray-600">{currentWork.designer}</p>
+      <div className="my-[30px] h-[600px] w-full rounded-lg bg-gray-200"></div>
       <p className="text-sm text-gray-600">{currentWork.description}</p>
-      <div className="mt-6">
-        <div className="mb-4 flex flex-wrap items-center">
-          <div className="flex items-center space-x-2">
+      <div className="mt-6 flex flex-col space-y-5">
+        <div className="flex flex-wrap items-center">
+          <div className="flex items-center">
             <p className="w-[100px] text-body text-gray-800">사용한 툴</p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap space-x-4">
               {currentWork.tools.map((tool, i) => (
                 <span
                   key={i}
-                  className="rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm text-gray-800"
+                  className="flex h-[33px] w-[128px] cursor-pointer items-center justify-center rounded-full border border-gray-700 font-medium text-gray-800"
                 >
                   {tool}
                 </span>
@@ -57,38 +57,38 @@ export default function NonInterceptedWorkDetail({
           </div>
         </div>
 
-        <div className="flex flex-col gap-x-8 gap-y-4">
+        <div className="flex gap-x-8">
           {/* 소요 시간 */}
           <div className="flex items-center">
             <p className="w-[100px] text-body text-gray-800">소요 시간</p>
             <p className="text-sm text-text-primary">{currentWork.duration}</p>
           </div>
-          {/* 난이도 */}
-          <div className="flex items-center">
-            <p className="w-[100px] text-body text-gray-800">난이도</p>
-            {Array.from({ length: currentWork.difficulty }).map((_, index) => (
-              <SvgFilledStar key={index} />
-            ))}
-          </div>
-          {/* 작업 링크 */}
-          <div className="flex items-center">
-            <p className="w-[100px] text-body text-gray-800">작업 링크</p>
-            <a
-              href={currentWork.link}
-              className="text-body text-[#0B74F0]"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              링크
-            </a>
-          </div>
+        </div>
+        {/* 난이도 */}
+        <div className="flex items-center">
+          <p className="w-[100px] text-body text-gray-800">난이도</p>
+          {Array.from({ length: currentWork.difficulty }).map((_, index) => (
+            <SvgFilledStar key={index} />
+          ))}
+        </div>
+        {/* 작업 링크 */}
+        <div className="flex items-center">
+          <p className="w-[100px] text-body text-gray-800">작업 링크</p>
+          <a
+            href={currentWork.link}
+            className="text-body text-[#0B74F0]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            링크
+          </a>
         </div>
       </div>
       <div className="w-full border-b border-gray-300 pb-6">
         <div className="flex w-[1060px] items-center justify-between  pt-40">
-          <div className="flex">
+          <div className="flex items-center">
             <SvgChat width={26} height={25} />
-            <span className="pl-3">피드백 공간</span>
+            <span className="pl-3 text-h4">피드백 공간</span>
           </div>
           <span>999개의 피드백</span>
         </div>
@@ -145,7 +145,7 @@ export default function NonInterceptedWorkDetail({
       </div>
       <div className="w-full py-[70px]">
         <textarea
-          className="h-[192px] w-full resize-none rounded-2xl border bg-background-primary p-5 text-sm text-text-primary placeholder:text-sm placeholder:text-gray-400 focus:outline-none"
+          className="h-[192px] w-full resize-none rounded-2xl border border-gray-500 bg-background-primary p-5 text-sm text-text-primary placeholder:text-sm placeholder:text-gray-600 focus:outline-none"
           placeholder="작업물에 대한 생각이나 의견을 공유해주세요."
         />
 

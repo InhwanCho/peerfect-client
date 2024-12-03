@@ -61,6 +61,19 @@ export default function HomePage() {
                 </Link>
               </td>
             </tr>
+            <tr>
+              <td className="border border-gray-300 px-4 py-2">
+                챌린지 상세 페이지
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                <Link
+                  href="/challenge/123/work/1"
+                  className="text-main-primary underline"
+                >
+                  /challenge/123/work/1
+                </Link>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

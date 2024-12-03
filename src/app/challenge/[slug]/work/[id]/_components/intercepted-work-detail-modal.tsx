@@ -19,7 +19,7 @@ const currentWork = {
   designer: '뉴비 디자이너',
   description: '상세 내용 블라블라...',
   tools: ['Figma', 'Sketch', 'Illustrator'],
-  duration: '5 days',
+  duration: '5일',
   difficulty: 4,
   link: 'https://example.com/project/modern-ui-design',
 };
@@ -75,15 +75,15 @@ export default function InterceptedWorkDetailModal({
           <p className="mb-4 text-sm text-gray-600">{currentWork.designer}</p>
           <div className="mb-4 h-[400px] w-full rounded-lg bg-gray-200"></div>
           <p className="text-sm text-gray-600">{currentWork.description}</p>
-          <div className="mt-6">
-            <div className="mb-4 flex flex-wrap items-center">
-              <div className="flex items-center space-x-2">
+          <div className="mt-6 flex flex-col space-y-5">
+            <div className="flex flex-wrap items-center">
+              <div className="flex items-center">
                 <p className="w-[100px] text-body text-gray-800">사용한 툴</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap space-x-4">
                   {currentWork.tools.map((tool, i) => (
                     <span
                       key={i}
-                      className="rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm text-gray-800"
+                      className="flex h-[33px] w-[128px] cursor-pointer items-center justify-center rounded-full border border-gray-700 font-medium text-gray-800"
                     >
                       {tool}
                     </span>
@@ -92,7 +92,7 @@ export default function InterceptedWorkDetailModal({
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+            <div className="flex gap-x-8">
               {/* 소요 시간 */}
               <div className="flex items-center">
                 <p className="w-[100px] text-body text-gray-800">소요 시간</p>
@@ -110,19 +110,19 @@ export default function InterceptedWorkDetailModal({
                   )
                 )}
               </div>
+            </div>
 
-              {/* 작업 링크 */}
-              <div className="flex items-center">
-                <p className="w-[100px] text-body text-gray-800">작업 링크</p>
-                <a
-                  href={currentWork.link}
-                  className="text-body text-[#0B74F0]"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  링크
-                </a>
-              </div>
+            {/* 작업 링크 */}
+            <div className="flex items-center">
+              <p className="w-[100px] text-body text-gray-800">작업 링크</p>
+              <a
+                href={currentWork.link}
+                className="text-body text-[#0B74F0]"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                링크
+              </a>
             </div>
           </div>
         </div>
