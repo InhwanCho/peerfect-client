@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import CardCarousel from '../_components/common/card-carousel';
+import Testpage from './_components/testpage';
 
 const images = ['/assets/home/home-hero1.png', '/assets/home/home-hero2.png'];
 
@@ -77,6 +78,7 @@ export default function HomePage() {
           </tbody>
         </table>
       </div>
+      <Testpage />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import InterceptedWorkDetailModal from '@/app/challenge/[slug]/work/[id]/_components/intercepted-work-detail-modal';
+import WorkDetail from '@/app/challenge/[slug]/work/[id]/_components/work-detail';
 
 interface WorkDetailModalProps {
   params: Promise<{ slug: string; id: string }>;
@@ -10,5 +10,5 @@ export default async function WorkDetailModal({
   // `params`를 Promise에서 언래핑
   const { slug, id } = await params;
 
-  return <InterceptedWorkDetailModal slug={slug} id={id} />;
+  return <WorkDetail slug={slug} id={id} isModal={true} />;
 }

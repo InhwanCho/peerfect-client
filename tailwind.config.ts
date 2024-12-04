@@ -18,6 +18,18 @@ const config: Config = {
     },
     extend: {
       colors: {
+        primary: '#4F46E5', // 원하는 색상으로 설정
+        'primary-foreground': '#FFFFFF',
+        secondary: '#F97316',
+        'secondary-foreground': '#FFFFFF',
+        destructive: '#DC2626',
+        'destructive-foreground': '#FFFFFF',
+        foreground: '#000000',
+        ring: '#3B82F6',
+        accent: '#f1f5f9', // 추가적인 색상이 필요하면 정의
+        'muted-foreground': '#6b7280',
+
+        // 여기 위의 컬러는 임의 색상
         black: '#111111',
         white: '#FFFFFF',
         //그레이 스케일 재 정의
