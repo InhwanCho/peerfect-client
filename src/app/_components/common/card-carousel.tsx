@@ -47,11 +47,11 @@ export default function CardCarousel({ images }: CardCarouselProps) {
   return (
     <div className="relative hidden w-full select-none overflow-hidden md:block">
       {/* 상태 기반 슬라이드 번호 */}
-      <div className="absolute bottom-3 left-8 z-50 flex items-center justify-center rounded-full bg-gray-400/10 lg:bottom-9 lg:left-[8%] lg:h-[50px] lg:w-[125px] xl:left-[15%]">
+      <div className="absolute bottom-3 left-8 z-50 flex items-center justify-center rounded-full bg-[#111111]/20 lg:bottom-9 lg:left-[8%] lg:h-[50px] lg:w-[125px] xl:left-[15%]">
         <p className="flex gap-x-2.5 px-10 py-3 text-small lg:text-subtitle2">
           <span className={`text-white`}>{currentSlide}</span>
-          <span className="text-text-caption">/</span>
-          <span className="text-text-caption">{images.length}</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-300">{images.length}</span>
         </p>
       </div>
       {/* 이미지 리스트 */}

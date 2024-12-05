@@ -235,7 +235,7 @@ const MultiSelectorTrigger = forwardRef<
         // w-full h-[70px] px-5 border-gray-400 bg-background-primary rounded-2xl border focus:outline-none focus:border-main-primary
         'flex flex-wrap gap-1.5 p-1 py-2 ring-1 ring-gray-400 focus:ring-main-primary h-[70px] rounded-lg bg-background',
         {
-          'ring-1 focus-within:ring-ring': activeIndex === -1,
+          'ring-1 focus-within:ring-main-primary': activeIndex === -1,
         },
         className
       )}

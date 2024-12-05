@@ -15,7 +15,7 @@ export default function TestPage() {
       <MultiSelector
         values={value}
         onValuesChange={setValue}
-        className="max-w-xs"
+        className="max-w-screen-sm"
       >
         <MultiSelectorTrigger>
           <MultiSelectorInput placeholder="사용한 툴을 선택해 주세요." />
