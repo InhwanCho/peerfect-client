@@ -6,6 +6,16 @@
   .card-container {
     @apply border border-gray-200 border-opacity-40 shadow-card;
   }
+  .image-blur {
+    transition: filter 0.2s ease; /* 부드럽게 효과 적용 */
+  }
+  .image-blur:hover :first-child {
+    filter: blur(3px); /* 마우스 올릴 때 블러 효과 */
+    @apply rounded-t-2xl;
+  }
+  .image-blur:hover :last-child {
+    filter: none;
+  }
 }
 
 /* input태그 자동완성 시 배경색 없애기 */

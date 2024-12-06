@@ -1,9 +1,10 @@
+import H3Title from '@/_components/common/home-title';
 import React from 'react';
 
 export default function MainChallenge() {
   return (
     <div>
-      <h3 className="mb-10 text-h3 font-bold text-black">피어펙트 챌린지</h3>
+      <H3Title title="피어펙트 챌린지" />
       <article className="w-full rounded-2xl shadow-card">
         <img src="/assets/home/ux-xl/ux-xl-day1.png" alt="ux card image" />
         <div className="flex flex-col gap-y-4 px-[30px] py-5">

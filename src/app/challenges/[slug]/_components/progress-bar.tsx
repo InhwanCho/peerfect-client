@@ -1,61 +1,43 @@
-'use client';
-
-interface ProgressBarProps {
-  activeDay: number; // 현재 활성화된 날짜
-}
-
-export default function ProgressBar({ activeDay }: ProgressBarProps) {
+export default function ProgressBar({ activeDay }: { activeDay: number }) {
   const totalDays = 14;
 
   return (
-    <div className="relative w-full text-white">
-      {/* 프로그래스 바 */}
-      <svg
-        width="100%"
-        height="34"
-        viewBox="-20 0 1320 34" // 좌우 여유 공간 추가(20px)
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="mx-auto"
-      >
-        {/* 라인 */}
-        <rect y="16" width="1280" height="3" rx="1.5" fill="#B5B5B5" />
+    <div className="relative flex w-full items-center justify-center">
+      {/* Progress Line */}
+      <div className="absolute top-1/2 z-0 h-[3px] w-full -translate-y-1/2 bg-gray-600" />
 
-        {/* 점 생성 */}
-        {Array.from({ length: totalDays }, (_, index) => {
-          const isActive = activeDay === index + 1;
-          const x = (index * 1280) / (totalDays - 1);
-          const fill = isActive ? '#8530F1' : '#1E1E1E';
-          const stroke = isActive ? '#8530F1' : '#B5B5B5';
-          const textColor = isActive ? '#FFFFFF' : '#B5B5B5';
+      {/* Nodes */}
+      <div className="relative z-10 flex w-full justify-between">
+        {Array.from({ length: totalDays }).map((_, index) => (
+          <div
+            key={index}
+            className={`relative flex size-[30px] items-center justify-center rounded-full border ${
+              activeDay === index + 1
+                ? 'border-purple-500 bg-purple-500'
+                : 'border-gray-600 bg-black'
+            } z-20`}
+          >
+            <span
+              className={`text-white ${
+                activeDay === index + 1 ? 'font-bold' : 'text-gray-400'
+              }`}
+            >
+              {index + 1}
+            </span>
 
-          return (
-            <g key={index}>
-              <circle cx={x} cy="17" r="16.9735" fill={fill} stroke={stroke} />
-              <text
-                x={x}
-                y="22"
-                textAnchor="middle"
-                fontSize="12"
-                fontWeight="bold"
-                fill={textColor}
-              >
-                {index + 1}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
-
-      {/* 캐릭터 아이콘 */}
-      <img
-        src="/assets/challenges/character-w-mask.png"
-        alt="character icon"
-        className="absolute top-[-40px] h-[40px] "
-        style={{
-          left: `calc((100% / 13.4) * ${activeDay - 1})`, // 정확한 위치 계산
-        }}
-      />
+            {/* Character */}
+            {activeDay === index + 1 && (
+              <div className="absolute bottom-[calc(100%+8px)] z-30 w-[140%]">
+                <img
+                  src="/assets/challenges/character-w-band.png"
+                  alt="character icon"
+                  className="size-full object-contain"
+                />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
