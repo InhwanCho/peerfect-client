@@ -143,7 +143,7 @@ export default function WorkGallery({ slug }: WorkGalleryProps) {
               <h3 className="text-sm font-medium text-main-primary">
                 {`#챌린지 00 ${currentWork.title}`}
               </h3>
-              <span className="text-sm text-gray-500">{currentWork.date}</span>
+              <time className="text-sm text-gray-500">{currentWork.date}</time>
             </div>
             <h1 className="mb-2 text-h2 font-semibold text-text-primary">
               {currentWork.title}

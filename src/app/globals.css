@@ -2,19 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer components {  
   .card-container {
     @apply border border-gray-200 border-opacity-40 shadow-card;
   }
-  .image-blur {
-    transition: filter 0.2s ease; /* 부드럽게 효과 적용 */
+
+  .card-blur {
+    transition: filter 0.2s ease;
   }
-  .image-blur:hover :first-child {
-    filter: blur(3px); /* 마우스 올릴 때 블러 효과 */
+
+  .card-blur.blured .card-image {
+    filter: blur(3px); /* 첫 번째 이미지에만 블러 효과 */
     @apply rounded-t-2xl;
   }
-  .image-blur:hover :last-child {
-    filter: none;
+
+  .card-blur.blured img:not(.card-image) {
+    filter: none; /* 다른 이미지에 블러 제거(효과 없음) */
   }
 }
 

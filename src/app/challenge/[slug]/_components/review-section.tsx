@@ -39,7 +39,7 @@ export default function ReviewSection() {
                   (이름)님
                 </span>
               </p>
-              <p className="text-text-tertiary">{createdDate}</p>
+              <time className="text-text-tertiary">{createdDate}</time>
             </div>
             <div>
               <p className="flex items-center text-body text-text-secondary">

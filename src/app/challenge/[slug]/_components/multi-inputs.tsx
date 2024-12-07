@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+'use client';
 import {
   MultiSelector,
   MultiSelectorContent,
@@ -6,17 +6,14 @@ import {
   MultiSelectorItem,
   MultiSelectorList,
   MultiSelectorTrigger,
-} from '../../../_components/ui/multi-selector';
+} from '@/_components/ui/multi-selector';
+import { useState } from 'react';
 
-export default function TestPage() {
+export default function MultiInputs() {
   const [value, setValue] = useState<string[]>([]);
   return (
-    <div className="flex items-center justify-center">
-      <MultiSelector
-        values={value}
-        onValuesChange={setValue}
-        className="max-w-screen-sm"
-      >
+    <div className="">
+      <MultiSelector values={value} onValuesChange={setValue}>
         <MultiSelectorTrigger>
           <MultiSelectorInput placeholder="사용한 툴을 선택해 주세요." />
         </MultiSelectorTrigger>

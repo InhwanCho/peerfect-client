@@ -5,6 +5,7 @@ import UploadForm from '@/app/challenge/[slug]/upload/_components/upload-form';
 import SvgArrowRight from '@/app/_components/icons/S/ArrowRight';
 import React, { Suspense } from 'react';
 import FileUploadForm from './_components/file-upload-form';
+import MultiInputs from '../_components/multi-inputs';
 
 interface UploadPageProps {
   params: Promise<{ slug: string }>;
@@ -40,7 +41,8 @@ export default async function UploadPage({ params }: UploadPageProps) {
             type="text"
             placeholder="작업물 링크  ex) figma file, github ..."
           />
-          <InputField type="text" placeholder="사용하신 툴을 입력해주세요." />
+          <MultiInputs />
+          {/* <InputField type="text" placeholder="사용하신 툴을 입력해주세요." /> */}
           <Suspense fallback={<div>Loading Upload Form...</div>}>
             <UploadForm />
           </Suspense>

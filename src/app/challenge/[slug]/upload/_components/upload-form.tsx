@@ -75,7 +75,7 @@ export default function UploadForm() {
             <span>
               {selectedDays !== null ? `${selectedDays} 일` : '직접입력'}
             </span>
-            <SvgArrowDown />
+            <SvgArrowDown isOpen={openDropdown === 'days'} />
           </div>
           {openDropdown === 'days' && (
             <ul className="card-container absolute top-[50px] z-10 max-h-[290px] w-full overflow-auto rounded-2xl bg-white">
@@ -105,7 +105,7 @@ export default function UploadForm() {
             <span>
               {selectedHours !== null ? `${selectedHours} 시간` : '직접입력'}
             </span>
-            <SvgArrowDown />
+            <SvgArrowDown isOpen={openDropdown === 'hours'} />
           </div>
           {openDropdown === 'hours' && (
             <ul className="card-container absolute top-[50px] z-10 max-h-[290px] w-full overflow-auto rounded-2xl bg-white">

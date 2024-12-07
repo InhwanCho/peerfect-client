@@ -17,6 +17,7 @@ export default async function ChallengesPage({ params }: ChallengesPageProps) {
           <MainChallenge />
           <UpcomoingChallenges />
           <CompletedChallenges />
+          <CompletedChallenges isNoCard />
         </div>
       </div>
     </div>

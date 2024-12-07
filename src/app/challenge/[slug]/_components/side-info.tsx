@@ -26,9 +26,9 @@ export default function SideInfo({ slug }: SideInfoProps) {
         <div>
           <div className="mt-4 flex items-center justify-between">
             <span className="text-sm text-gray-600">등록날짜</span>
-            <span className="text-sm font-bold text-text-primary">
+            <time className="text-sm font-bold text-text-primary">
               2024-11-10
-            </span>
+            </time>
           </div>
           <div className="mt-2 flex items-center justify-between">
             <span className="text-sm text-gray-600">참여자 수</span>

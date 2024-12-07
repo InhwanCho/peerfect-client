@@ -77,7 +77,7 @@ export default function WorkDetail({ slug, id, isModal }: WorkDetailProps) {
             <h3 className="text-sm font-medium text-main-primary">
               {`#챌린지 ${slug} ${currentWork.title}`}
             </h3>
-            <span className="text-sm text-gray-500">{currentWork.date}</span>
+            <time className="text-sm text-gray-500">{currentWork.date}</time>
           </div>
           <h1 className="mb-2 text-h2 font-semibold text-text-primary">
             {currentWork.title}
@@ -181,7 +181,7 @@ export default function WorkDetail({ slug, id, isModal }: WorkDetailProps) {
                     신고
                   </button>
                 </p>
-                <p className="text-text-tertiary">2024-12-01</p>
+                <time className="text-text-tertiary">2024-12-01</time>
               </div>
               {/* 후기 내용 */}
               <p className="leading-relaxed text-text-primary">
@@ -212,7 +212,7 @@ export default function WorkDetail({ slug, id, isModal }: WorkDetailProps) {
                       신고
                     </button>
                   </p>
-                  <p className="text-text-tertiary">2024-12-01</p>
+                  <time className="text-text-tertiary">2024-12-01</time>
                 </div>
                 <div className="flex text-[#7E7E7E]">
                   @00님

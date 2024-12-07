@@ -232,10 +232,12 @@ const MultiSelectorTrigger = forwardRef<
     <div
       ref={ref}
       className={cn(
-        // w-full h-[70px] px-5 border-gray-400 bg-background-primary rounded-2xl border focus:outline-none focus:border-main-primary
-        'flex flex-wrap gap-1.5 p-1 py-2 ring-1 ring-gray-400 focus:ring-main-primary h-[70px] rounded-lg bg-background',
+        'flex flex-wrap gap-1.5 p-1 py-2 ring-1 ring-gray-400 focus:ring-main-primary h-[70px] rounded-2xl bg-background',
         {
           'ring-1 focus-within:ring-main-primary': activeIndex === -1,
+        },
+        {
+          'ring-main-primary': Array.isArray(value) && value.length > 0,
         },
         className
       )}
@@ -245,7 +247,7 @@ const MultiSelectorTrigger = forwardRef<
         <Badge
           key={item}
           className={cn(
-            'px-1 rounded-xl flex items-center gap-1',
+            'pl-2 pr-1.5 rounded-xl flex items-center gap-1',
             activeIndex === index && 'ring-2 ring-muted-foreground '
           )}
           variant={'secondary'}
@@ -259,7 +261,7 @@ const MultiSelectorTrigger = forwardRef<
             onClick={() => onValueChange(item)}
           >
             <span className="sr-only">Remove {item} option</span>
-            <SvgX className="size-4 hover:stroke-red-400" />
+            <SvgX className="size-4 " filledColor="#fff" />
           </button>
         </Badge>
       ))}
@@ -328,7 +330,7 @@ const MultiSelectorList = forwardRef<
     <CommandList
       ref={ref}
       className={cn(
-        'p-2 flex flex-col gap-2 rounded-md scrollbar-thin scrollbar-track-transparent transition-colors scrollbar-thumb-gray-400  scrollbar-thumb-rounded-lg w-full absolute bg-white shadow-md z-50 border border-muted top-0',
+        'flex flex-col gap-2 rounded-2xl transition-colors w-full absolute bg-white shadow-md z-50 border border-muted top-0',
         className
       )}
     >
@@ -365,7 +367,7 @@ const MultiSelectorItem = forwardRef<
         setInputValue('');
       }}
       className={cn(
-        'rounded-md cursor-pointer px-2 py-1 transition-colors flex justify-between ',
+        'cursor-pointer px-3 py-2 transition-colors flex justify-between',
         className,
         isIncluded && 'opacity-50 cursor-default',
         props.disabled && 'opacity-50 cursor-not-allowed'

@@ -20,7 +20,7 @@ const config: Config = {
       colors: {
         primary: '#4F46E5', // 원하는 색상으로 설정
         'primary-foreground': '#FFFFFF',
-        secondary: '#F97316',
+        secondary: '#8530F1',
         'secondary-foreground': '#FFFFFF',
         destructive: '#DC2626',
         'destructive-foreground': '#FFFFFF',
