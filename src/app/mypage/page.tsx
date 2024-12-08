@@ -63,13 +63,13 @@ export default function Mypage() {
 
             {/* 섹션 내용 */}
             {selectedMenu === MenuState.Profile && (
-              <section className="card-container w-full flex-1 rounded-2xl bg-background-primary px-16 pb-20">
+              <section className="card-container w-full flex-1 rounded-2xl border bg-background-primary px-16 pb-20">
                 <h4 className="pt-12 text-h4">프로필 정보</h4>
                 <div className="flex w-full pt-8">
-                  <div className="flex flex-col">
+                  <div className="flex flex-col items-center justify-center">
                     <div className="size-[130px] rounded-full bg-gray-200"></div>
                     <button
-                      className="mt-6 rounded-full border border-[#AC6BFF] p-2.5 text-buttonS text-main-purple-1"
+                      className="mt-6 w-[100px] rounded-full border border-[#AC6BFF] p-2.5 text-buttonS text-main-purple-1"
                       aria-label="upload picture"
                     >
                       사진업로드
