@@ -107,7 +107,7 @@ export default function MultiInputs() {
     <div className="relative w-full select-none text-sm">
       <div
         className={cn(
-          'flex flex-wrap gap-1.5 p-1 py-2.5 ring-1 ring-gray-400 focus:ring-main-primary h-[70px] rounded-2xl bg-background',
+          'flex flex-wrap gap-1 p-1 py-2.5 ring-1 ring-gray-400 focus:ring-main-primary h-[70px] rounded-2xl bg-background',
           {
             'ring-1 focus-within:ring-main-primary': activeIndex === -1,
           },
