@@ -3,8 +3,8 @@ import localFont from 'next/font/local';
 import '@/app/globals.css';
 import { cn } from '../lib/utils';
 
-import { Providers } from './_components/provider/providers';
 import Navbar from './(home)/_components/navbar';
+import { Providers } from './_components/provider/providers';
 
 export const metadata: Metadata = {
   title: 'PeerFect',

@@ -19,7 +19,7 @@ export default function EmailVerification({
         이메일 인증
       </h4>
       <div className="w-full text-center">
-        <div className="mb-16 mt-[110px] whitespace-nowrap text-sm text-[#000000]">
+        <div className="mb-16 mt-[110px] whitespace-nowrap text-sm text-foreground">
           <p className="mb-0.5">
             입력하신 메일 주소로 인증 메일이 발송되었습니다.
           </p>

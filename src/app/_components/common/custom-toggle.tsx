@@ -57,7 +57,7 @@ export default function CustomToggle({
       }`}
     >
       <div
-        className={`size-[34px] rounded-full bg-background-primary shadow-md transition-transform duration-300${
+        className={`size-[34px] rounded-full bg-background-primary shadow-md transition-transform duration-300 ${
           isActive ? 'translate-x-[38px]' : 'translate-x-0'
         }`}
       ></div>

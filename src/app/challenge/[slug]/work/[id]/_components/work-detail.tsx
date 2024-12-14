@@ -1,7 +1,7 @@
 'use client';
 
-import CustomToggle from '@/_components/common/custom-toggle';
-import CustomButton from '@/_components/common/custom-button';
+import CustomButton from '@/app/_components/common/custom-button';
+import CustomToggle from '@/app/_components/common/custom-toggle';
 import SvgChat from '@/app/_components/icons/L/Chat';
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import SvgX from '@/app/_components/icons/M/X';

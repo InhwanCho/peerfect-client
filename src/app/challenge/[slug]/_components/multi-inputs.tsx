@@ -1,7 +1,7 @@
 'use client';
 
-import SvgCheck from '@/_components/icons/M/Check';
-import SvgX from '@/_components/icons/M/X';
+import SvgCheck from '@/app/_components/icons/M/Check';
+import SvgX from '@/app/_components/icons/M/X';
 import { cn } from '@/lib/utils';
 import React, {
   useState,
@@ -122,7 +122,7 @@ export default function MultiInputs() {
         {selectedValues.map((value) => (
           <div
             key={value}
-            className="ml-2 flex items-center rounded-xl bg-main-primary px-2 py-1 text-white"
+            className="ml-2 flex items-center rounded-xl bg-main-primary px-2 text-white"
           >
             {value}
             <button
@@ -141,8 +141,10 @@ export default function MultiInputs() {
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onFocus={() => setIsDropdownOpen(true)}
-          className="flex-1 border-none pl-4 outline-none placeholder:text-sm placeholder:text-gray-400 "
-          placeholder="사용한 툴을 선택해 주세요."
+          className={`flex-1 border-none pl-4 outline-none placeholder:text-sm placeholder:text-gray-400 `}
+          placeholder={
+            selectedValues.length > 2 ? '' : '사용한 툴을 선택해 주세요.'
+          }
         />
       </div>
       {/* 드롭다운 */}

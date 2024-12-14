@@ -1,9 +1,9 @@
 'use client';
 
-import SvgArrowDown from '@/_components/icons/M/ArrowDown';
-import SvgBell from '@/_components/icons/M/Bell';
-import SvgX from '@/_components/icons/M/X';
-import MenuMoreIcon from '@/_components/icons/menu-more-icon';
+import SvgArrowDown from '@/app/_components/icons/M/ArrowDown';
+import SvgBell from '@/app/_components/icons/M/Bell';
+import SvgX from '@/app/_components/icons/M/X';
+import MenuMoreIcon from '@/app/_components/icons/menu-more-icon';
 import Link from 'next/link';
 import { useState } from 'react';
 

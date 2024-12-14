@@ -1,4 +1,4 @@
-import H3Title from '@/_components/common/home-title';
+import H3Title from '@/app/_components/common/h3-title';
 import HomeCard from './home-card';
 
 const temDay = 5;

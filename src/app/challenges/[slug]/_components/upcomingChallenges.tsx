@@ -1,5 +1,5 @@
-import ChallengeCard from '@/_components/common/challenge-card';
-import H3Title from '@/_components/common/home-title';
+import ChallengeCard from '@/app/_components/common/challenge-card';
+import H3Title from '@/app/_components/common/h3-title';
 import React from 'react';
 
 export default function UpcomoingChallenges() {

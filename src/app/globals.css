@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {  
+@layer components {
   .card-container {
     @apply border border-gray-200 border-opacity-40 shadow-card;
   }
