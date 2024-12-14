@@ -1,7 +1,7 @@
 'use client';
+import SvgLeft from '@/app/_components/icons/XL/Left';
+import SvgRight from '@/app/_components/icons/XL/Right';
 import { useState } from 'react';
-import SvgLeft from '../../../_components/icons/XL/Left';
-import SvgRight from '../../../_components/icons/XL/Right';
 
 interface CardCarouselProps {
   images: string[];
