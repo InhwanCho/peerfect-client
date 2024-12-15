@@ -40,7 +40,7 @@ export default function HomeCard({
         src={imgSrc}
         alt={title === 'UX 챌린지' ? 'chart image' : 'spheres image'}
         aria-label={title === 'UX 챌린지' ? 'chart image' : 'spheres image'}
-        className="absolute bottom-[29px] right-[79px] h-[110px] w-[88px]"
+        className="absolute bottom-[29px] right-6 h-[110px] w-[88px] lg:right-10 2xl:right-20"
       />
     </div>
   );
