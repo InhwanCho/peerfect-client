@@ -3,14 +3,14 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import SvgArrowDown from '@/app/_components/icons/M/ArrowDown';
 import SvgFilledStar from '@/app/_components/icons/S/FilledStar';
 
-export default function UploadForm() {
+export default function EffotInput() {
   // 드롭다운, days, hours, 난이도(별)
   const [openDropdown, setOpenDropdown] = useState<'days' | 'hours' | null>(
     null
   );
   const [selectedDays, setSelectedDays] = useState<number | null>(null);
   const [selectedHours, setSelectedHours] = useState<number | null>(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState<number>(5);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<number>(0);
 
   const daysDropdownRef = useRef<HTMLDivElement | null>(null);
   const hoursDropdownRef = useRef<HTMLDivElement | null>(null);
@@ -59,9 +59,15 @@ export default function UploadForm() {
   }, []);
 
   return (
-    <div className="flex w-full select-none flex-col items-center justify-between gap-y-4 rounded-lg bg-white px-1 phone:flex-row phone:gap-y-0 2xl:w-[510px]">
+    <div
+      className="flex w-full select-none flex-col items-start gap-y-1.5 py-1.5
+  phone:flex-row phone:items-center phone:justify-between phone:gap-y-0 phone:py-0
+  md:flex-col md:items-start md:gap-y-6 md:py-1.5
+  lg:flex-row lg:items-center lg:justify-between lg:gap-y-0 lg:py-0
+  2xl:w-[510px]"
+    >
       <div className="flex items-center gap-x-2 sm:gap-x-4">
-        <span className="text-sm text-gray-500">소요시간</span>
+        <span className="truncate text-sm text-gray-500">소요시간</span>
         {/* Days Dropdown */}
         <div ref={daysDropdownRef} className="relative w-[100px]">
           <div
@@ -125,7 +131,7 @@ export default function UploadForm() {
 
       {/* 난이도 */}
       <div className="mt-4 flex items-center gap-x-2 phone:mt-0 sm:gap-x-4">
-        <span className="text-sm text-text-secondary">난이도</span>
+        <span className="text-sm text-gray-500">난이도</span>
         <div className="flex gap-x-1">
           {[...Array(5)].map((_, i) => (
             <SvgFilledStar

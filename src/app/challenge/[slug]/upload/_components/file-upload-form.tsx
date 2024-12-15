@@ -3,6 +3,7 @@
 import SvgBoxArrowUp from '@/app/_components/icons/M/BoxArrowUp';
 import styles from './file-upload-form.module.css';
 import { useState } from 'react';
+import SvgX from '@/app/_components/icons/M/X';
 
 interface UploadedFile {
   name: string;
@@ -68,9 +69,13 @@ export default function FileUploadForm() {
     handleFiles(e.target.files);
   };
 
+  const removeFile = (index: number) => {
+    setUploadedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
   return (
     <div
-      className={`relative ${styles.fileUploadForm} ${
+      className={`relative min-w-[320px] ${styles.fileUploadForm} ${
         uploadedFiles.length > 0 ? styles.fileUploaded : ''
       } ${isDragging ? styles.dragging : ''}`}
       onDragOver={handleDragOver}
@@ -119,8 +124,14 @@ export default function FileUploadForm() {
             {uploadedFiles.map((file, index) => (
               <div key={index} className="flex items-center justify-between">
                 <span className="text-main-purple-1">{file.name}</span>
-                <span className="text-sm text-gray-500">
+                <span className="flex items-center text-sm text-gray-500">
                   ({(file.size / 1024).toFixed(2)} KB)
+                  <button
+                    className="pl-4 pt-0.5"
+                    onClick={() => removeFile(index)}
+                  >
+                    <SvgX className="size-[18px]" />
+                  </button>
                 </span>
               </div>
             ))}
