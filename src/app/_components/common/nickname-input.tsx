@@ -52,7 +52,7 @@ export function NicknameInput({
             {error}
           </p>
         ) : (
-          <p className="absolute -bottom-7 left-1 text-small text-gray-400">
+          <p className="absolute -bottom-12 left-1 w-full text-small text-gray-400 xl:-bottom-7">
             공백 및 특수문자를 제외한 영문, 한글만 사용 가능합니다.
           </p>
         )}

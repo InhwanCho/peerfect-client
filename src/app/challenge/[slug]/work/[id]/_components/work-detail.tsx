@@ -22,7 +22,7 @@ const currentWork = {
   description: '상세 내용 블라블라...',
   tools: ['Figma', 'Sketch', 'Illustrator'],
   duration: '5일',
-  difficulty: 4,
+  difficulty: 5,
   link: 'https://example.com/project/modern-ui-design',
 };
 
@@ -51,7 +51,7 @@ export default function WorkDetail({ slug, id, isModal }: WorkDetailProps) {
     <div
       className={`${
         isModal
-          ? 'fixed inset-0 z-50 flex items-center justify-center bg-[#111111]/80'
+          ? 'fixed inset-0 z-50 flex items-center justify-center bg-[#111111]/80 md:px-24'
           : ''
       }`}
       onClick={isModal ? onClose : undefined}
@@ -59,23 +59,20 @@ export default function WorkDetail({ slug, id, isModal }: WorkDetailProps) {
       {/* SVG 버튼 컨테이너 */}
       {isModal && (
         <>
+          {/* 이전 버튼 */}
           <button
-            className="absolute left-[calc(50%-800px)] top-1/2 -translate-y-1/2 text-3xl text-text-primary"
+            className="absolute left-2 top-1/2 z-50 -translate-y-1/2 text-3xl text-text-primary 2xl:left-[calc(50%-780px)]"
             onClick={(e) => e.stopPropagation()}
             aria-label="prev button"
-            style={{
-              zIndex: 60, // 다른 요소 위로 표시
-            }}
           >
             <SvgLeft props={{ width: 80, height: 80 }} />
           </button>
+
+          {/* 다음 버튼 */}
           <button
-            className="absolute right-[calc(50%-800px)] top-1/2 -translate-y-1/2 text-3xl text-text-primary"
+            className="absolute right-2 top-1/2 z-50 -translate-y-1/2 text-3xl text-text-primary  2xl:right-[calc(50%-780px)]"
             onClick={(e) => e.stopPropagation()}
             aria-label="next button"
-            style={{
-              zIndex: 60, // 다른 요소 위로 표시
-            }}
           >
             <SvgRight props={{ width: 80, height: 80 }} />
           </button>
@@ -85,7 +82,7 @@ export default function WorkDetail({ slug, id, isModal }: WorkDetailProps) {
       <div
         className={`relative ${
           isModal
-            ? 'h-[82vh] w-[1280px] overflow-y-auto rounded-lg bg-background-secondary px-[32px] pb-14 md:px-[57px] lg:px-[82px] xl:px-[180px]'
+            ? 'custom-scrollbar h-[90vh] w-[560px] overflow-y-auto rounded-lg bg-white px-[32px] pb-14 md:w-[740px] md:px-[57px] lg:h-[85vh] lg:w-[1280px] lg:px-[82px] xl:px-[180px]'
             : ''
         }`}
         onClick={isModal ? (e) => e.stopPropagation() : undefined}
@@ -124,68 +121,70 @@ export default function WorkDetail({ slug, id, isModal }: WorkDetailProps) {
 
           {/* 디자인 작업물 섹션 */}
           {isDesignSelected ? (
-            <>
+            <div className="flex flex-col space-y-4">
               <div className="mb-4 h-[400px] w-full rounded-lg bg-gray-200"></div>
-              <p className="text-sm text-gray-600">{currentWork.description}</p>
-              <div className="mt-6 flex flex-col space-y-5">
-                <div className="flex flex-wrap items-center">
-                  <div className="flex items-center">
-                    <p className="w-[100px] text-body text-gray-800">
-                      사용한 툴
-                    </p>
-                    <div className="flex flex-wrap space-x-4">
-                      {currentWork.tools.map((tool, i) => (
-                        <span
-                          key={i}
-                          className="flex h-[33px] w-[128px] cursor-pointer items-center justify-center rounded-full border border-gray-700 font-medium text-gray-800"
-                        >
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-x-8">
-                  <div className="flex items-center">
-                    <p className="w-[100px] text-body text-gray-800">
-                      소요 시간
-                    </p>
-                    <p className="text-sm text-text-primary">
-                      {currentWork.duration}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center">
-                    <p className="w-[100px] text-body text-gray-800">난이도</p>
-                    {Array.from({ length: currentWork.difficulty }).map(
-                      (_, index) => (
-                        <SvgFilledStar key={index} />
-                      )
-                    )}
-                  </div>
-                </div>
-
+              <p className="mb-16 text-sm text-gray-600">
+                {currentWork.description}
+              </p>
+              <div className="flex flex-wrap items-center">
                 <div className="flex items-center">
-                  <p className="w-[100px] text-body text-gray-800">작업 링크</p>
-                  <a
-                    href={currentWork.link}
-                    className="text-body text-[#0B74F0]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    링크
-                  </a>
+                  <p className="w-[100px] pb-1 text-body text-gray-800">
+                    사용한 툴
+                  </p>
+                  {/* 반응형 너비 설정 및 스크롤 활성화 */}
+                  <div className="custom-scrollbar flex max-w-[calc(100vw-150px)] space-x-4 overflow-x-scroll pb-2">
+                    {currentWork.tools.map((tool, i) => (
+                      <span
+                        key={i}
+                        className="flex h-[33px] w-[128px] shrink-0 cursor-pointer items-center justify-center rounded-full border border-gray-700 font-medium text-gray-800"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </>
+              <div className="flex gap-x-16 pb-3">
+                <div className="flex items-center">
+                  <p className="w-[100px] text-body text-gray-800">소요 시간</p>
+                  <p className="truncate text-body text-text-primary">
+                    {currentWork.duration}
+                  </p>
+                </div>
+
+                <div className="ml-1 flex items-center">
+                  <p className="w-20 text-body text-gray-800 phone:w-[100px]">
+                    난이도
+                  </p>
+                  {Array.from({ length: currentWork.difficulty }).map(
+                    (_, index) => (
+                      <SvgFilledStar key={index} />
+                    )
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center">
+                <p className="w-[100px] text-body text-gray-800">작업 링크</p>
+                <a
+                  href={currentWork.link}
+                  className="text-body text-[#0B74F0]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  링크
+                </a>
+              </div>
+            </div>
           ) : (
-            <FeedbackSection className="mt-12" />
+            <FeedbackSection className="mt-12" isModal={true} />
           )}
         </div>
 
         {/* 피드백(댓글 영역) */}
-        {!isModal && <FeedbackSection className="mt-20 lg:mt-40" />}
+        {!isModal && (
+          <FeedbackSection className="mt-20 lg:mt-40" isModal={false} />
+        )}
       </div>
     </div>
   );

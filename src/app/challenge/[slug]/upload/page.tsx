@@ -38,8 +38,13 @@ export default async function UploadPage({ params }: UploadPageProps) {
         </Suspense>
         {/* Form Section */}
         <div className="w-full space-y-4 md:w-[510px]">
-          <InputField type="text" placeholder="제목을 입력해주세요." />
           <InputField
+            label="제목"
+            type="text"
+            placeholder="제목을 입력해주세요."
+          />
+          <InputField
+            label="링크"
             type="text"
             placeholder="작업물 링크  ex) figma file, github ..."
           />

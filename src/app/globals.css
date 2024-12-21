@@ -19,6 +19,11 @@
   .card-blur.blured img:not(.card-image) {
     filter: none; /* 다른 이미지에 블러 제거(효과 없음) */
   }
+
+  /* 스크롤바(테일윈드에서 require해야됨) */
+  .custom-scrollbar {
+    @apply scrollbar-thin scrollbar-track-gray-300 scrollbar-thumb-gray-500
+  }
 }
 
 /* input태그 자동완성 시 배경색 없애기 */

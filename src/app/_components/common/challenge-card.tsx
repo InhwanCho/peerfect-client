@@ -142,7 +142,7 @@ export default function ChallengeCard({ completed }: ChallengeCardProps) {
 
   return (
     <div className="relative">
-      <div className="flex w-full overflow-x-auto bg-white pb-10">
+      <div className="custom-scrollbar flex w-full overflow-x-auto bg-white pb-6">
         {cards.map((card, index) => (
           <Link
             href={`/challenge/${index}`}
