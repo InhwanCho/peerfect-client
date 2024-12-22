@@ -1,5 +1,6 @@
 'use client';
 
+import { BellIconAnimation } from '@/app/_components/icon-animation/bell-animation';
 import SvgArrowDown from '@/app/_components/icons/M/ArrowDown';
 import SvgBell from '@/app/_components/icons/M/Bell';
 import SvgX from '@/app/_components/icons/M/X';
@@ -66,10 +67,11 @@ export default function Navbar() {
                 className="relative cursor-pointer"
                 aria-label="alert button"
               >
-                <SvgBell
+                <BellIconAnimation />
+                {/* <SvgBell
                   filledColor="#FFFFFF"
                   props={{ width: 24, height: 24 }}
-                />
+                /> */}
               </button>
               {isNotificationOpen && (
                 <div className="absolute left-1 right-0 top-[76px]">

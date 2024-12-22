@@ -5,6 +5,7 @@ import { NicknameInput } from '../_components/common/nickname-input';
 import CustomButton from '../_components/common/custom-button';
 import CustomToggle from '../_components/common/custom-toggle';
 import { MenuState } from '../types/types';
+import MyChallengeRoadMap from './_components/my-challenge-loadmap';
 
 export default function Mypage() {
   const [nickname, setNickname] = useState('뽀');
@@ -50,7 +51,7 @@ export default function Mypage() {
                   className={`cursor-pointer ${selectedMenu === MenuState.MyChallenge ? 'text-main-primary' : 'text-gray-400'}`}
                   onClick={() => setSelectedMenu(MenuState.MyChallenge)}
                 >
-                  나의 챌린지 과정
+                  나의 챌린지 로드맵
                 </li>
                 <li
                   className={`cursor-pointer ${selectedMenu === MenuState.Notification ? 'text-main-primary' : 'text-gray-400'}`}
@@ -113,12 +114,7 @@ export default function Mypage() {
               </section>
             )}
 
-            {selectedMenu === MenuState.MyChallenge && (
-              <section className="card-container w-full flex-1 rounded-2xl bg-background-primary px-16 pb-20">
-                <h4 className="pt-12 text-h4">나의 챌린지 과정</h4>
-                {/* 나의 챌린지 과정 내용 추가 */}
-              </section>
-            )}
+            {selectedMenu === MenuState.MyChallenge && <MyChallengeRoadMap />}
 
             {selectedMenu === MenuState.Notification && (
               <section className="card-container w-full flex-1 rounded-2xl bg-background-primary px-16 pb-20">
