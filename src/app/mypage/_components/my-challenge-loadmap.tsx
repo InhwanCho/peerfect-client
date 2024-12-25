@@ -44,11 +44,13 @@ export default function MyChallengeRoadMap() {
               <img
                 src="/assets/mypage/completed-img.png"
                 alt="completed img"
-                style={{
-                  minWidth: size.width * 2,
-                  bottom: -size.width * 0.53,
-                }}
-                className="absolute left-[50%] translate-x-[-50%]"
+                style={
+                  {
+                    // minWidth: size.width * 2,
+                    // bottom: -size.width * 0.53,
+                  }
+                }
+                className="absolute bottom-2 left-[50%] w-20 translate-x-[-50%]"
               />
             )}
             {id < day && (

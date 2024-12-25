@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import SwitchAuthButton from './switch-auth-button';
 import CustomButton from '@/app/_components/common/custom-button';
+import TestButton from './test-button';
 
 interface EmailVerificationProps {
   verifiedEmail?: string;
@@ -32,7 +33,8 @@ export default function EmailVerification({
           <CustomButton color="purple" onClick={onProceedToSignup}>
             인증완료
           </CustomButton>
-          <CustomButton color="default">인증메일 재발송</CustomButton>
+          <TestButton />
+          {/* <CustomButton color="default">인증메일 재발송</CustomButton> */}
         </div>
         <div className="flex w-full justify-between pt-4">
           <SwitchAuthButton onClick={onSwitchAuthType} />
