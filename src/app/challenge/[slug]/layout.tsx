@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <main className="mx-auto mt-16 w-full max-w-7xl px-4 md:px-[74px] lg:mt-20 lg:px-[32px] xl:px-8">
+      <main className="mx-auto mt-10 w-full max-w-7xl px-6 md:mt-16 md:px-[32px] xl:px-8">
         {children}
       </main>
       <Footer />

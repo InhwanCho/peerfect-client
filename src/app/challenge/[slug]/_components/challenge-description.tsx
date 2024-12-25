@@ -1,3 +1,5 @@
+import SideInfo from './side-info';
+
 export default function ChallengeDescription() {
   return (
     <section

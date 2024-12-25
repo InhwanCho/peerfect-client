@@ -58,12 +58,7 @@ export default function WorkGallery({ slug }: WorkGalleryProps) {
   const [currentWork, setCurrentWork] = useState<WorkData | null>(null);
 
   const router = useRouter();
-  // const handleOpenModal = (index: number) => {
-  //   // router.push(`/challenge/11/work/12312`);
 
-  //   setCurrentWork(dummyData[index]);
-  //   setIsModalOpen(true);
-  // };
   const handleOpenModal = (id: number) => {
     router.push(`/challenge/${slug}/work/${id}`, { scroll: false });
   };
@@ -95,10 +90,11 @@ export default function WorkGallery({ slug }: WorkGalleryProps) {
 
   return (
     <section>
+      {/* TODO : UI 따로 만들어야됨 */}
       <img
         src="/assets/challenge/otherworks.webp"
         alt="서로의 작업물을 공유하고, 피드백을 나눠 보세요"
-        className="w-full"
+        className="h-[230px] w-full lg:h-auto"
       />
       <header className="mb-[60px] mt-20 flex justify-between">
         <h2 className="mb-6 text-xl font-bold text-text-primary">
