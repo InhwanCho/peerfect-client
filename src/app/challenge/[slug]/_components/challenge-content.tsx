@@ -19,18 +19,18 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
 
   return (
     <section className="flex w-full justify-center">
-      <article className="mb-20 flex-1 space-y-8 first:space-y-10 md:space-y-14 lg:space-y-20">
+      <article className="mb-20 flex-1 space-y-8 first:space-y-20 md:space-y-14 lg:space-y-20">
         {/* 탭 메뉴 */}
         <TabMenu activeTab={activeTab} setActiveTab={setActiveTab} />
         {/* 탭에 따라 콘텐츠 표시 */}
         {activeTab === '챌린지설명' && (
           <>
-            <SideInfo slug={slug} location="content" />
             <ChallengeDescription />
             <ChallengeRequirements />
-            <WorkPreview />
+            {/* <WorkPreview /> */}
             <HowToParticipate />
             <ReviewSection />
+            <SideInfo slug={slug} location="content" />
           </>
         )}
         {activeTab === 'review' && <ReviewSection />}

@@ -6,7 +6,7 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
   const title = searchParams.get('title') || '임시 제목입니다';
 
   return (
-    <header className="mb-10 rounded-3xl shadow-md md:mb-12 lg:mb-16">
+    <header className="mb-10 rounded-3xl shadow-md md:mb-12 lg:mb-[78px]">
       <img
         src="/assets/challenge/ui_challenge.webp"
         alt="ui challenge hero image"

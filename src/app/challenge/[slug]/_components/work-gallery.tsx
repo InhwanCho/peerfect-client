@@ -89,13 +89,13 @@ export default function WorkGallery({ slug }: WorkGalleryProps) {
   };
 
   return (
-    <section>
+    <section className="">
       {/* TODO : UI 따로 만들어야됨 */}
-      <img
+      {/* <img
         src="/assets/challenge/otherworks.webp"
         alt="서로의 작업물을 공유하고, 피드백을 나눠 보세요"
         className="h-[230px] w-full lg:h-auto"
-      />
+      /> */}
       <header className="mb-[60px] mt-20 flex justify-between">
         <h2 className="mb-6 text-xl font-bold text-text-primary">
           후기 <span className="text-text-tertiary"> {dummyData.length}개</span>
@@ -107,7 +107,7 @@ export default function WorkGallery({ slug }: WorkGalleryProps) {
           onSelect={handleOrderChange}
         />
       </header>
-      <div className="grid grid-cols-2 gap-x-10 gap-y-20 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-12 md:gap-y-16 phone:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-2 md:px-0">
         {dummyData.map((work, index) => (
           <WorkCard
             key={work.id}

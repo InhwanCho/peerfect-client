@@ -5,7 +5,6 @@ import CustomButton from '@/app/_components/common/custom-button';
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import SvgHalfStar from '@/app/_components/icons/M/HalfStar';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
 
 interface SideInfoProps {
   location: 'content' | 'side';
@@ -20,7 +19,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   return (
     <>
       {location === 'side' ? (
-        <aside className="ml-14 hidden w-[340px] xl:block">
+        <aside className="ml-10 hidden w-[320px] lg:block xl:ml-14 xl:w-[340px]">
           <div className="card-container sticky top-32 rounded-lg bg-background-primary px-7 py-8">
             <div>
               <p className="mb-1 text-sm text-text-primary">#챌린지 {slug}</p>
@@ -67,7 +66,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
           </div>
         </aside>
       ) : (
-        <aside className="sticky top-28 mx-auto block w-full xl:hidden">
+        <aside className="sticky bottom-12 mx-auto block w-full sm:bottom-20 lg:hidden">
           <div className="card-container flex items-center justify-between rounded-lg bg-background-primary">
             {/* 왼쪽 섹션 챌린지,타이틀*/}
             <div className="flex w-full items-center justify-between p-6 sm:px-10">

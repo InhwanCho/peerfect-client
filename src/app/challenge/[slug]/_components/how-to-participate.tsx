@@ -16,25 +16,6 @@ export default function HowToParticipate() {
               1
             </div>
             <p className="mt-4 text-xl font-semibold text-text-primary">
-              챌린지 선택하기
-            </p>
-          </div>
-          <img
-            src="/assets/challenge/challenge_select.png"
-            alt="챌린지 선택"
-            className="mb-6 h-auto w-[150px]"
-          />
-          <p className="text-center text-base text-text-primary">
-            원하는 프로젝트를 선택하세요.
-          </p>
-        </div>
-        {/* Step 2 */}
-        <div className="flex flex-col items-center justify-between">
-          <div className="mb-6 flex flex-col items-center">
-            <div className="w-full break-words text-center text-[24px] font-semibold leading-[33.6px] text-main-primary">
-              2
-            </div>
-            <p className="mt-4 text-xl font-semibold text-text-primary">
               참여하기 버튼 클릭
             </p>
           </div>
@@ -49,6 +30,25 @@ export default function HowToParticipate() {
             <br />
             <span className="font-bold">&apos;참여하기&apos; </span>
             <span>버튼을 눌러주세요.</span>
+          </p>
+        </div>
+        {/* Step 2 */}
+        <div className="flex flex-col items-center justify-between">
+          <div className="mb-6 flex flex-col items-center">
+            <div className="w-full break-words text-center text-[24px] font-semibold leading-[33.6px] text-main-primary">
+              2
+            </div>
+            <p className="mt-4 text-xl font-semibold text-text-primary">
+              시간제한내용
+            </p>
+          </div>
+          <img
+            src="/assets/challenge/challenge_select.png"
+            alt="챌린지 선택"
+            className="mb-6 h-auto w-[150px]"
+          />
+          <p className="text-center text-base text-text-primary">
+            원하는 프로젝트를 선택하세요.
           </p>
         </div>
         {/* Step 3 */}
