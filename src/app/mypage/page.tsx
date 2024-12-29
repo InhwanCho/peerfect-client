@@ -37,9 +37,9 @@ export default function Mypage() {
       <div className="mx-auto px-20 xl:w-[70%] xl:px-0">
         <h1 className="py-[100px] text-h2">마이페이지</h1>
         <section className="min-h-[calc(100vh-250px-90px)]">
-          <div className="mx-auto w-full lg:flex">
+          <div className="mx-auto w-full space-y-12 pb-20 lg:flex lg:space-y-0">
             {/* 왼쪽 메뉴 */}
-            <aside className="card-container mr-[110px] h-[300px] w-[220px] rounded-2xl bg-background-primary pl-8 pt-[60px] transition-colors">
+            <aside className="card-container mr-[110px] h-[300px] w-full min-w-[220px] rounded-2xl bg-background-primary pl-8 pt-[60px] transition-colors lg:w-fit">
               <ul className="space-y-[48px] text-subtitle2">
                 <li
                   className={`cursor-pointer ${selectedMenu === MenuState.Profile ? 'text-main-primary' : 'text-gray-400'}`}

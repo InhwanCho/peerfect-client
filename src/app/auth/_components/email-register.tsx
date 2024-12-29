@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import EmailSignupForm from './email-signup-form';
 import EmailVerification from './email-verification';
 import EmailInputForm from './email-input-form';
+import { useEmailCheck } from '@/app/hooks/use-email-send';
 
 interface EmailRegisterProps {
   onSwitchAuthType: () => void;
@@ -26,11 +27,19 @@ export default function EmailRegister({
   const [isSignupScreen, setIsSignupScreen] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState('');
   const emailValue = watch('email');
+  const emailMutation = useEmailCheck();
 
   const onSubmit = (data: { email: string }) => {
     console.log('Valid email:', data.email);
-    setVerifiedEmail(data.email);
-    setIsVerified(true);
+    emailMutation.mutate(data.email, {
+      onSuccess: () => {
+        setVerifiedEmail(data.email);
+        setIsVerified(true);
+      },
+      onError: () => {
+        alert('인증 요청에 실패했습니다. 다시 시도해주세요.');
+      },
+    });
   };
 
   if (isSignupScreen) {
@@ -55,6 +64,7 @@ export default function EmailRegister({
       emailValue={emailValue}
       errors={errors}
       isValid={isValid}
+      isLoading={emailMutation.isPending}
       onSubmit={handleSubmit(onSubmit)}
       register={register}
       onSwitchAuthType={onSwitchAuthType}

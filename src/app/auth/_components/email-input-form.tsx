@@ -1,3 +1,5 @@
+'use client';
+
 import ErrorMessage from '@/app/_components/common/error-message';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import SwitchAuthButton from './switch-auth-button';
@@ -9,6 +11,7 @@ interface EmailInputFormProps {
   errors: FieldErrors;
   isValid: boolean;
   onSubmit: () => void;
+  isLoading: boolean;
   register: UseFormRegister<{ email: string }>;
   onSwitchAuthType: () => void;
 }
@@ -18,6 +21,7 @@ export default function EmailInputForm({
   errors,
   isValid,
   onSubmit,
+  isLoading,
   register,
   onSwitchAuthType,
 }: EmailInputFormProps) {
@@ -77,7 +81,7 @@ export default function EmailInputForm({
           color={!isValid ? 'gray' : 'purple'}
           className={`mb-4 mt-20 `}
         >
-          인증 후 로그인
+          {isLoading ? '이메일 발송 중...' : '인증 후 로그인'}
         </CustomButton>
         <div className="flex justify-between">
           <SwitchAuthButton onClick={onSwitchAuthType} />
