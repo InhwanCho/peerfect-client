@@ -3,7 +3,7 @@ import { cn } from '../../../lib/utils';
 
 interface CustomButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: 'xs' | 'small' | 'medium' | 'large';
+  size?: 'xxs' | 'xs' | 'small' | 'medium' | 'large';
   color: 'purple' | 'gray' | 'light-purple' | 'default';
   className?: string;
   reviewButton?: boolean;
@@ -20,6 +20,7 @@ export default function CustomButton({
 }: CustomButtonProps) {
   const sizeClass = size
     ? {
+        xxs: 'w-[100px]',
         xs: 'w-[120px]',
         small: 'w-[300px]',
         medium: 'w-[330px]',

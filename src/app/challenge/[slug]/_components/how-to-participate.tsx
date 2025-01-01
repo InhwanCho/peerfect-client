@@ -16,19 +16,19 @@ export default function HowToParticipate() {
               1
             </div>
             <p className="mt-4 text-xl font-semibold text-text-primary">
-              참여하기 버튼 클릭
+              시작하기 버튼 클릭
             </p>
           </div>
           <div className="relative mb-6 inline-flex w-[160px] items-center justify-center rounded-full bg-main-primary p-4 md:mb-0">
             <div className="break-words text-center text-[16px] font-semibold leading-[22.4px] text-white">
-              참여하기
+              시작하기
             </div>
             <MouseIcon className="absolute -bottom-10 right-1 mb-6 h-auto w-7" />
           </div>
           <p className="text-center text-base text-text-primary">
             프로젝트 페이지에서
             <br />
-            <span className="font-bold">&apos;참여하기&apos; </span>
+            <span className="font-bold">&apos;시작하기&apos; </span>
             <span>버튼을 눌러주세요.</span>
           </p>
         </div>
@@ -39,7 +39,7 @@ export default function HowToParticipate() {
               2
             </div>
             <p className="mt-4 text-xl font-semibold text-text-primary">
-              시간제한내용
+              챌린지 시작하기
             </p>
           </div>
           <img
@@ -48,7 +48,9 @@ export default function HowToParticipate() {
             className="mb-6 h-auto w-[150px]"
           />
           <p className="text-center text-base text-text-primary">
-            원하는 프로젝트를 선택하세요.
+            <span className="font-semibold">48시간 이내</span>
+            <span>에</span>
+            <span className="block">챌린지를 완료해 주세요.</span>
           </p>
         </div>
         {/* Step 3 */}
@@ -63,7 +65,8 @@ export default function HowToParticipate() {
           </div>
           <UploadImageIcon className="mb-6 h-auto w-[100px]" />
           <p className="text-center text-base text-text-primary">
-            과제를 완료한 후, 업로드하세요.
+            <span>과제를 완료한 후,</span>
+            <span className="block">업로드하세요.</span>
           </p>
         </div>
       </div>

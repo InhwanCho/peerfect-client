@@ -19,7 +19,7 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
 
   return (
     <section className="flex w-full justify-center">
-      <article className="mb-20 flex-1 space-y-8 first:space-y-20 md:space-y-14 lg:space-y-20">
+      <article className="mb-20 flex-1 space-y-8 sm:first:space-y-[40px] md:space-y-14 md:first:space-y-[60px] lg:space-y-20 lg:first:space-y-20">
         {/* 탭 메뉴 */}
         <TabMenu activeTab={activeTab} setActiveTab={setActiveTab} />
         {/* 탭에 따라 콘텐츠 표시 */}

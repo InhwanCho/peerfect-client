@@ -4,6 +4,7 @@ import CustomButton from '@/app/_components/common/custom-button';
 
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import SvgHalfStar from '@/app/_components/icons/M/HalfStar';
+import SvgXCricleFill from '@/app/_components/icons/M/XCricleFill';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface SideInfoProps {
@@ -56,7 +57,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               color="purple"
               className="my-10"
             >
-              참여하기
+              시작하기
             </CustomButton>
             <p className="mt-6 flex justify-center text-center text-sm text-text-caption ">
               <span className="cursor-pointer decoration-current underline-offset-4 transition-all duration-200 hover:text-text-primary hover:underline">
@@ -100,10 +101,16 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               }}
               color="purple"
               size="xs"
-              className="mr-6 sm:mr-10"
+              className="mr-6 sm:mr-10 "
             >
               시작하기
             </CustomButton>
+            <button className="mr-6 sm:mr-10">
+              <SvgXCricleFill
+                filledColor="#E0E0E0"
+                props={{ width: 24, height: 24 }}
+              />
+            </button>
           </div>
         </aside>
       )}

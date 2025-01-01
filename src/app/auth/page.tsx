@@ -1,18 +1,40 @@
 'use client';
 
 import { useState } from 'react';
-import FormLayout from './_components/form-layout';
 import SocialButton from './_components/social-button';
 import EmailRegister from './_components/email-register';
+import { useSearchParams } from 'next/navigation';
+import EmailVerification from './_components/email-verification';
+import EmailSignupForm from './_components/email-signup-form';
 
 export default function AuthPage() {
   const [authType, setAuthType] = useState('social');
+  const [isSignupScreen, setIsSignupScreen] = useState<boolean>(false);
+  const searchParam = useSearchParams();
+  const verifiedCode = searchParam.get('code');
+  const verifiedEmail = searchParam.get('email');
 
   return (
-    <FormLayout>
-      {authType === 'email' ? (
+    <>
+      {verifiedCode && verifiedEmail ? (
+        isSignupScreen ? (
+          // 회원가입 화면
+          <EmailSignupForm verifiedEmail={verifiedEmail} />
+        ) : (
+          // 이메일 인증 화면
+          <EmailVerification
+            verifiedEmail={verifiedEmail}
+            onProceedToSignup={() => setIsSignupScreen(true)}
+            onSwitchAuthType={() => setAuthType('social')}
+          />
+        )
+      ) : authType === 'email' ? (
         // 이메일 로그인 폼
-        <EmailRegister onSwitchAuthType={() => setAuthType('social')} />
+        <EmailRegister
+          isSignupScreen={isSignupScreen}
+          setIsSignupScreen={setIsSignupScreen}
+          onSwitchAuthType={() => setAuthType('social')}
+        />
       ) : (
         // 소셜 로그인 UI
         <>
@@ -31,6 +53,6 @@ export default function AuthPage() {
           </div>
         </>
       )}
-    </FormLayout>
+    </>
   );
 }

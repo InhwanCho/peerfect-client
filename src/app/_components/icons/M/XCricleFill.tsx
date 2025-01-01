@@ -1,17 +1,21 @@
-import * as React from 'react';
-import type { SVGProps } from 'react';
-const SvgXCricleFill = (props: SVGProps<SVGSVGElement>) => (
+import { SvgProps } from '../types/svg-type';
+const SvgXCricleFill = ({
+  className,
+  props,
+  filledColor = '#000',
+}: SvgProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
     height="1em"
     fill="none"
     viewBox="0 0 24 24"
+    className={className}
     {...props}
   >
-    <path fill="#000" d="M12.13 21.12a9 9 0 1 0 0-18 9 9 0 0 0 0 18" />
+    <path fill={filledColor} d="M12.13 21.12a9 9 0 1 0 0-18 9 9 0 0 0 0 18" />
     <path
-      fill="#000"
+      fill={filledColor}
       d="M12.13 22.26C6.54 22.26 2 17.71 2 12.13S6.55 2 12.13 2s10.13 4.55 10.13 10.13-4.55 10.13-10.13 10.13m0-18c-4.34 0-7.87 3.53-7.87 7.87S7.79 20 12.13 20 20 16.47 20 12.13s-3.53-7.87-7.87-7.87"
     />
     <path

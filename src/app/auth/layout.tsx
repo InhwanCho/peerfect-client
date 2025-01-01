@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { cn } from '../../lib/utils';
 import styles from './authlayout.module.css';
+import { Suspense } from 'react';
+import FormLayout from './_components/form-layout';
 
 export const metadata: Metadata = {
   title: 'Peerfect - login',
@@ -23,7 +25,9 @@ export default function AuthLayout({
           Grow Together, Be Perfect
         </p>
       </div>
-      {children}
+      <FormLayout>
+        <Suspense fallback="loading ...">{children}</Suspense>
+      </FormLayout>
     </div>
   );
 }

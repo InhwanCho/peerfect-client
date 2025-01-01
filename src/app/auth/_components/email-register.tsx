@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import EmailSignupForm from './email-signup-form';
 import EmailVerification from './email-verification';
@@ -9,10 +9,14 @@ import { useEmailCheck } from '@/app/hooks/use-email-send';
 
 interface EmailRegisterProps {
   onSwitchAuthType: () => void;
+  isSignupScreen: boolean;
+  setIsSignupScreen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function EmailRegister({
   onSwitchAuthType,
+  isSignupScreen,
+  setIsSignupScreen,
 }: EmailRegisterProps) {
   const {
     register,
@@ -24,7 +28,6 @@ export default function EmailRegister({
   });
 
   const [isVerified, setIsVerified] = useState(false);
-  const [isSignupScreen, setIsSignupScreen] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState('');
   const emailValue = watch('email');
   const emailMutation = useEmailCheck();
