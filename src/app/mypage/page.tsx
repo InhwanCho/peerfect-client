@@ -11,7 +11,7 @@ export default function Mypage() {
   const [nickname, setNickname] = useState('뽀');
   const [error, setError] = useState('');
   const [selectedMenu, setSelectedMenu] = useState<MenuState>(
-    MenuState.Profile
+    MenuState.MyChallenge
   );
   const [marketingEnabled, setMarketingEnabled] = useState(false);
   const [feedbackEnabled, setFeedbackEnabled] = useState(false);
@@ -42,16 +42,16 @@ export default function Mypage() {
             <aside className="card-container mr-[110px] h-[300px] w-full min-w-[220px] rounded-2xl bg-background-primary pl-8 pt-[60px] transition-colors lg:w-fit">
               <ul className="space-y-[48px] text-subtitle2">
                 <li
-                  className={`cursor-pointer ${selectedMenu === MenuState.Profile ? 'text-main-primary' : 'text-gray-400'}`}
-                  onClick={() => setSelectedMenu(MenuState.Profile)}
-                >
-                  프로필 설정
-                </li>
-                <li
                   className={`cursor-pointer ${selectedMenu === MenuState.MyChallenge ? 'text-main-primary' : 'text-gray-400'}`}
                   onClick={() => setSelectedMenu(MenuState.MyChallenge)}
                 >
                   나의 챌린지 로드맵
+                </li>
+                <li
+                  className={`cursor-pointer ${selectedMenu === MenuState.Profile ? 'text-main-primary' : 'text-gray-400'}`}
+                  onClick={() => setSelectedMenu(MenuState.Profile)}
+                >
+                  프로필 설정
                 </li>
                 <li
                   className={`cursor-pointer ${selectedMenu === MenuState.Notification ? 'text-main-primary' : 'text-gray-400'}`}
