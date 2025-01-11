@@ -27,7 +27,7 @@ export default function CompletedChallenges({
           </div>
         </div>
       ) : (
-        <ChallengeCard completed />
+        <ChallengeCard completed select="UI" />
       )}
     </div>
   );

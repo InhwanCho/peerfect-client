@@ -1,21 +1,16 @@
+import apiClient from '@/lib/api-client';
 import { useMutation } from '@tanstack/react-query';
 
-const API_URL = 'http://15.165.184.154:8008/api/email/emailCheck';
-
-export const sendEmailCheckRequest = async (email: string) => {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
+const sendEmailCheckRequest = async (email: string) => {
+  try {
+    const response = await apiClient.post('api/email/emailCheck', { email });
+    return response.data;
+  } catch (error: any) {
+    if (error.response) {
+      throw new Error(`Error: ${error.response.status}`);
+    }
+    throw error;
   }
-
-  return response.json();
 };
 
 export const useEmailCheck = () => {
@@ -25,7 +20,7 @@ export const useEmailCheck = () => {
       console.log('API Response:', data);
       alert('인증 이메일이 전송되었습니다.');
     },
-    onError: (error: string) => {
+    onError: (error: any) => {
       console.error('Error:', error);
       alert('인증 요청에 실패했습니다. 다시 시도해주세요.');
     },

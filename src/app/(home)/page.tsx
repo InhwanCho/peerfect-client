@@ -13,7 +13,7 @@ export default function HomePage() {
     <>
       <CardCarousel images={images} />
       <PeerfectChallenge select={select} setSelect={setSelect} />
-      <ChallengePreview select={select}/>
+      <ChallengePreview select={select} />
     </>
   );
 }

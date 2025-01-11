@@ -24,6 +24,7 @@ export default function AuthPage() {
           // 이메일 인증 화면
           <EmailVerification
             verifiedEmail={verifiedEmail}
+            verifiedCode={verifiedCode}
             onProceedToSignup={() => setIsSignupScreen(true)}
             onSwitchAuthType={() => setAuthType('social')}
           />
@@ -42,10 +43,11 @@ export default function AuthPage() {
             로그인
           </h2>
           <div className="flex w-full flex-col gap-y-3">
-            <SocialButton provider="kakao" showRecentBadge />
+            <SocialButton provider="kakao" />
             <SocialButton provider="google" />
             {/* <SocialButton provider="apple" showRecentBadge /> */}
             <SocialButton
+              showRecentBadge
               className="mt-2"
               provider="email"
               onClick={() => setAuthType('email')}

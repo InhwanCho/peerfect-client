@@ -7,7 +7,7 @@ export default function UpcomoingChallenges() {
     <div className="my-20">
       <H3Title title="다가오는 챌린지" eyes={true} />
       {/* 카드 */}
-      <ChallengeCard />
+      <ChallengeCard select="UI" />
     </div>
   );
 }
