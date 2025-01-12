@@ -33,7 +33,7 @@ export default function HomeCard({
       onClick={onClick}
     >
       <h2 className="mb-4 text-h2 text-black">{title}</h2>
-      <div className="mb-8 w-4/5 text-sm lg:text-lg leading-relaxed text-gray-600">
+      <div className="mb-8 w-4/5 text-sm leading-relaxed text-gray-600 lg:text-lg">
         <p>{description}</p>
         {subDescription && <p className="pt-1">{subDescription}</p>}
       </div>

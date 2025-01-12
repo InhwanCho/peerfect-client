@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-10 flex w-full select-none justify-center bg-black">
+      <header className="sticky top-0 z-30 flex w-full select-none justify-center bg-black">
         <div className="flex h-[90px] w-full items-center justify-between px-8 lg:w-[90%] xl:w-3/4">
           <div className="flex items-center justify-start gap-12 sm:gap-[86px]">
             <Link className="h-[55px] w-[177px]" href="/">

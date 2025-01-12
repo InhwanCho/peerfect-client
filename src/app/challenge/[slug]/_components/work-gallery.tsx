@@ -107,7 +107,7 @@ export default function WorkGallery({ slug }: WorkGalleryProps) {
           onSelect={handleOrderChange}
         />
       </header>
-      <div className="grid grid-cols-1 gap-x-10 gap-y-12 md:gap-y-16 phone:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-2 md:px-0">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-12 px-2 phone:grid-cols-2 md:grid-cols-3 md:gap-y-16 md:px-0 lg:grid-cols-4">
         {dummyData.map((work, index) => (
           <WorkCard
             key={work.id}

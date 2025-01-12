@@ -4,16 +4,22 @@ import CardCarousel from '../_components/common/card-carousel';
 import PeerfectChallenge from './_components/peerfect-challenge';
 import ChallengePreview from './_components/challenge-preview';
 import { useState } from 'react';
+import HomeChallenge from './_components/home-challenge';
+import HomePreview from './_components/home-preview';
 
 const images = ['/assets/home/home-hero1.png', '/assets/home/home-hero2.png'];
 
 export default function HomePage() {
-  const [select, setSelect] = useState('UX');
+  const [activeTab, setActiveTab] = useState('UX');
+
   return (
     <>
       <CardCarousel images={images} />
-      <PeerfectChallenge select={select} setSelect={setSelect} />
-      <ChallengePreview select={select} />
+      <HomeChallenge activeTab={activeTab} setActiveTab={setActiveTab} />
+      <HomePreview activeTab={activeTab} />
+      {/* <PeerfectChallenge select={activeTab} setSelect={setActiveTab} /> */}
+      <div>이건 나중에 삭제(임시)</div>
+      <ChallengePreview select={activeTab} />
     </>
   );
 }

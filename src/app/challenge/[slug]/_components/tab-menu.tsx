@@ -12,7 +12,7 @@ export default function TabMenu({ activeTab, setActiveTab }: TabMenuProps) {
 
   return (
     <nav className="w-full">
-      <ul className="flex w-full border-b-2 border-gray-200 text-text-caption lg:w-fit max-w-[400px]">
+      <ul className="flex w-full max-w-[400px] border-b-2 border-gray-200 text-gray-400 lg:w-fit">
         {tabs.map((tab) => (
           <li
             key={tab.id}

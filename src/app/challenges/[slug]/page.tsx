@@ -1,3 +1,4 @@
+import Footer from '@/app/(home)/_components/footer';
 import ChallengesHero from './_components/challenges-hero';
 import CompletedChallenges from './_components/completed-challenges';
 import MainChallenge from './_components/main-challenge';
@@ -26,6 +27,7 @@ export default async function ChallengesPage({ params }: ChallengesPageProps) {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -11,14 +11,14 @@ export default function Pagination() {
     <section className="my-[180px]">
       <div className="flex items-center justify-center space-x-2">
         <button
-          className="flex size-8 phone:size-10 md:size-[52px] cursor-pointer items-center justify-center rounded-full hover:bg-gray-200"
+          className="flex size-8 cursor-pointer items-center justify-center rounded-full hover:bg-gray-200 phone:size-10 md:size-[52px]"
           aria-label="First Page"
           disabled={currentPage === 1}
         >
           <SvgDoubleArrowLeft filledColor="#757575" />
         </button>
         <button
-          className="flex size-8 phone:size-10 md:size-[52px] cursor-pointer items-center justify-center rounded-full hover:bg-gray-200"
+          className="flex size-8 cursor-pointer items-center justify-center rounded-full hover:bg-gray-200 phone:size-10 md:size-[52px]"
           aria-label="Previous Page"
           disabled={currentPage === 1}
         >
@@ -30,7 +30,7 @@ export default function Pagination() {
             return (
               <button
                 key={page}
-                className={`flex size-8 phone:size-10 md:size-[52px] items-center justify-center rounded-full font-medium ${
+                className={`flex size-8 items-center justify-center rounded-full font-medium phone:size-10 md:size-[52px] ${
                   currentPage === page
                     ? 'bg-[#CDA6FF] text-white' // 활성화된 페이지 스타일
                     : 'bg-background-primary text-gray-600 transition-colors hover:bg-[#CDA6FF] hover:text-white'
@@ -43,14 +43,14 @@ export default function Pagination() {
           })}
         </div>
         <button
-          className="flex size-8 phone:size-10 md:size-[52px] cursor-pointer items-center justify-center rounded-full hover:bg-gray-200"
+          className="flex size-8 cursor-pointer items-center justify-center rounded-full hover:bg-gray-200 phone:size-10 md:size-[52px]"
           aria-label="Next Page"
           disabled={true}
         >
           <SvgArrowRight filledColor="#757575" />
         </button>
         <button
-          className="flex size-8 phone:size-10 md:size-[52px] cursor-pointer items-center justify-center rounded-full hover:bg-gray-200"
+          className="flex size-8 cursor-pointer items-center justify-center rounded-full hover:bg-gray-200 phone:size-10 md:size-[52px]"
           aria-label="Last Page"
           disabled={true}
         >

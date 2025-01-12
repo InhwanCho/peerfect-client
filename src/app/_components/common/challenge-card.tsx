@@ -15,22 +15,27 @@ export default function ChallengeCard({
   select,
 }: ChallengeCardProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const { data: challenges, isLoading, isError } = useChallengePreview(select);
+  const {
+    data: challengesData,
+    isLoading,
+    isError,
+  } = useChallengePreview(select);
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError || !challenges) return <div>Error loading challenges</div>;
-  console.log(select);
-  console.log(challenges[0]);
+  if (isError || !challengesData) return <div>Error loading challenges</div>;
 
   return (
     <div className="relative">
       <div className="custom-scrollbar flex w-full overflow-x-auto bg-white pb-6">
-        {challenges.map((card, index) => (
+        {challengesData.map((card, index) => (
           <Link
-            href={`/challenge/${card.challengeNo}`}
+            href={{
+              pathname: `/challenge/${card.challengeNo}`,
+              query: { active: select },
+            }}
             key={card.challengeNo}
             className={`relative max-w-[260px] shrink-0 snap-start rounded-2xl shadow-card ${
-              index === challenges.length - 1 ? 'mr-8' : 'mr-4'
+              index === challengesData.length - 1 ? 'mr-8' : 'mr-4'
             }`}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
@@ -42,7 +47,7 @@ export default function ChallengeCard({
             >
               {/* 첫 번째 이미지 */}
               <img
-                src={`/assets/home/${select.toLowerCase()}-m/${select.toLowerCase()}-m-day${select === 'UI' ? card.challengeNo : card.challengeNo - 14}.png`}
+                src={`/assets/home/${select.toLowerCase()}-m/${select.toLowerCase()}-m-day${index + 1}.png`}
                 alt="challenge card image"
                 className="card-image"
               />
@@ -86,7 +91,7 @@ export default function ChallengeCard({
               ) : (
                 <>
                   <div>
-                    <h4 className="mb-4 line-clamp-2 text-lg font-bold text-black">
+                    <h4 className="line-clamp-2 h-14 text-lg font-bold text-black">
                       {card.challengeTitle}
                     </h4>
                     <p className="line-clamp-2 text-[13px] text-gray-600">

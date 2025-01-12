@@ -6,9 +6,10 @@ import HowToParticipate from './how-to-participate';
 import ReviewSection from './review-section';
 import SideInfo from './side-info';
 import TabMenu from './tab-menu';
-import WorkPreview from './work-preview';
 import WorkGallery from './work-gallery';
 import ChallengeRequirements from './challenge-requirements';
+import { useSearchParams } from 'next/navigation';
+import { useChallengeDetail } from '@/app/hooks/use-challenge-detail';
 
 interface ChallengeContentProps {
   slug: string;
@@ -16,6 +17,18 @@ interface ChallengeContentProps {
 
 export default function ChallengeContent({ slug }: ChallengeContentProps) {
   const [activeTab, setActiveTab] = useState('챌린지설명');
+  const searchParams = useSearchParams();
+  const active = searchParams.get('active') || 'ux';
+
+  const {
+    data: challengeDetailData,
+    isLoading,
+    isError,
+  } = useChallengeDetail(slug, active);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !challengeDetailData)
+    return <div>Error loading challenge details</div>;
 
   return (
     <section className="flex w-full justify-center">
@@ -25,9 +38,11 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
         {/* 탭에 따라 콘텐츠 표시 */}
         {activeTab === '챌린지설명' && (
           <>
-            <ChallengeDescription />
+            <ChallengeDescription
+              challengeIntro={challengeDetailData.challengeIntro}
+              challengeMission={challengeDetailData.challengeMission}
+            />
             <ChallengeRequirements />
-            {/* <WorkPreview /> */}
             <HowToParticipate />
             <ReviewSection />
             <SideInfo slug={slug} location="content" />

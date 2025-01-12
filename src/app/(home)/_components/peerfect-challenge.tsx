@@ -6,8 +6,6 @@ interface PeerfectChallengeProps {
   setSelect: (value: string) => void;
 }
 
-const temDay = 5;
-
 export default function PeerfectChallenge({
   select,
   setSelect,
