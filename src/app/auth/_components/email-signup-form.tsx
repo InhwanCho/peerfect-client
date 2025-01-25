@@ -5,6 +5,8 @@ import CheckIcon from '@/app/_components/icons/check-icon';
 import TermsAgreement from './terms-agrrment';
 import CustomButton from '@/app/_components/common/custom-button';
 import { NicknameInput } from '@/app/_components/common/nickname-input';
+import { useNicknameCheck } from '@/app/hooks/use-nickname-check';
+import { useSignup } from '@/app/hooks/use-sign-up';
 
 interface SignupFormProps {
   verifiedEmail: string;
@@ -12,7 +14,9 @@ interface SignupFormProps {
 
 export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
   const [nickname, setNickname] = useState<string>('');
+  const [fixedNickname, setFixedNickname] = useState<string>(''); // 고정된 닉네임 값
   const [error, setError] = useState<string>('');
+  const [showSuccess, setShowSuccess] = useState<boolean>(false); // 성공 메시지 표시 여부
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<'required' | 'optional'>(
     'required'
@@ -22,6 +26,17 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
     required: false,
     optional: false,
   });
+
+  // 닉네임 중복 확인 훅 사용
+  const nicknameCheckMutation = useNicknameCheck();
+
+  // 회원가입 훅 사용
+  const signupMutation = useSignup();
+
+  // 닉네임 변경 시 성공 메시지 숨기기
+  useEffect(() => {
+    setShowSuccess(false);
+  }, [nickname]);
 
   // 약관 동의 상태 관리
   useEffect(() => {
@@ -61,10 +76,55 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
     setNickname(value);
   };
 
+  const handleNicknameCheck = () => {
+    if (!nickname.trim()) {
+      setError('닉네임을 입력해주세요.');
+      return;
+    }
+
+    // 닉네임 중복 확인 요청
+    nicknameCheckMutation.mutate(nickname, {
+      onSuccess: (data) => {
+        if (data === '중복된 닉네임입니다') {
+          setError(data); // 중복된 닉네임 메시지
+          setShowSuccess(false);
+        } else {
+          setError('');
+          setShowSuccess(true); // 성공 메시지 표시
+          setFixedNickname(nickname); // 닉네임 고정
+        }
+      },
+      onError: () => {
+        setError('닉네임 확인에 실패했습니다. 다시 시도해주세요.');
+        setShowSuccess(false);
+      },
+    });
+  };
+
+  const handleSignup = () => {
+    if (!fixedNickname) {
+      alert('닉네임 중복 확인을 해주세요.');
+      return;
+    }
+
+    if (!agreements.required) {
+      alert('필수 약관에 동의해주세요.');
+      return;
+    }
+
+    // 회원가입 요청
+    signupMutation.mutate({
+      nickname: fixedNickname,
+      email: verifiedEmail,
+      requiredterm: agreements.required.toString(),
+      optionalterm: agreements.optional.toString(),
+    });
+  };
+
   const isNicknameValid =
     nickname.trim().length >= 1 && nickname.trim().length <= 12 && !error;
 
-  const isFormValid = isNicknameValid && agreements.required;
+  const isFormValid = isNicknameValid && agreements.required && !!fixedNickname; // 고정된 닉네임 있어야 가능
 
   return (
     <>
@@ -97,11 +157,13 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
               onChange={handleNicknameChange}
               isNicknameValid={isNicknameValid}
               error={error}
+              showSuccess={showSuccess} // 성공 메시지 prop 전달
             />
             <CustomButton
               type="button"
               size="xs"
               color={isNicknameValid ? 'purple' : 'gray'}
+              onClick={handleNicknameCheck} // 중복 확인 요청 실행
             >
               중복확인
             </CustomButton>
@@ -121,7 +183,7 @@ export default function EmailSignupForm({ verifiedEmail }: SignupFormProps) {
       {/* 회원가입 버튼 */}
       <CustomButton
         disabled={!isFormValid}
-        onClick={() => console.log('회원가입')}
+        onClick={handleSignup} // 회원가입 요청 실행
         color={isFormValid ? 'purple' : 'gray'}
       >
         회원가입

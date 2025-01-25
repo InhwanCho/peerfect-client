@@ -77,7 +77,13 @@ export default function HomePreview({ activeTab }: HomePreviewProps) {
 
         {/* 하단 버튼 */}
         <div className="my-20 flex justify-center">
-          <CustomButton color="purple" size="small">
+          <CustomButton
+            color="purple"
+            size="small"
+            onClick={() => {
+              router.push(`/challenges/${activeTab}?day=2`);
+            }}
+          >
             {activeTab} 챌린지 시작하기
           </CustomButton>
         </div>

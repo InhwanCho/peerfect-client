@@ -5,6 +5,7 @@ import CustomButton from '@/app/_components/common/custom-button';
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import SvgHalfStar from '@/app/_components/icons/M/HalfStar';
 import SvgXCricleFill from '@/app/_components/icons/M/XCricleFill';
+import { useChallengePreview } from '@/app/hooks/use-challenge-preview';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface SideInfoProps {
@@ -15,16 +16,33 @@ interface SideInfoProps {
 export default function SideInfo({ slug, location }: SideInfoProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const title = searchParams.get('title') || '임시 제목입니다';
+  const active = searchParams.get('active') || '임시 제목입니다';
+  const slugNumber = Number(slug);
 
+  const {
+    data: challengesData,
+    isLoading,
+    isError,
+  } = useChallengePreview(active);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !challengesData) return <div>Error loading challenges</div>;
+
+  const challenge = challengesData.find(
+    (item) => item.challengeNo.toString() === slug
+  );
   return (
     <>
       {location === 'side' ? (
         <aside className="ml-10 hidden w-[320px] lg:block xl:ml-14 xl:w-[340px]">
           <div className="card-container sticky top-32 rounded-lg bg-background-primary px-7 py-8">
             <div>
-              <p className="mb-1 text-sm text-text-primary">#챌린지 {slug}</p>
-              <h2 className="text-xl font-bold text-black">{title}</h2>
+              <p className="mb-1 text-body text-gray-900">
+                #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
+              </p>
+              <h2 className="text-xl font-bold text-black">
+                {challenge?.challengeTitle}
+              </h2>
             </div>
             <div>
               <div className="mt-4 flex items-center justify-between">
@@ -72,8 +90,12 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
             {/* 왼쪽 섹션 챌린지,타이틀*/}
             <div className="flex w-full items-center justify-between p-6 sm:px-10">
               <div className="flex flex-col">
-                <p className="text-sm text-gray-600">#챌린지 {slug}</p>
-                <h2 className="mt-1 text-xl font-bold text-black">{title}</h2>
+                <p className="text-sm text-gray-600">
+                  #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
+                </p>
+                <h2 className="mt-1 text-xl font-bold text-black">
+                  {challenge?.challengeTitle}
+                </h2>
               </div>
               {/* 오른쪽 섹션 날짜, 난이도*/}
               <div className="hidden flex-col items-end space-y-2 sm:flex">

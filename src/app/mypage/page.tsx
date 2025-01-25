@@ -99,6 +99,7 @@ export default function Mypage() {
                 {/* 닉네임 입력 */}
                 <div className="py-20">
                   <NicknameInput
+                    showSuccess
                     label
                     nicknameValue={nickname}
                     onChange={handleNicknameChange}

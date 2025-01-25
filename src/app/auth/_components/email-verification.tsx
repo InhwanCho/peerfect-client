@@ -38,14 +38,17 @@ export default function EmailVerification({
           onSuccess: async (_, variables) => {
             try {
               const result = await checkMemberRequest(variables.verifiedEmail);
-              console.log(result);
+
+              console.log('result :', result);
               // 메시지에 따른 분기 처리
               if (result.message === '회원가입이 되어있습니다.') {
+                //회원입니다.
+                console.log('result.memberId :', result.memberId);
                 // 기존 회원: 토큰과 ID 저장 후 메인 페이지로 이동
                 localStorage.setItem('accessToken', result.accessToken);
                 localStorage.setItem('memberId', result.memberId);
                 router.push('/');
-              } else if (result.message === '회원가입이 완료 되었습니다.') {
+              } else if (result.message === '회원이 아닙니다') {
                 // 신규 회원: 회원가입 진행
                 onProceedToSignup();
               }
@@ -82,7 +85,7 @@ export default function EmailVerification({
                 localStorage.setItem('accessToken', result.accessToken);
                 localStorage.setItem('memberId', result.memberId);
                 router.push('/');
-              } else if (result.message === '회원가입이 완료 되었습니다.') {
+              } else if (result.message === '회원이 아닙니다') {
                 onProceedToSignup();
               }
             } catch (error: any) {

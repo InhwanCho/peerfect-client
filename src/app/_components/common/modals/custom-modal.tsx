@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import SvgX from '@/app/_components/icons/M/X';
 import SvgLeft from '@/app/_components/icons/XL/Left';
 import SvgRight from '@/app/_components/icons/XL/Right';
@@ -11,6 +12,7 @@ interface CustomModalProps {
   onNext?: () => void;
   onPrev?: () => void;
   children?: React.ReactNode;
+  isAdminPage?: boolean;
 }
 
 export default function CustomModal({
@@ -20,16 +22,37 @@ export default function CustomModal({
   onClose,
   onNext,
   onPrev,
+  isAdminPage
 }: CustomModalProps) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose(); // ESC 키를 누르면 모달 닫기
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown); // keydown 이벤트 리스너 추가
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown); // 이벤트 리스너 제거
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#111111]/80"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-[#111111]/80`}
       onClick={onClose}
     >
       <div
-        className="relative h-[82vh] w-[1280px] rounded-lg bg-background-secondary px-[32px] md:px-[57px] lg:px-[82px] xl:px-[180px]"
+        className={`relative h-[82vh] ${
+          isAdminPage
+            ? 'w-[780px] px-[36px] bg-white overflow-y-auto custom-scrollbar'
+            : 'w-[1280px] px-[32px] md:px-[57px] lg:px-[82px] xl:px-[180px] bg-background-secondary'
+        } rounded-lg`}
         onClick={(e) => e.stopPropagation()}
       >
         {xButton && (

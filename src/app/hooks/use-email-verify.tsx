@@ -34,11 +34,25 @@ export const checkMemberRequest = async (email: string) => {
     const response = await apiClient.post(
       '/api/member/checkMember',
       { email },
-      {
-        // 200과 409 상태 코드 모두 성공으로 간주
-        validateStatus: (status) => status === 200 || status === 409,
-      }
+      { withCredentials: true }
     );
+
+    // 메시지가 '회원입니다.'인 경우 헤더를 콘솔에 출력
+    if (response.data.message === '회원입니다.') {
+      const authorizationHeader = response.headers.authorization;
+
+      if (authorizationHeader) {
+        // Bearer 토큰에서 "Bearer " 제거
+        const token = authorizationHeader.replace('Bearer ', '');
+        console.log('Extracted Token:', token);
+
+        // localStorage에 저장
+        localStorage.setItem('accessToken', token);
+        console.log('Token saved to localStorage');
+      }
+    }
+
+    console.log('response :', response);
     return response.data; // 응답 데이터를 반환
   } catch (error: any) {
     throw error;

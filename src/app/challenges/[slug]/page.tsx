@@ -23,7 +23,12 @@ export default async function ChallengesPage({ params }: ChallengesPageProps) {
               <CompletedChallenges isNoCard />
             </>
           ) : (
-            <div>{slug} 섹션은 미구현</div>
+            <>
+              <MainChallenge />
+              <UpcomoingChallenges />
+              <CompletedChallenges />
+              <CompletedChallenges isNoCard />
+            </>
           )}
         </div>
       </div>

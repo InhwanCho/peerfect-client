@@ -1,7 +1,6 @@
-// apiClient.ts
-import axios from 'axios';
+import { DEV_URL } from './../config/config';
 
-const DEV_URL = 'http://15.165.184.154:8008/';
+import axios from 'axios';
 
 const apiClient = axios.create({
   baseURL: DEV_URL,

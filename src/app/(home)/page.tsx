@@ -18,7 +18,6 @@ export default function HomePage() {
       <HomeChallenge activeTab={activeTab} setActiveTab={setActiveTab} />
       <HomePreview activeTab={activeTab} />
       {/* <PeerfectChallenge select={activeTab} setSelect={setActiveTab} /> */}
-      <div>이건 나중에 삭제(임시)</div>
       <ChallengePreview select={activeTab} />
     </>
   );

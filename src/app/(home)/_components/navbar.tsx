@@ -44,7 +44,7 @@ export default function Navbar() {
                   onClick={toggleChallengeDropdown}
                 >
                   <div className="whitespace-nowrap pr-4 font-semibold text-white md:text-base lg:text-subtitle2">
-                    <Link href={'/challenge/002'}>챌린지</Link>
+                    <Link href={''}>챌린지</Link>
                   </div>
                   <SvgArrowDown
                     isOpen={isChallengeOpen}

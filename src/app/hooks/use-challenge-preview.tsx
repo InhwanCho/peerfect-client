@@ -14,6 +14,7 @@ export function useChallengePreview(select: string) {
     queryFn: async () => {
       const endpoint = `/api/challenges/${select.toLowerCase()}-preview`;
       const response = await apiClient.get(endpoint);
+      console.log('response :', response);
       return response.data;
     },
   });

@@ -28,7 +28,6 @@ export default function ChallengeDescription({
         <h2 className="mb-2 text-xl font-bold text-main-primary">
           챌린지 소개
         </h2>
-        <h3 className="mb-4 text-xl font-semibold text-text-primary">title</h3>
         <div className="space-y-2 text-text-primary">
           {introParagraphs.map((paragraph, index) => (
             <p key={index}>{paragraph}.</p>
@@ -39,7 +38,6 @@ export default function ChallengeDescription({
         <h2 className="mb-2 text-xl font-bold text-main-primary">
           챌린지 미션
         </h2>
-        <h3 className="mb-4 text-xl font-semibold text-text-primary">title</h3>
         <ul className="list-disc pl-5 text-text-primary">
           {missionList.map((mission, index) => (
             <li key={index}>{mission}</li>

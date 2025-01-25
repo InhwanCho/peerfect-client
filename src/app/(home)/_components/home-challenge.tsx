@@ -1,5 +1,4 @@
 import H3Title from '@/app/_components/common/h3-title';
-import { useState } from 'react';
 
 interface HomeChallengeProps {
   activeTab: string;
