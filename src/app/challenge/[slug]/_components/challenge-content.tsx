@@ -42,7 +42,7 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
               challengeIntro={challengeDetailData.challengeIntro}
               challengeMission={challengeDetailData.challengeMission}
             />
-            <ChallengeRequirements />
+            {/* <ChallengeRequirements /> */}
             <HowToParticipate />
             <ReviewSection />
             <SideInfo slug={slug} location="content" />

@@ -76,7 +76,7 @@ export default function HowToParticipate() {
       <div className="py-20 text-text-primary">
         <p className="text-gray-900 text-h4 mb-6">업로드 시 지켜주세요!</p>
         <div className="flex flex-col ml-[30px] gap-y-[35px]">
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-6 mt-6">
             <SvgCheckEmptyCircle filledColor="#AC6BFF" />
             <p className="text-body font-semibold text-gray-900">
               이미지 파일 형식:{' '}

@@ -33,7 +33,7 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
   return (
     <header className="mb-10 rounded-3xl shadow-md md:mb-12 lg:mb-[78px]">
       <img
-        src={`/assets/home/${active}-xl/${active}-xl-day3.png`}
+        src={`/assets/home/${active.toLowerCase()}-xl/${active.toLowerCase()}-xl-day${slugNumber > 14 ? slugNumber - 14 : slugNumber}.png`}
         alt="ui challenge hero image"
         className="min-h-[130px] sm:min-h-[178px]"
       />
@@ -45,6 +45,7 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
           {challenge.challengeTitle}
         </h1>
         <ul className="mt-2 list-disc text-body text-gray-600">
+          {/* //challengeShortIntro */}
           {challengeIntroSentences.map((sentence, index) => (
             <li
               key={index}
