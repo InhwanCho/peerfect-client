@@ -70,7 +70,7 @@ export default function AdminHeader({ selected, onSelect }: AdminHeaderProps) {
               참여 및 완료자 수 데이터
             </p>
           </div>
-          <div className="absolute right-16 top-6 flex space-x-[70px] xl:space-x-[90px] 2xl:space-x-[150px]">
+          <div className="absolute right-16 top-6 flex space-x-[70px] xl:space-x-[70px] 2xl:space-x-[150px]">
             <div className="flex flex-col">
               <div className="rounded-full bg-foreground">
                 <p className="text-nowrap px-2.5 py-1 text-small text-white">

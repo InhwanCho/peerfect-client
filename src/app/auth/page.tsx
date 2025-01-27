@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SocialButton from './_components/social-button';
 import EmailRegister from './_components/email-register';
 import { useSearchParams } from 'next/navigation';
@@ -10,9 +10,15 @@ import EmailSignupForm from './_components/email-signup-form';
 export default function AuthPage() {
   const [authType, setAuthType] = useState('social');
   const [isSignupScreen, setIsSignupScreen] = useState<boolean>(false);
+  const [recentLogin, setRecentLogin] = useState<string | null>(null);
   const searchParam = useSearchParams();
   const verifiedCode = searchParam.get('code');
   const verifiedEmail = searchParam.get('email');
+
+  useEffect(() => {
+    const storedRecentLogin = localStorage.getItem("resentLogin");
+    setRecentLogin(storedRecentLogin);
+  }, []);
 
   return (
     <>
@@ -43,11 +49,11 @@ export default function AuthPage() {
             로그인
           </h2>
           <div className="flex w-full flex-col gap-y-3">
-            <SocialButton provider="kakao" />
-            <SocialButton provider="google" />
+            <SocialButton provider="kakao" showRecentBadge={recentLogin === 'kakao'} />
+            <SocialButton provider="google" showRecentBadge={recentLogin === 'google'} />
             {/* <SocialButton provider="apple" showRecentBadge /> */}
             <SocialButton
-              showRecentBadge
+              showRecentBadge={recentLogin === 'email'}
               className="mt-2"
               provider="email"
               onClick={() => setAuthType('email')}

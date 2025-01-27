@@ -39,7 +39,8 @@ export const checkMemberRequest = async (email: string) => {
 
     // 메시지가 '회원입니다.'인 경우 헤더를 콘솔에 출력
     if (response.data.message === '회원입니다.') {
-      const authorizationHeader = response.headers.authorization;
+      const authorizationHeader = response.headers['authorization'];
+      console.log('response.headers :', response.headers);
 
       if (authorizationHeader) {
         // Bearer 토큰에서 "Bearer " 제거
@@ -48,6 +49,7 @@ export const checkMemberRequest = async (email: string) => {
 
         // localStorage에 저장
         localStorage.setItem('accessToken', token);
+        localStorage.setItem('resentLogin', 'email');
         console.log('Token saved to localStorage');
       }
     }

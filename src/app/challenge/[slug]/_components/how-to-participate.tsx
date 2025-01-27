@@ -1,3 +1,4 @@
+import SvgCheckEmptyCircle from '@/app/_components/icons/M/CheckEmptyCircle';
 import MouseIcon from '@/app/_components/icons/mouse-icon';
 import UploadImageIcon from '@/app/_components/icons/upload-image-icon';
 
@@ -7,7 +8,9 @@ export default function HowToParticipate() {
       <h2 className="pb-8 text-xl font-bold text-main-primary md:pb-20">
         참여 방법
       </h2>
-      {/* <p className="text-2xl font-semibold text-text-primary mb-6 text-center">참여 방법 서술</p> */}
+      <p className="text-2xl font-semibold text-text-primary mb-6 text-center">
+        참여 방법 서술
+      </p>
       <div className="flex min-h-[300px] grid-cols-3 flex-col gap-y-12 md:grid">
         {/* Step 1 */}
         <div className="flex flex-col items-center justify-between">
@@ -71,15 +74,30 @@ export default function HowToParticipate() {
         </div>
       </div>
       <div className="py-20 text-text-primary">
-        <p className="pb-4 text-2xl font-semibold">이것만은 꼭 지켜주세요 !</p>
-        <p className="break-words pb-0.5">
-          요구조건을 최대한 준수해주세요. 요구조건을 해결하는 디자인을 통해
-          문제해결 및 디자인 스킬을 동시에 향상시켜보세요!
-        </p>
-        <p className="break-words">
-          또한, 모든 참여자들의 작품은 공유/저장은 삼가해주세요. 각 개인의
-          노력이 담긴 작업물을 우리 모두 함께 보호해요!
-        </p>
+        <p className="text-gray-900 text-h4 mb-6">업로드 시 지켜주세요!</p>
+        <div className="flex flex-col ml-[30px] gap-y-[35px]">
+          <div className="flex items-center space-x-6">
+            <SvgCheckEmptyCircle filledColor="#AC6BFF" />
+            <p className="text-body font-semibold text-gray-900">
+              이미지 파일 형식:{' '}
+              <span className="font-normal pl-1">.png, .jpg</span>
+            </p>
+          </div>
+          <div className="flex items-center space-x-6">
+            <SvgCheckEmptyCircle filledColor="#AC6BFF" />
+            <p className="text-body font-semibold text-gray-900">
+              캔버스 크기:{' '}
+              <span className="font-normal pl-1">1920px × 1920px 캔버스 안에서 제작</span>
+            </p>
+          </div>
+          <div className="flex items-center space-x-6">
+            <SvgCheckEmptyCircle filledColor="#AC6BFF" />
+            <p className="text-body font-semibold text-gray-900">
+              텍스트 가독성:{' '}
+              <span className="font-normal pl-1">최소 14px이상</span>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -8,6 +8,7 @@ import {
   checkMemberRequest,
 } from '@/app/hooks/use-email-verify';
 import { useRouter } from 'next/navigation';
+import { Timer } from '@/app/_components/common/timer';
 
 interface EmailVerificationProps {
   verifiedEmail?: string;
@@ -37,29 +38,23 @@ export default function EmailVerification({
         {
           onSuccess: async (_, variables) => {
             try {
-              const result = await checkMemberRequest(variables.verifiedEmail);
+              const response = await checkMemberRequest(
+                variables.verifiedEmail
+              );
 
-              console.log('result :', result);
+              console.log('response :', response);
               // 메시지에 따른 분기 처리
-              if (result.message === '회원가입이 되어있습니다.') {
+              if (response.message === '회원입니다.') {
                 //회원입니다.
-                console.log('result.memberId :', result.memberId);
-                // 기존 회원: 토큰과 ID 저장 후 메인 페이지로 이동
-                localStorage.setItem('accessToken', result.accessToken);
-                localStorage.setItem('memberId', result.memberId);
+                console.log('response.memberId :', response.memberId);
+                alert('로그인 성공.');
                 router.push('/');
-              } else if (result.message === '회원이 아닙니다') {
+              } else if (response.message === '회원이 아닙니다') {
                 // 신규 회원: 회원가입 진행
                 onProceedToSignup();
               }
             } catch (error: any) {
               console.log('error:', error);
-              if (error.response && error.response.status === 401) {
-                // 401 오류 시, 회원가입 진행
-                onProceedToSignup();
-              } else {
-                alert('알 수 없는 오류가 발생했습니다.');
-              }
             }
           },
           onError: () => {
@@ -80,20 +75,23 @@ export default function EmailVerification({
         {
           onSuccess: async (_, variables) => {
             try {
-              const result = await checkMemberRequest(variables.verifiedEmail);
-              if (result.message === '회원가입이 되어있습니다.') {
-                localStorage.setItem('accessToken', result.accessToken);
-                localStorage.setItem('memberId', result.memberId);
+              const response = await checkMemberRequest(
+                variables.verifiedEmail
+              );
+
+              console.log('response :', response);
+              // 메시지에 따른 분기 처리
+              if (response.message === '회원입니다.') {
+                //회원입니다.
+                console.log('response.memberId :', response.memberId);
+                alert('로그인 성공.');
                 router.push('/');
-              } else if (result.message === '회원이 아닙니다') {
+              } else if (response.message === '회원이 아닙니다') {
+                // 신규 회원: 회원가입 진행
                 onProceedToSignup();
               }
             } catch (error: any) {
-              if (error.response && error.response.status === 401) {
-                onProceedToSignup();
-              } else {
-                alert('알 수 없는 오류가 발생했습니다.');
-              }
+              console.log('error:', error);
             }
           },
           onError: () => {
@@ -126,7 +124,7 @@ export default function EmailVerification({
             10분 이내에 인증을 완료해주세요.
           </p>
         </div>
-        <div className="flex w-full gap-x-2">
+        <div className="flex w-full gap-x-2 relative">
           <input
             value={value}
             onChange={handleChange}
@@ -138,6 +136,11 @@ export default function EmailVerification({
                   ? 'border-main-primary'
                   : 'focus:border-main-primary focus:outline-none'
               } md:text-buttonM`}
+          />
+          <Timer
+            duration={600}
+            reset
+            className="top-4 left-[260px] select-none pointer-events-none"
           />
           <CustomButton color="purple" onClick={handleVerify} size="xs">
             인증완료
