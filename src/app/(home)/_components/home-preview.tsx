@@ -81,7 +81,7 @@ export default function HomePreview({ activeTab }: HomePreviewProps) {
             color="purple"
             size="small"
             onClick={() => {
-              router.push(`/challenges/${activeTab}?day=2`);
+              router.push(`/challenges/${activeTab}?day=1`);
             }}
           >
             {activeTab} 챌린지 시작하기

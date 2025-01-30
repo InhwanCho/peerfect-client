@@ -163,13 +163,21 @@ export default function MultiInputs() {
                   {
                     'bg-gray-100': index === activeIndex,
                     'hover:bg-gray-100': index !== activeIndex,
-                  },
-                  selectedValues.includes(option) && 'opacity-50'
+                  }
                 )}
               >
-                <span>{option}</span>
+                <span
+                  className={cn(
+                    selectedValues.includes(option) && 'opacity-30'
+                  )}
+                >
+                  {option}
+                </span>
                 {selectedValues.includes(option) && (
-                  <SvgCheck className="size-4 text-blue-500" />
+                  <SvgCheck
+                    className="size-4 opacity-100"
+                    filledColor="#8530f1"
+                  />
                 )}
               </div>
             ))

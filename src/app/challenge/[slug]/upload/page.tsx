@@ -50,7 +50,7 @@ export default async function UploadPage({ params }: UploadPageProps) {
           />
           <MultiInputs />
           {/* <InputField type="text" placeholder="사용하신 툴을 입력해주세요." /> */}
-          <EffortInput />
+          {/* <EffortInput /> */}
           <TextAreaField placeholder="작업에 대한 간단한 설명 또는 소감을 적어주세요." />
         </div>
       </section>

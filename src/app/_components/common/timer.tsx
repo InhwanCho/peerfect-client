@@ -12,7 +12,7 @@ export function Timer({ duration = 180, reset, className }: TimerProps) {
   const [time, setTime] = useState(duration);
 
   useEffect(() => {
-    setTime(duration);
+    setTime(duration - 1);
   }, [reset]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export function Timer({ duration = 180, reset, className }: TimerProps) {
       <div className="flex flex-col justify-center">
         <TimerIcon />
         <span
-          // style={{ marginLeft: '-1px' }}
+        // style={{ marginLeft: '-1px' }}
         >{`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}</span>
       </div>
     </div>

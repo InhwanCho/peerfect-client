@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import apiClient from '@/lib/api-client';
+import { useUserStore } from '@/store/use-user-store';
 
 interface SignupRequest {
   nickname: string;
@@ -22,19 +23,24 @@ const signupRequest = async (data: SignupRequest) => {
 
     // localStorage에 저장
     localStorage.setItem('accessToken', token);
-    localStorage.setItem('resentLogin', 'email');
+    localStorage.setItem('recentLogin', 'email');
     console.log('Token saved to localStorage');
   }
   return { data: response.data, headers: response.headers };
 };
 
 export const useSignup = () => {
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
   const router = useRouter();
 
   return useMutation({
     mutationFn: signupRequest,
     onSuccess: (response) => {
       console.log('회원가입 성공:', response.data);
+      setUserInfo({
+        memberId: response.data.memberId,
+        nickName: response.data.nickname,
+      });
       alert('회원가입이 완료되었습니다.');
       router.push('/');
     },

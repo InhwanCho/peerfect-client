@@ -9,6 +9,7 @@ import {
 } from '@/app/hooks/use-email-verify';
 import { useRouter } from 'next/navigation';
 import { Timer } from '@/app/_components/common/timer';
+import { useUserStore } from '@/store/use-user-store';
 
 interface EmailVerificationProps {
   verifiedEmail?: string;
@@ -27,6 +28,7 @@ export default function EmailVerification({
   const { mutate } = useEmailVerify();
   const router = useRouter();
 
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
@@ -46,6 +48,10 @@ export default function EmailVerification({
               // 메시지에 따른 분기 처리
               if (response.message === '회원입니다.') {
                 //회원입니다.
+                setUserInfo({
+                  memberId: response.memberId,
+                  nickName: response.nickName,
+                });
                 console.log('response.memberId :', response.memberId);
                 alert('로그인 성공.');
                 router.push('/');
@@ -124,7 +130,7 @@ export default function EmailVerification({
             10분 이내에 인증을 완료해주세요.
           </p>
         </div>
-        <div className="flex w-full gap-x-2 relative">
+        <div className="relative flex w-full gap-x-2">
           <input
             value={value}
             onChange={handleChange}
@@ -140,7 +146,7 @@ export default function EmailVerification({
           <Timer
             duration={600}
             reset
-            className="top-4 left-[260px] select-none pointer-events-none"
+            className="pointer-events-none left-[260px] top-4 select-none"
           />
           <CustomButton color="purple" onClick={handleVerify} size="xs">
             인증완료

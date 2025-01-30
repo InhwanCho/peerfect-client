@@ -2,9 +2,9 @@
 
 import { BellIconAnimation } from '@/app/_components/icon-animation/bell-animation';
 import SvgArrowDown from '@/app/_components/icons/M/ArrowDown';
-import SvgBell from '@/app/_components/icons/M/Bell';
 import SvgX from '@/app/_components/icons/M/X';
 import MenuMoreIcon from '@/app/_components/icons/menu-more-icon';
+import { useUserStore } from '@/store/use-user-store';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -12,6 +12,7 @@ export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { memberId, nickName } = useUserStore();
 
   const toggleChallengeDropdown = () => {
     setIsChallengeOpen(!isChallengeOpen);
@@ -115,11 +116,20 @@ export default function Navbar() {
             </div>
             <div className="flex items-center">
               <Link
-                href="/auth"
+                href={nickName ? '/mypage' : '/auth'}
                 className="hidden text-base font-semibold text-white lg:inline-flex"
               >
                 <span className="text-nowrap font-semibold md:text-base lg:text-subtitle2">
-                  로그인 / 회원가입
+                  {nickName ? (
+                    <>
+                      <span className="text-main-primary">디자이너</span>
+                      <span className="ml-4 font-semibold text-white">
+                        ({nickName}) 님
+                      </span>
+                    </>
+                  ) : (
+                    '로그인 / 회원가입'
+                  )}
                 </span>
               </Link>
             </div>

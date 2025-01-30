@@ -49,7 +49,7 @@ export const checkMemberRequest = async (email: string) => {
 
         // localStorage에 저장
         localStorage.setItem('accessToken', token);
-        localStorage.setItem('resentLogin', 'email');
+        localStorage.setItem('recentLogin', 'email');
         console.log('Token saved to localStorage');
       }
     }

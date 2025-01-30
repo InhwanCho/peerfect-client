@@ -105,9 +105,13 @@ export default function FileUploadForm() {
             </span>
             파일 선택
           </label>
-          <p className="mt-2 text-sm text-[#ACACAC]">
-            첨부 가능한 파일 크기는 최대 10MB입니다.
-          </p>
+          <div className="mt-2.5 flex flex-col text-center text-sm text-[#ACACAC]">
+            <p>* 첨부 가능한 파일 크기는 최대 10MB입니다.</p>
+            <p className="mt-1">
+              * 첫번째 이미지 파일이 메인이미지로 사용됩니다.
+            </p>
+          </div>
+
           {errorMessage && (
             <p className="mt-2 text-sm text-role-negative">{errorMessage}</p>
           )}

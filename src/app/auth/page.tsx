@@ -16,7 +16,7 @@ export default function AuthPage() {
   const verifiedEmail = searchParam.get('email');
 
   useEffect(() => {
-    const storedRecentLogin = localStorage.getItem("resentLogin");
+    const storedRecentLogin = localStorage.getItem('recentLogin');
     setRecentLogin(storedRecentLogin);
   }, []);
 
@@ -49,8 +49,14 @@ export default function AuthPage() {
             로그인
           </h2>
           <div className="flex w-full flex-col gap-y-3">
-            <SocialButton provider="kakao" showRecentBadge={recentLogin === 'kakao'} />
-            <SocialButton provider="google" showRecentBadge={recentLogin === 'google'} />
+            <SocialButton
+              provider="kakao"
+              showRecentBadge={recentLogin === 'kakao'}
+            />
+            <SocialButton
+              provider="google"
+              showRecentBadge={recentLogin === 'google'}
+            />
             {/* <SocialButton provider="apple" showRecentBadge /> */}
             <SocialButton
               showRecentBadge={recentLogin === 'email'}

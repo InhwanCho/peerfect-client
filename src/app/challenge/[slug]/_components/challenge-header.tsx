@@ -1,5 +1,6 @@
 'use client';
 
+import { useChallengeDetail } from '@/app/hooks/use-challenge-detail';
 import { useChallengePreview } from '@/app/hooks/use-challenge-preview';
 import { useSearchParams } from 'next/navigation';
 
@@ -12,7 +13,7 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
     isLoading,
     isError,
   } = useChallengePreview(active);
-
+  const { data: challengeDetailData } = useChallengeDetail(slug, active);
   if (isLoading) return <div>Loading...</div>;
   if (isError || !challengesData) return <div>Error loading challenges</div>;
 
@@ -24,11 +25,6 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
     return <div>Error: Challenge not found for challengeNo {slug}</div>;
 
   const slugNumber = Number(slug); // slug를 숫자로 변환
-  // TODO: detail에서 값 가져와야됨
-  const challengeIntroSentences = challenge.challengeShortIntro
-    .split('.') // 점(`.`)을 기준으로 나눔
-    .map((sentence) => sentence.trim()) // 각 문장의 양쪽 공백 제거
-    .filter((sentence) => sentence.length > 0); // 빈 문자열 필터링
 
   return (
     <header className="mb-10 rounded-3xl shadow-md md:mb-12 lg:mb-[78px]">
@@ -45,15 +41,7 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
           {challenge.challengeTitle}
         </h1>
         <ul className="mt-2 list-disc text-body text-gray-600">
-          {/* //challengeShortIntro */}
-          {challengeIntroSentences.map((sentence, index) => (
-            <li
-              key={index}
-              className="overflow-hidden truncate whitespace-nowrap before:mr-2 before:content-['•']"
-            >
-              {sentence}.
-            </li>
-          ))}
+          {challengeDetailData?.challengeShortIntro || '짧은 소개글란 입니다.'}
         </ul>
       </div>
     </header>

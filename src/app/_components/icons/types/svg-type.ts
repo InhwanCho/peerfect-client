@@ -5,4 +5,5 @@ export interface SvgProps {
   className?: string;
   filledColor?: string;
   isOpen?: boolean;
+  style?: React.CSSProperties;
 }
