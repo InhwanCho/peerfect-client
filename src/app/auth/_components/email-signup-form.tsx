@@ -5,8 +5,8 @@ import CheckIcon from '@/app/_components/icons/check-icon';
 import TermsAgreement from './terms-agrrment';
 import CustomButton from '@/app/_components/common/custom-button';
 import { NicknameInput } from '@/app/_components/common/nickname-input';
-import { useNicknameCheck } from '@/app/hooks/use-nickname-check';
-import { useSignup } from '@/app/hooks/use-sign-up';
+import { useNicknameCheck } from '@/hooks/use-nickname-check';
+import { useSignup } from '@/hooks/use-sign-up';
 
 interface SignupFormProps {
   verifiedEmail: string;

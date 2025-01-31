@@ -3,13 +3,11 @@ import Link from 'next/link';
 import SwitchAuthButton from './switch-auth-button';
 import CustomButton from '@/app/_components/common/custom-button';
 import { useEffect, useState } from 'react';
-import {
-  useEmailVerify,
-  checkMemberRequest,
-} from '@/app/hooks/use-email-verify';
 import { useRouter } from 'next/navigation';
 import { Timer } from '@/app/_components/common/timer';
 import { useUserStore } from '@/store/use-user-store';
+import { checkMemberRequest, useEmailVerify } from '@/hooks/use-email-verify';
+import { fetchMemberInfo } from '@/hooks/use-member-info';
 
 interface EmailVerificationProps {
   verifiedEmail?: string;
@@ -47,12 +45,16 @@ export default function EmailVerification({
               console.log('response :', response);
               // 메시지에 따른 분기 처리
               if (response.message === '회원입니다.') {
-                //회원입니다.
+                const memberInfo = await fetchMemberInfo(response.memberId);
+                console.log('memberInfo :', memberInfo);
                 setUserInfo({
-                  memberId: response.memberId,
-                  nickName: response.nickName,
+                  challengeInfo: memberInfo.challengeInfo,
+                  nickName: memberInfo.nickName,
+                  memberImg: memberInfo.memberImg,
+                  memberId: memberInfo.memberId,
+                  memberEmail: memberInfo.memberEmail,
                 });
-                console.log('response.memberId :', response.memberId);
+
                 alert('로그인 성공.');
                 router.push('/');
               } else if (response.message === '회원이 아닙니다') {

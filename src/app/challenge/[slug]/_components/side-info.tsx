@@ -1,11 +1,12 @@
 'use client';
 
+import { startChallenge } from '@/api/start-challenge';
 import CustomButton from '@/app/_components/common/custom-button';
-
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import SvgHalfStar from '@/app/_components/icons/M/HalfStar';
 import SvgXCricleFill from '@/app/_components/icons/M/XCricleFill';
-import { useChallengePreview } from '@/app/hooks/use-challenge-preview';
+import { useChallengePreview } from '@/hooks/use-challenge-preview';
+import { useUserStore } from '@/store/use-user-store';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 interface SideInfoProps {
@@ -18,6 +19,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   const searchParams = useSearchParams();
   const active = searchParams.get('active') || '임시 제목입니다';
   const slugNumber = Number(slug);
+  const { memberId } = useUserStore();
 
   const {
     data: challengesData,
@@ -31,6 +33,18 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   const challenge = challengesData.find(
     (item) => item.challengeNo.toString() === slug
   );
+
+  const handleStartChallenge = async () => {
+    try {
+      if (!memberId) return;
+      await startChallenge(slugNumber, memberId);
+      console.log('Challenge started successfully');
+      router.push(`/challenges/${active}?day=1`);
+    } catch (error) {
+      console.error('Failed to start challenge:', error);
+    }
+  };
+
   return (
     <>
       {location === 'side' ? (
@@ -69,9 +83,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               </div>
             </div>
             <CustomButton
-              onClick={() => {
-                router.push(`${slug}/upload`);
-              }}
+              onClick={handleStartChallenge}
               color="purple"
               className="my-10"
             >
@@ -118,9 +130,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               </div>
             </div>
             <CustomButton
-              onClick={() => {
-                router.push(`/start-challenge`);
-              }}
+              onClick={handleStartChallenge}
               color="purple"
               size="xs"
               className="mr-6 sm:mr-10 "

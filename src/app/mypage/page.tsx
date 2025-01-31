@@ -6,15 +6,18 @@ import CustomButton from '../_components/common/custom-button';
 import CustomToggle from '../_components/common/custom-toggle';
 import { MenuState } from '../types/types';
 import MyChallengeRoadMap from './_components/my-challenge-loadmap';
+import { deleteMember } from '@/api/delete-member';
+import { useUserStore } from '@/store/use-user-store';
 
 export default function Mypage() {
-  const [nickname, setNickname] = useState('뽀');
   const [error, setError] = useState('');
   const [selectedMenu, setSelectedMenu] = useState<MenuState>(
     MenuState.MyChallenge
   );
   const [marketingEnabled, setMarketingEnabled] = useState(false);
   const [feedbackEnabled, setFeedbackEnabled] = useState(false);
+  const { memberId, memberImg, memberEmail, nickName } = useUserStore();
+  const [nickname, setNickname] = useState(nickName || '');
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -32,6 +35,18 @@ export default function Mypage() {
   const isNicknameValid =
     nickname.trim().length >= 1 && nickname.trim().length <= 12 && !error;
 
+  const handleDelete = async () => {
+    if (!memberId) return;
+    if (window.confirm('정말로 회원 탈퇴를 진행하시겠습니까?')) {
+      try {
+        await deleteMember(memberId);
+        alert('회원 탈퇴가 완료되었습니다.');
+        // 필요한 후속 동작 수행 (예: 홈 화면으로 이동)
+      } catch (error) {
+        alert('회원 탈퇴 중 문제가 발생했습니다.');
+      }
+    }
+  };
   return (
     <main className="min-h-[calc(100vh-90px)] bg-gray-50">
       <div className="mx-auto px-20 xl:w-[70%] xl:px-0">
@@ -68,7 +83,16 @@ export default function Mypage() {
                 <h4 className="pt-12 text-h4">프로필 정보</h4>
                 <div className="flex w-full pt-8">
                   <div className="flex flex-col items-center justify-center">
-                    <div className="size-[130px] rounded-full bg-gray-200"></div>
+                    {memberImg ? (
+                      <img
+                        src={memberImg}
+                        alt={`${nickName} profile`}
+                        className="size-[130px] rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="size-[130px] rounded-full bg-gray-200"></div>
+                    )}
+
                     <button
                       className="mt-6 w-[100px] rounded-full border border-[#AC6BFF] p-2.5 text-buttonS text-main-purple-1"
                       aria-label="upload picture"
@@ -90,7 +114,7 @@ export default function Mypage() {
                         이메일
                       </p>
                       <span className="font-medium text-text-primary">
-                        asdfaf@naver.com
+                        {memberEmail}
                       </span>
                     </div>
                   </div>
@@ -101,7 +125,7 @@ export default function Mypage() {
                   <NicknameInput
                     showSuccess
                     label
-                    nicknameValue={nickname}
+                    nicknameValue={nickname!}
                     onChange={handleNicknameChange}
                     isNicknameValid={isNicknameValid}
                     error={error}
@@ -152,6 +176,9 @@ export default function Mypage() {
                     />
                   </div>
                 </div>
+                <button className="mt-20 bg-red-50" onClick={handleDelete}>
+                  임시 - 회원 탈퇴 버튼
+                </button>
                 <div className="mt-20 flex items-center justify-center">
                   <CustomButton className="" color="gray" size="small">
                     저장하기

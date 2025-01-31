@@ -9,7 +9,7 @@ import TabMenu from './tab-menu';
 import WorkGallery from './work-gallery';
 import ChallengeRequirements from './challenge-requirements';
 import { useSearchParams } from 'next/navigation';
-import { useChallengeDetail } from '@/app/hooks/use-challenge-detail';
+import { useChallengeDetail } from '@/hooks/use-challenge-detail';
 
 interface ChallengeContentProps {
   slug: string;

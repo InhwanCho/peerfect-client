@@ -1,7 +1,6 @@
 'use client';
 
-import { useChallengeDetail } from '@/app/hooks/use-challenge-detail';
-import { useChallengePreview } from '@/app/hooks/use-challenge-preview';
+import { useChallengeDetail } from '@/hooks/use-challenge-detail';
 import { useSearchParams } from 'next/navigation';
 
 export default function ChallengeHeader({ slug }: { slug: string }) {
@@ -9,22 +8,15 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
   const active = searchParams.get('active') || 'ux';
 
   const {
-    data: challengesData,
+    data: challengeDetailData,
     isLoading,
     isError,
-  } = useChallengePreview(active);
-  const { data: challengeDetailData } = useChallengeDetail(slug, active);
+  } = useChallengeDetail(slug, active);
   if (isLoading) return <div>Loading...</div>;
-  if (isError || !challengesData) return <div>Error loading challenges</div>;
+  if (isError || !challengeDetailData)
+    return <div>Error loading challenges</div>;
 
-  const challenge = challengesData.find(
-    (item) => item.challengeNo.toString() === slug
-  );
-
-  if (!challenge)
-    return <div>Error: Challenge not found for challengeNo {slug}</div>;
-
-  const slugNumber = Number(slug); // slug를 숫자로 변환
+  const slugNumber = Number(slug);
 
   return (
     <header className="mb-10 rounded-3xl shadow-md md:mb-12 lg:mb-[78px]">
@@ -38,7 +30,7 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
           #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
         </h2>
         <h1 className="mt-1 text-2xl font-semibold text-text-primary">
-          {challenge.challengeTitle}
+          {challengeDetailData.challengeGroup}
         </h1>
         <ul className="mt-2 list-disc text-body text-gray-600">
           {challengeDetailData?.challengeShortIntro || '짧은 소개글란 입니다.'}

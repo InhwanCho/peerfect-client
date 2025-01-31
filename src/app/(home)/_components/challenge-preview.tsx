@@ -15,7 +15,7 @@ export default function ChallengePreview({ select }: ChallengePreviewProps) {
         {/* 제목 */}
         <H3Title title="챌린지 미리보기" eyes={true} />
         {/* 카드 섹션 */}
-        <ChallengeCard select={select} />
+        {/* <ChallengeCard select={select} /> */}
         {select && (
           <div className="mt-28 flex items-center justify-center text-white">
             <CustomButton

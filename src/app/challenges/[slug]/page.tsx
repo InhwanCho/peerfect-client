@@ -1,15 +1,36 @@
+'use client';
+
 import Footer from '@/app/(home)/_components/footer';
 import ChallengesHero from './_components/challenges-hero';
 import CompletedChallenges from './_components/completed-challenges';
 import MainChallenge from './_components/main-challenge';
 import UpcomoingChallenges from './_components/upcomingChallenges';
+import { useUserStore } from '@/store/use-user-store';
+import { fetchMemberInfo } from '@/hooks/use-member-info';
+import { useEffect, useState } from 'react';
 
 interface ChallengesPageProps {
   params: Promise<{ slug: string }>;
 }
+export default function ChallengesPage({ params }: ChallengesPageProps) {
+  const { memberId } = useUserStore();
+  const [slug, setSlug] = useState<string | null>(null);
+  console.log('memberId :', memberId);
+  useEffect(() => {
+    async function initializePage() {
+      const resolvedParams = await params;
+      setSlug(resolvedParams.slug);
 
-export default async function ChallengesPage({ params }: ChallengesPageProps) {
-  const { slug } = await params;
+      if (memberId) {
+        const fetchedMemberInfo = await fetchMemberInfo(memberId);
+        console.log('fetchedmemberinfo :', fetchedMemberInfo);
+      }
+    }
+
+    initializePage();
+  }, [params, memberId]);
+
+  if (!slug) return <div>Loading...</div>;
   return (
     <div>
       <ChallengesHero slug={slug} />
@@ -17,17 +38,15 @@ export default async function ChallengesPage({ params }: ChallengesPageProps) {
         <div className="flex w-full flex-col px-8 lg:w-[90%] xl:w-3/4">
           {slug === 'UX' ? (
             <>
-              <MainChallenge />
-              <UpcomoingChallenges />
-              <CompletedChallenges />
-              <CompletedChallenges isNoCard />
+              <MainChallenge select="UX" />
+              <UpcomoingChallenges select="UX" />
+              <CompletedChallenges select="UX" />
             </>
           ) : (
             <>
-              <MainChallenge />
-              <UpcomoingChallenges />
-              <CompletedChallenges />
-              <CompletedChallenges isNoCard />
+              <MainChallenge select="UI" />
+              <UpcomoingChallenges select="UI" />
+              <CompletedChallenges select="UI" />
             </>
           )}
         </div>

@@ -1,17 +1,29 @@
 import ChallengeCard from '@/app/_components/common/challenge-card';
 import H3Title from '@/app/_components/common/h3-title';
+import { useCompletedChallenge } from '@/hooks/use-completed-challenge';
+import { useUserStore } from '@/store/use-user-store';
 
 interface CompletedChallengesProps {
-  isNoCard?: boolean; //임시
+  select: string;
 }
 
 export default function CompletedChallenges({
-  isNoCard,
+  select,
 }: CompletedChallengesProps) {
+  const { memberId } = useUserStore();
+  const {
+    data: completedData,
+    isLoading,
+    isError,
+  } = useCompletedChallenge(memberId!);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !completedData) return <div>Error loading challenges</div>;
+
   return (
     <div className="py-20">
       <H3Title title="완료된 챌린지" />
-      {isNoCard ? (
+      {completedData.length === 0 ? (
         <div className="flex w-full justify-center">
           <div className="flex h-[475px] w-[500px] flex-col items-center">
             <img
@@ -27,7 +39,11 @@ export default function CompletedChallenges({
           </div>
         </div>
       ) : (
-        <ChallengeCard completed select="UI" />
+        <ChallengeCard
+          completed
+          select={select}
+          challengesData={completedData}
+        />
       )}
     </div>
   );

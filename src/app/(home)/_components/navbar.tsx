@@ -12,7 +12,11 @@ export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { memberId, nickName } = useUserStore();
+  const { nickName, memberImg, memberEmail } = useUserStore();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   const toggleChallengeDropdown = () => {
     setIsChallengeOpen(!isChallengeOpen);
@@ -116,17 +120,80 @@ export default function Navbar() {
             </div>
             <div className="flex items-center">
               <Link
-                href={nickName ? '/mypage' : '/auth'}
+                href={nickName ? '' : '/auth'}
                 className="hidden text-base font-semibold text-white lg:inline-flex"
               >
                 <span className="text-nowrap font-semibold md:text-base lg:text-subtitle2">
                   {nickName ? (
-                    <>
-                      <span className="text-main-primary">디자이너</span>
-                      <span className="ml-4 font-semibold text-white">
-                        ({nickName}) 님
-                      </span>
-                    </>
+                    <div className="relative">
+                      {/* 닉네임 및 클릭 영역 */}
+                      <div
+                        onClick={toggleMenu}
+                        className="flex cursor-pointer items-center text-white"
+                      >
+                        <span className="text-main-primary">디자이너</span>
+                        <span className="ml-4 font-semibold text-white">
+                          ({nickName})님
+                        </span>
+                      </div>
+
+                      {/* 드롭다운 메뉴 */}
+                      {isMenuOpen && (
+                        <div className="absolute -left-2 top-[56px] w-[335px] rounded-b-lg bg-[#282828]">
+                          {/* 프로필 영역 */}
+                          <div className="flex h-[90px] items-center p-6">
+                            <img
+                              src={
+                                memberImg
+                                  ? memberImg
+                                  : '/assets/sample/sample-profile.png'
+                              }
+                              alt={`${nickName} profile`}
+                              className="size-[67px] rounded-full object-cover"
+                            />
+                            <div className="ml-4">
+                              <p className="text-body text-gray-50">
+                                {memberEmail}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* 메뉴 리스트 */}
+                          <div className="py-1 text-buttonM">
+                            <Link
+                              href="/my-challenges"
+                              className="flex h-[48px] items-center px-6 text-gray-50 hover:bg-gray-800"
+                            >
+                              나의 챌린지
+                            </Link>
+                            <Link
+                              href="/my-works"
+                              className="flex h-[48px] items-center px-6 text-gray-50 hover:bg-gray-800"
+                            >
+                              나의 작업물
+                            </Link>
+                            <Link
+                              href="/mypage"
+                              className="flex h-[48px] items-center px-6 text-[#AB6BFF] hover:bg-gray-800"
+                            >
+                              마이페이지
+                            </Link>
+                          </div>
+                          <div className="mx-6 h-px border-b border-gray-50"></div>
+                          {/* 로그아웃 */}
+                          <div className="pt-1 text-buttonM">
+                            <button
+                              onClick={() => {
+                                console.log('로그아웃');
+                              }}
+                              className="flex h-[48px] w-full items-center px-6 text-left text-gray-50 hover:rounded-b-lg hover:bg-gray-800"
+                            >
+                              로그아웃
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   ) : (
                     '로그인 / 회원가입'
                   )}

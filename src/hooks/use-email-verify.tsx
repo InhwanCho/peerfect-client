@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import apiClient from '@/lib/api-client';
+import { setAuthToken } from '@/lib/token';
 
 interface EmailVerifyRequest {
   verifiedEmail: string;
@@ -40,17 +41,10 @@ export const checkMemberRequest = async (email: string) => {
     // 메시지가 '회원입니다.'인 경우 헤더를 콘솔에 출력
     if (response.data.message === '회원입니다.') {
       const authorizationHeader = response.headers['authorization'];
-      console.log('response.headers :', response.headers);
-
       if (authorizationHeader) {
-        // Bearer 토큰에서 "Bearer " 제거
-        const token = authorizationHeader.replace('Bearer ', '');
-        console.log('Extracted Token:', token);
+        setAuthToken(authorizationHeader);
 
-        // localStorage에 저장
-        localStorage.setItem('accessToken', token);
         localStorage.setItem('recentLogin', 'email');
-        console.log('Token saved to localStorage');
       }
     }
 

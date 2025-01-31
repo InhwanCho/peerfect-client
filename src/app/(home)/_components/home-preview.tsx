@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import H3Title from '@/app/_components/common/h3-title';
 import SvgArrowDown from '@/app/_components/icons/M/ArrowDown';
 import SvgArrowUp from '@/app/_components/icons/M/ArrowUp';
-import { useChallengePreview } from '@/app/hooks/use-challenge-preview';
+import { useChallengePreview } from '@/hooks/use-challenge-preview';
 import CustomButton from '@/app/_components/common/custom-button';
 
 interface HomePreviewProps {
@@ -81,7 +81,9 @@ export default function HomePreview({ activeTab }: HomePreviewProps) {
             color="purple"
             size="small"
             onClick={() => {
-              router.push(`/challenges/${activeTab}?day=1`);
+              router.push(
+                `${activeTab === 'UX' ? '/challenge/15?active=UX' : '/challenge/1?active=UI'}`
+              );
             }}
           >
             {activeTab} 챌린지 시작하기

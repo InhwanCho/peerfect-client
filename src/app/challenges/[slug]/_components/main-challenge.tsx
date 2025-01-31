@@ -1,15 +1,32 @@
 import H3Title from '@/app/_components/common/h3-title';
+import { useMainChallenge } from '@/hooks/use-main-challenge';
+import { useUserStore } from '@/store/use-user-store';
+import Link from 'next/link';
 
-export default function MainChallenge() {
+interface MainChallengeProps {
+  select: string;
+}
+
+export default function MainChallenge({ select }: MainChallengeProps) {
+  const { memberId } = useUserStore();
+  const {
+    data: challengeData,
+    isLoading,
+    isError,
+  } = useMainChallenge(memberId!);
+  console.log('challengeData :', challengeData);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !challengeData) return <div>Error loading challenge</div>;
   return (
-    <div>
+    <Link href={`/challenge/${challengeData.challengeNo}?active=${select}`}>
       <H3Title title="메인 챌린지" />
       <article className="w-full rounded-2xl shadow-card">
         <img src="/assets/home/ux-xl/ux-xl-day1.png" alt="ux card image" />
         <div className="flex flex-col gap-y-4 px-[30px] py-5">
-          <h4 className="text-subtitle1">UX란 무엇인가요?</h4>
+          <h4 className="text-subtitle1">{challengeData?.challengeTitle}</h4>
           <li className="text-body text-gray-600">
-            UX와 UI의 차이를 간단히 조사하고, 노트에 정리해보세요.
+            {challengeData?.challengeShortIntro}
           </li>
           <div className="flex justify-end text-sm font-semibold text-gray-400">
             <img
@@ -22,6 +39,6 @@ export default function MainChallenge() {
           </div>
         </div>
       </article>
-    </div>
+    </Link>
   );
 }

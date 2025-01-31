@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import EmailSignupForm from './email-signup-form';
 import EmailVerification from './email-verification';
 import EmailInputForm from './email-input-form';
-import { useEmailCheck } from '@/app/hooks/use-email-send';
+import { useEmailCheck } from '@/hooks/use-email-send';
 
 interface EmailRegisterProps {
   onSwitchAuthType: () => void;
