@@ -22,7 +22,10 @@ export default function MainChallenge({ select }: MainChallengeProps) {
     <Link href={`/challenge/${challengeData.challengeNo}?active=${select}`}>
       <H3Title title="메인 챌린지" />
       <article className="w-full rounded-2xl shadow-card">
-        <img src="/assets/home/ux-xl/ux-xl-day1.png" alt="ux card image" />
+        <img
+          src={`/assets/home/ux-xl/ux-xl-day${challengeData.challengeNo}.png`}
+          alt="ux card image"
+        />
         <div className="flex flex-col gap-y-4 px-[30px] py-5">
           <h4 className="text-subtitle1">{challengeData?.challengeTitle}</h4>
           <li className="text-body text-gray-600">

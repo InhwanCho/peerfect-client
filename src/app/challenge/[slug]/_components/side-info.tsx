@@ -19,7 +19,8 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   const searchParams = useSearchParams();
   const active = searchParams.get('active') || '임시 제목입니다';
   const slugNumber = Number(slug);
-  const { memberId } = useUserStore();
+  const { memberId, challengeInfo } = useUserStore();
+  console.log('challengeInfo :', challengeInfo);
 
   const {
     data: challengesData,
@@ -135,7 +136,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               size="xs"
               className="mr-6 sm:mr-10 "
             >
-              시작하기
+              {challengeInfo ? '업로드하기' : '시작하기'}
             </CustomButton>
             <button className="mr-6 sm:mr-10">
               <SvgXCricleFill
