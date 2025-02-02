@@ -119,12 +119,9 @@ export default function Navbar() {
               )}
             </div>
             <div className="flex items-center">
-              <Link
-                href={nickName ? '' : '/auth'}
-                className="hidden text-base font-semibold text-white lg:inline-flex"
-              >
-                <span className="text-nowrap font-semibold md:text-base lg:text-subtitle2">
-                  {nickName ? (
+              {nickName ? (
+                <div className="hidden text-base font-semibold text-white lg:inline-flex">
+                  <span className="text-nowrap font-semibold md:text-base lg:text-subtitle2">
                     <div className="relative">
                       {/* 닉네임 및 클릭 영역 */}
                       <div
@@ -194,12 +191,20 @@ export default function Navbar() {
                         </div>
                       )}
                     </div>
-                  ) : (
-                    '로그인 / 회원가입'
-                  )}
-                </span>
-              </Link>
+                  </span>
+                </div>
+              ) : (
+                <Link
+                  href="/auth"
+                  className="hidden text-base font-semibold text-white lg:inline-flex"
+                >
+                  <span className="text-nowrap font-semibold md:text-base lg:text-subtitle2">
+                    로그인 / 회원가입
+                  </span>
+                </Link>
+              )}
             </div>
+
             <button
               className="cursor-pointer lg:hidden"
               onClick={toggleDrawer}

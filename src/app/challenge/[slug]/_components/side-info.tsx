@@ -38,7 +38,8 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   const handleStartChallenge = async () => {
     try {
       if (!memberId) return;
-      await startChallenge(slugNumber, memberId);
+      const a = await startChallenge(slugNumber, memberId);
+      console.log('a :', a);
       console.log('Challenge started successfully');
       router.push(`/challenges/${active}?day=1`);
     } catch (error) {

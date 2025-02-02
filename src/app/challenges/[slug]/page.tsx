@@ -13,9 +13,9 @@ interface ChallengesPageProps {
   params: Promise<{ slug: string }>;
 }
 export default function ChallengesPage({ params }: ChallengesPageProps) {
-  const { memberId, setUserInfo } = useUserStore();
+  const { memberId, setUserInfo, challengeInfo } = useUserStore();
   const [slug, setSlug] = useState<string | null>(null);
-  console.log('memberId :', memberId);
+  console.log('challengeInfo :', challengeInfo);
   useEffect(() => {
     async function initializePage() {
       const resolvedParams = await params;
@@ -29,6 +29,7 @@ export default function ChallengesPage({ params }: ChallengesPageProps) {
     }
 
     initializePage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params, memberId]);
 
   if (!slug) return <div>Loading...</div>;

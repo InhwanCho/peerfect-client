@@ -11,6 +11,7 @@ interface ChallengeCardProps {
     challengeNo: number;
     challengeShortIntro: string;
     challengeTitle: string;
+    memberCount: string;
   }[];
 }
 
@@ -107,7 +108,9 @@ export default function ChallengeCard({
                       alt="user image"
                       className="size-[18px]"
                     />
-                    <span className="ml-2 text-gray-900">nn 명</span>
+                    <span className="ml-2 text-gray-900">
+                      {card.memberCount} 명
+                    </span>
                     <span className="pl-1.5 text-main-primary">참가 중</span>
                   </div>
                 </>

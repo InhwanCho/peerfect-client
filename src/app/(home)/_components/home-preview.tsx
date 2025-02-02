@@ -82,7 +82,7 @@ export default function HomePreview({ activeTab }: HomePreviewProps) {
             size="small"
             onClick={() => {
               router.push(
-                `${activeTab === 'UX' ? '/challenge/15?active=UX' : '/challenge/1?active=UI'}`
+                `${activeTab === 'UX' ? '/challenges/UX?day=1' : '/challenges/UI?day=1'}`
               );
             }}
           >

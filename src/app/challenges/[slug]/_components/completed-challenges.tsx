@@ -1,3 +1,4 @@
+'use client';
 import ChallengeCard from '@/app/_components/common/challenge-card';
 import H3Title from '@/app/_components/common/h3-title';
 import { useCompletedChallenge } from '@/hooks/use-completed-challenge';
@@ -10,20 +11,25 @@ interface CompletedChallengesProps {
 export default function CompletedChallenges({
   select,
 }: CompletedChallengesProps) {
-  const { memberId } = useUserStore();
+  const { memberId, challengeInfo } = useUserStore();
+
+  // ✅ challengeInfo가 있을 때만 API 호출
   const {
-    data: completedData,
+    data: completedChallenges,
     isLoading,
     isError,
-  } = useCompletedChallenge(memberId!);
+  } = useCompletedChallenge(memberId || '', {
+    enabled: !!challengeInfo && !!memberId, // challengeInfo 없으면 실행 안함
+  });
+
+  // 데이터가 없을 경우 빈 배열 반환
+  const challengesData = challengeInfo && memberId ? completedChallenges : [];
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError || !completedData) return <div>Error loading challenges</div>;
-
-  return (
-    <div className="py-20">
-      <H3Title title="완료된 챌린지" />
-      {completedData.length === 0 ? (
+  if (isError || !challengesData || challengesData.length === 0) {
+    return (
+      <div className="mb-20">
+        <H3Title title="완료된 챌린지" />
         <div className="flex w-full justify-center">
           <div className="flex h-[475px] w-[500px] flex-col items-center">
             <img
@@ -38,13 +44,18 @@ export default function CompletedChallenges({
             </p>
           </div>
         </div>
-      ) : (
-        <ChallengeCard
-          completed
-          select={select}
-          challengesData={completedData}
-        />
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mb-20">
+      <H3Title title="완료된 챌린지" />
+      <ChallengeCard
+        completed
+        select={select}
+        challengesData={challengesData}
+      />
     </div>
   );
 }

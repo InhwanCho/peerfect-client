@@ -18,6 +18,7 @@ interface MemberInfo {
 export async function fetchMemberInfo(memberId: string): Promise<MemberInfo> {
   const endpoint = `/api/member/${memberId}/memberInfo`;
   const response = await apiClient.get(endpoint);
+  console.log('response :', response);
   return response.data;
 }
 
