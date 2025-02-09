@@ -1,9 +1,12 @@
 'use client';
 
+import { logoutApi } from '@/api/logout';
+import ServiceModal from '@/app/_components/common/modals/service-modal';
 import { BellIconAnimation } from '@/app/_components/icon-animation/bell-animation';
 import SvgArrowDown from '@/app/_components/icons/M/ArrowDown';
 import SvgX from '@/app/_components/icons/M/X';
 import MenuMoreIcon from '@/app/_components/icons/menu-more-icon';
+import { removeAuthToken } from '@/lib/token';
 import { useUserStore } from '@/store/use-user-store';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -12,7 +15,7 @@ export default function Navbar() {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { nickName, memberImg, memberEmail } = useUserStore();
+  const { nickName, memberImg, memberEmail, memberId } = useUserStore();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -34,6 +37,26 @@ export default function Navbar() {
     setIsDrawerOpen(false);
   };
 
+  const handleLogout = async () => {
+    if (!memberId) {
+      console.error('사용자 ID가 없습니다.');
+      return;
+    }
+
+    try {
+      // API 요청
+      await logoutApi(memberId);
+      // 토큰 및 사용자 정보 초기화
+      removeAuthToken();
+      useUserStore.getState().clearAuthToken();
+      alert('로그아웃이 완료되었습니다.');
+    } catch (error) {
+      alert('로그아웃 중 문제가 발생했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  const [temIsModalOpen, setTemIsModalOpen] = useState(false);
+
   return (
     <>
       <header className="sticky top-0 z-30 flex w-full select-none justify-center bg-black">
@@ -46,10 +69,13 @@ export default function Navbar() {
               <nav className="flex items-center">
                 <div
                   className="relative flex cursor-pointer items-center pr-3"
-                  onClick={toggleChallengeDropdown}
+                  // onClick={toggleChallengeDropdown}
+                  onClick={() => {
+                    setTemIsModalOpen(true);
+                  }}
                 >
                   <div className="whitespace-nowrap pr-4 font-semibold text-white md:text-base lg:text-subtitle2">
-                    <Link href={''}>챌린지</Link>
+                    <p>챌린지</p>
                   </div>
                   <SvgArrowDown
                     isOpen={isChallengeOpen}
@@ -57,6 +83,12 @@ export default function Navbar() {
                     props={{ width: 22, height: 22 }}
                   />
                 </div>
+                {temIsModalOpen && (
+                  <ServiceModal
+                    serviceType="selectMainChallenge"
+                    onClose={() => setTemIsModalOpen(false)}
+                  />
+                )}
                 {/* {isChallengeOpen && (
                   <div className="absolute top-[90px] bg-background-primary shadow-card p-4">                    
                     <div>챌린지 나중에 추가</div>
@@ -180,9 +212,7 @@ export default function Navbar() {
                           {/* 로그아웃 */}
                           <div className="pt-1 text-buttonM">
                             <button
-                              onClick={() => {
-                                console.log('로그아웃');
-                              }}
+                              onClick={handleLogout}
                               className="flex h-[48px] w-full items-center px-6 text-left text-gray-50 hover:rounded-b-lg hover:bg-gray-800"
                             >
                               로그아웃

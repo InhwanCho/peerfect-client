@@ -105,11 +105,18 @@ export default function FileUploadForm() {
             </span>
             파일 선택
           </label>
-          <div className="mt-2.5 flex flex-col text-center text-sm text-[#ACACAC]">
-            <p>* 첨부 가능한 파일 크기는 최대 10MB입니다.</p>
-            <p className="mt-1">
-              * 첫번째 이미지 파일이 메인이미지로 사용됩니다.
+          <div className="mt-4 flex flex-col text-center text-sm text-[#ACACAC]">
+            <p>
+              이미지는 <span className="text-main-primary">JPG 또는 PNG</span>{' '}
+              파일로 업로드해주세요.
             </p>
+            <p>
+              <span className="text-main-primary">
+                첫 번째 업로드한 이미지가
+              </span>{' '}
+              대표 이미지가 됩니다.
+            </p>
+            <p className="mt-4">첨부 가능한 파일 크기는 최대 10MB입니다.</p>
           </div>
 
           {errorMessage && (

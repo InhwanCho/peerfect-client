@@ -22,7 +22,7 @@ export default function CustomModal({
   onClose,
   onNext,
   onPrev,
-  isAdminPage
+  isAdminPage,
 }: CustomModalProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -50,8 +50,8 @@ export default function CustomModal({
       <div
         className={`relative h-[82vh] ${
           isAdminPage
-            ? 'w-[780px] px-[36px] bg-white overflow-y-auto custom-scrollbar'
-            : 'w-[1280px] px-[32px] md:px-[57px] lg:px-[82px] xl:px-[180px] bg-background-secondary'
+            ? 'custom-scrollbar w-[780px] overflow-y-auto bg-white px-[36px]'
+            : 'w-[1280px] bg-background-secondary px-[32px] md:px-[57px] lg:px-[82px] xl:px-[180px]'
         } rounded-lg`}
         onClick={(e) => e.stopPropagation()}
       >
