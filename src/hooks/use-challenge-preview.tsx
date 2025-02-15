@@ -6,6 +6,7 @@ interface ChallengeData {
   challengeShortIntro: string;
   challengeTitle: string;
   memberCount: string;
+  challengeDay: string;
 }
 
 export function useChallengePreview(
