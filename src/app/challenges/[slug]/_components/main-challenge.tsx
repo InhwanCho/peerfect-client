@@ -47,7 +47,7 @@ export default function MainChallenge({ select }: MainChallengeProps) {
       <Link href={`/challenge/${challengeData.challengeNo}?active=${select}`}>
         <article className="w-full rounded-2xl shadow-card">
           <img
-            src={`/assets/home/${select}-xl/${select}-xl-day${day}.png`}
+            src={`/assets/home/${select.toLowerCase()}-xl/${select.toLowerCase()}-xl-day${day}.png`}
             alt="challenge card image"
           />
           <div className="flex flex-col gap-y-4 px-[30px] py-5">
