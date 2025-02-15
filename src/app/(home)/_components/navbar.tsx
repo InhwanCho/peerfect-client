@@ -50,6 +50,7 @@ export default function Navbar() {
       removeAuthToken();
       useUserStore.getState().clearAuthToken();
       alert('로그아웃이 완료되었습니다.');
+      window.location.href = '/auth';
     } catch (error) {
       alert('로그아웃 중 문제가 발생했습니다. 다시 시도해주세요.');
     }
@@ -168,7 +169,7 @@ export default function Navbar() {
 
                       {/* 드롭다운 메뉴 */}
                       {isMenuOpen && (
-                        <div className="absolute -left-2 top-[56px] w-[335px] rounded-b-lg bg-[#282828]">
+                        <div className="absolute -left-2 top-[58px] w-[335px] rounded-b-lg bg-[#282828]">
                           {/* 프로필 영역 */}
                           <div className="flex h-[90px] items-center p-6">
                             <img

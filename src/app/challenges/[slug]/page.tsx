@@ -15,7 +15,7 @@ interface ChallengesPageProps {
 export default function ChallengesPage({ params }: ChallengesPageProps) {
   const { memberId, setUserInfo, challengeInfo } = useUserStore();
   const [slug, setSlug] = useState<string | null>(null);
-  console.log('challengeInfo :', challengeInfo);
+
   useEffect(() => {
     async function initializePage() {
       const resolvedParams = await params;
@@ -24,7 +24,6 @@ export default function ChallengesPage({ params }: ChallengesPageProps) {
       if (memberId) {
         const fetchedMemberInfo = await fetchMemberInfo(memberId);
         setUserInfo(fetchedMemberInfo);
-        console.log('fetchedmemberinfo :', fetchedMemberInfo);
       }
     }
 

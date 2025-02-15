@@ -30,7 +30,7 @@ export default function ChallengeHeader({ slug }: { slug: string }) {
           #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
         </h2>
         <h1 className="mt-1 text-2xl font-semibold text-text-primary">
-          {challengeDetailData.challengeGroup}
+          {challengeDetailData.challengeTitle}
         </h1>
         <ul className="mt-2 list-disc text-body text-gray-600">
           {challengeDetailData?.challengeShortIntro || '짧은 소개글란 입니다.'}

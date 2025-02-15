@@ -23,7 +23,6 @@ export function setAuthToken(token: string) {
 // LocalStorage에서 Token을 파싱해 가져오는 함수
 export function getAuthToken(): string | null {
   const tokenDataStr = localStorage.getItem(TOKEN_STORAGE_KEY);
-
   if (!tokenDataStr) return null;
 
   try {
@@ -32,7 +31,6 @@ export function getAuthToken(): string | null {
       expiresAt: number;
     };
 
-    // 만료 시간 확인
     if (new Date().getTime() > tokenData.expiresAt) {
       // 만료된 경우
       // removeAuthToken();

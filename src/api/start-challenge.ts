@@ -6,7 +6,10 @@ export async function startChallenge(
 ): Promise<void> {
   try {
     const endpoint = `/api/challenges/${challengeNo}/member/${userId}/start`;
-    const response = await apiClient.put(endpoint);
+    const response = await apiClient.put(endpoint, {
+      challengeNo: challengeNo,
+      memberId: userId,
+    });
     console.log('Challenge started successfully:', response.data);
   } catch (error) {
     console.error('Error starting challenge:', error);

@@ -12,6 +12,7 @@ interface ChallengeCardProps {
     challengeShortIntro: string;
     challengeTitle: string;
     memberCount: string;
+    challengeDay: string;
   }[];
 }
 
@@ -52,7 +53,7 @@ export default function ChallengeCard({
             >
               {/* 첫 번째 이미지 */}
               <img
-                src={`/assets/home/${select.toLowerCase()}-m/${select.toLowerCase()}-m-day${card.challengeNo}.png`}
+                src={`/assets/home/${select.toLowerCase()}-m/${select.toLowerCase()}-m-day${card.challengeDay}.png`}
                 alt="challenge card image"
                 className="card-image"
               />

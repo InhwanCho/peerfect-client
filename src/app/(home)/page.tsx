@@ -13,7 +13,6 @@ export default function HomePage() {
   const [activeTab, setActiveTab] = useState('UX');
   const { challengeInfo } = useUserStore();
   const router = useRouter();
-  console.log('challengeInfo :', challengeInfo);
 
   // challengeInfo가 있을 경우 페이지 이동 처리 - > challenges로 변경해야됨.
   useEffect(() => {

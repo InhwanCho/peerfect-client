@@ -5,6 +5,7 @@ import { cn } from '../lib/utils';
 
 import Navbar from './(home)/_components/navbar';
 import { Providers } from './_components/provider/providers';
+import TokenCheck from './_components/common/token-check';
 
 export const metadata: Metadata = {
   title: 'PeerFect',
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-pt-[100px] scroll-smooth">
       <body className={`${cn('antialiased', fontPretendard.className)}`}>
         <Providers>
+          <TokenCheck />
           <Navbar />
           {children}
           {modal}

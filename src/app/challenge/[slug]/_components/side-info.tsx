@@ -2,12 +2,14 @@
 
 import { startChallenge } from '@/api/start-challenge';
 import CustomButton from '@/app/_components/common/custom-button';
+import ServiceModal from '@/app/_components/common/modals/service-modal';
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import SvgHalfStar from '@/app/_components/icons/M/HalfStar';
 import SvgXCricleFill from '@/app/_components/icons/M/XCricleFill';
 import { useChallengePreview } from '@/hooks/use-challenge-preview';
 import { useUserStore } from '@/store/use-user-store';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 interface SideInfoProps {
   location: 'content' | 'side';
@@ -17,10 +19,10 @@ interface SideInfoProps {
 export default function SideInfo({ slug, location }: SideInfoProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [modalOpen, setModalOpen] = useState(false);
   const active = searchParams.get('active') || '임시 제목입니다';
   const slugNumber = Number(slug);
   const { memberId, challengeInfo } = useUserStore();
-  console.log('challengeInfo :', challengeInfo);
 
   const {
     data: challengesData,
@@ -38,8 +40,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   const handleStartChallenge = async () => {
     try {
       if (!memberId) return;
-      const a = await startChallenge(slugNumber, memberId);
-      console.log('a :', a);
+      await startChallenge(slugNumber, memberId);
       console.log('Challenge started successfully');
       router.push(`/challenges/${active}?day=1`);
     } catch (error) {
@@ -92,10 +93,19 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               시작하기
             </CustomButton>
             <p className="mt-6 flex justify-center text-center text-sm text-text-caption ">
-              <span className="cursor-pointer decoration-current underline-offset-4 transition-all duration-200 hover:text-text-primary hover:underline">
+              <button
+                onClick={() => setModalOpen(!modalOpen)}
+                className="cursor-pointer decoration-current underline-offset-4 transition-all duration-200 hover:text-text-primary hover:underline"
+              >
                 챌린지를 중단할래요
-              </span>
+              </button>
             </p>
+            {modalOpen && (
+              <ServiceModal
+                serviceType="stopChallenge"
+                onClose={() => setModalOpen(false)}
+              />
+            )}
           </div>
         </aside>
       ) : (
@@ -112,11 +122,11 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
                 </h2>
               </div>
               {/* 오른쪽 섹션 날짜, 난이도*/}
-              <div className="hidden flex-col items-end space-y-2 sm:flex">
+              <div className="hidden flex-col items-start space-y-2 sm:flex">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600">등록날짜</span>
                   <time className="text-sm font-bold text-text-primary">
-                    2024-00-10
+                    2024-10-10
                   </time>
                 </div>
                 <div className="flex items-center space-x-2">

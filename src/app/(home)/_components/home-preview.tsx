@@ -45,7 +45,7 @@ export default function HomePreview({ activeTab }: HomePreviewProps) {
         {/* 챌린지 리스트 */}
         <div
           className={`mt-8 transition-all duration-500 ${
-            showAll ? 'max-h-[1400px]' : 'max-h-[340px]'
+            showAll ? 'max-h-[1450px]' : 'max-h-[340px]'
           } overflow-hidden`}
         >
           {visibleChallenges.map((challenge, index) => (
