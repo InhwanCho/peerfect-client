@@ -22,7 +22,15 @@ export async function reissueToken(token: string): Promise<string> {
     );
     console.log('리이슈 response :', response);
 
-    const newAccessToken = response.data?.accessToken;
+    const data = response.data;
+    const prefix = 'accessToken 재발급완료 : ';
+    let newAccessToken = data;
+
+    // data가 문자열이고 prefix로 시작하면 prefix 부분 제거
+    if (typeof data === 'string' && data.startsWith(prefix)) {
+      newAccessToken = data.substring(prefix.length).trim();
+      console.log('newAccessToken :', newAccessToken);
+    }
 
     if (!newAccessToken) {
       console.log(
