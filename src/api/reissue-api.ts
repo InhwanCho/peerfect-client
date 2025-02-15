@@ -35,6 +35,7 @@ export async function reissueToken(token: string): Promise<string> {
     if (!newAccessToken) {
       removeAuthToken();
       useUserStore.getState().clearAuthToken();
+      useUserStore.persist.clearStorage();
       throw new Error('새로운 토큰이 응답에 없습니다.');
     }
 
@@ -48,6 +49,7 @@ export async function reissueToken(token: string): Promise<string> {
     console.error('🔴 토큰 재발급 실패:', error);
     removeAuthToken();
     useUserStore.getState().clearAuthToken();
+    useUserStore.persist.clearStorage();
     throw new Error('토큰 재발급 중 오류가 발생했습니다.');
   }
 }

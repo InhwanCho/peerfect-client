@@ -6,7 +6,7 @@ import ServiceModal from '@/app/_components/common/modals/service-modal';
 import SvgFilledStar from '@/app/_components/icons/M/FilledStar';
 import SvgHalfStar from '@/app/_components/icons/M/HalfStar';
 import SvgXCricleFill from '@/app/_components/icons/M/XCricleFill';
-import { useChallengePreview } from '@/hooks/use-challenge-preview';
+import { useChallengeDetail } from '@/hooks/use-challenge-detail';
 import { useUserStore } from '@/store/use-user-store';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
@@ -23,19 +23,21 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   const active = searchParams.get('active') || '임시 제목입니다';
   const slugNumber = Number(slug);
   const { memberId, challengeInfo } = useUserStore();
+  console.log('challengeInfo :', challengeInfo);
 
+  // useChallengeDetail 훅을 사용해 챌린지 상세 정보를 가져옴
   const {
-    data: challengesData,
+    data: challengeDetailData,
     isLoading,
     isError,
-  } = useChallengePreview(active);
+  } = useChallengeDetail(slug, active);
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError || !challengesData) return <div>Error loading challenges</div>;
+  if (isError || !challengeDetailData)
+    return <div>Error loading challenge detail</div>;
 
-  const challenge = challengesData.find(
-    (item) => item.challengeNo.toString() === slug
-  );
+  // challengeDetailData는 단일 객체로 반환됩니다.
+  const challenge = challengeDetailData;
 
   const handleStartChallenge = async () => {
     try {
@@ -58,7 +60,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
                 #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
               </p>
               <h2 className="text-xl font-bold text-black">
-                {challenge?.challengeTitle}
+                {challenge.challengeTitle}
               </h2>
             </div>
             <div>
@@ -85,13 +87,26 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
                 </div>
               </div>
             </div>
-            <CustomButton
-              onClick={handleStartChallenge}
-              color="purple"
-              className="my-10"
-            >
-              시작하기
-            </CustomButton>
+            {challengeInfo ? (
+              <CustomButton
+                color="purple"
+                className="my-10"
+                onClick={() => {
+                  router.push(`/challenge/${challengeInfo.currentDay}/upload`);
+                }}
+              >
+                업로드하기
+              </CustomButton>
+            ) : (
+              <CustomButton
+                onClick={handleStartChallenge}
+                color="purple"
+                className="my-10"
+              >
+                시작하기
+              </CustomButton>
+            )}
+
             <p className="mt-6 flex justify-center text-center text-sm text-text-caption ">
               <button
                 onClick={() => setModalOpen(!modalOpen)}
@@ -111,17 +126,17 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
       ) : (
         <aside className="sticky bottom-12 mx-auto block w-full sm:bottom-20 lg:hidden">
           <div className="card-container flex items-center justify-between rounded-lg bg-background-primary">
-            {/* 왼쪽 섹션 챌린지,타이틀*/}
+            {/* 왼쪽 섹션: 챌린지 번호 및 타이틀 */}
             <div className="flex w-full items-center justify-between p-6 sm:px-10">
               <div className="flex flex-col">
                 <p className="text-sm text-gray-600">
                   #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
                 </p>
                 <h2 className="mt-1 text-xl font-bold text-black">
-                  {challenge?.challengeTitle}
+                  {challenge.challengeTitle}
                 </h2>
               </div>
-              {/* 오른쪽 섹션 날짜, 난이도*/}
+              {/* 오른쪽 섹션: 등록날짜, 난이도 */}
               <div className="hidden flex-col items-start space-y-2 sm:flex">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600">등록날짜</span>
@@ -145,7 +160,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               onClick={handleStartChallenge}
               color="purple"
               size="xs"
-              className="mr-6 sm:mr-10 "
+              className="mr-6 sm:mr-10"
             >
               {challengeInfo ? '업로드하기' : '시작하기'}
             </CustomButton>

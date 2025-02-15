@@ -4,23 +4,21 @@ import { useEffect } from 'react';
 import { reissueToken } from '@/api/reissue-api';
 import { getAuthToken, removeAuthToken } from '@/lib/token';
 import { useUserStore } from '@/store/use-user-store';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { fetchMemberInfo } from '@/hooks/use-member-info';
 
 export default function TokenCheck() {
   const router = useRouter();
-  const pathname = usePathname();
+  const { clearUserInfo, clearAuthToken, setUserInfo } = useUserStore();
 
   useEffect(() => {
-    // 현재 경로가 /auth이면 토큰 체크 로직을 실행하지 않음
-    if (pathname === '/auth') return;
-
     const checkToken = async () => {
       const token = getAuthToken();
       if (!token) {
         console.log('🔴 토큰이 없습니다. 로그아웃 처리');
         removeAuthToken();
-        useUserStore.getState().clearAuthToken();
+        clearAuthToken();
+        clearUserInfo();
         router.push('/auth');
         return;
       }
@@ -39,7 +37,9 @@ export default function TokenCheck() {
           if (!newAccessToken) {
             console.log('🔴 토큰 재발급 실패, 로그아웃 처리');
             removeAuthToken();
-            useUserStore.getState().clearAuthToken();
+            clearAuthToken();
+            clearUserInfo();
+
             router.push('/auth');
           } else {
             console.log('✅ 토큰이 성공적으로 재발급됨');
@@ -52,7 +52,7 @@ export default function TokenCheck() {
 
             // memberId로 회원정보 fetch 후 업데이트
             const memberInfo = await fetchMemberInfo(memberIdFromToken);
-            useUserStore.getState().setUserInfo(memberInfo);
+            setUserInfo(memberInfo);
           }
         } else {
           console.log('✅ 토큰이 유효합니다.');
@@ -60,7 +60,8 @@ export default function TokenCheck() {
       } catch (error) {
         console.error('🔴 토큰 검증 중 오류 발생:', error);
         removeAuthToken();
-        useUserStore.getState().clearAuthToken();
+        clearAuthToken();
+        clearUserInfo();
         router.push('/auth');
       }
     };
@@ -90,7 +91,7 @@ export default function TokenCheck() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleWindowFocus);
     };
-  }, [router, pathname]);
+  }, [router]);
 
   return null; // UI를 렌더링하지 않음
 }
