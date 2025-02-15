@@ -6,6 +6,7 @@ interface CompletedChallengeData {
   challengeShortIntro: string;
   challengeTitle: string;
   memberCount: string;
+  challengeDay: string;
 }
 
 export function useCompletedChallenge(
