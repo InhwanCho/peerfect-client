@@ -8,6 +8,7 @@ import { MenuState } from '../types/types';
 import MyChallengeRoadMap from './_components/my-challenge-loadmap';
 import { deleteMember } from '@/api/delete-member';
 import { useUserStore } from '@/store/use-user-store';
+import { fetchMemberInfo } from '@/hooks/use-member-info';
 
 export default function Mypage() {
   const [error, setError] = useState('');
@@ -46,6 +47,12 @@ export default function Mypage() {
         alert('회원 탈퇴 중 문제가 발생했습니다.');
       }
     }
+  };
+
+  const handleUserInfo = async () => {
+    if (!memberId) return;
+    const memberInfo = await fetchMemberInfo(memberId);
+    console.log('memberInfo :', memberInfo);
   };
   return (
     <main className="min-h-[calc(100vh-90px)] bg-gray-50">
@@ -176,9 +183,12 @@ export default function Mypage() {
                     />
                   </div>
                 </div>
-                <button className="mt-20 bg-red-50" onClick={handleDelete}>
-                  임시 - 회원 탈퇴 버튼
-                </button>
+                <div className="mt-20 flex gap-x-10">
+                  <button className=" bg-red-50" onClick={handleDelete}>
+                    임시 - 회원 탈퇴 버튼
+                  </button>
+                  <button onClick={handleUserInfo}>임시 - api 호출</button>
+                </div>
                 <div className="mt-20 flex items-center justify-center">
                   <CustomButton className="" color="gray" size="small">
                     저장하기

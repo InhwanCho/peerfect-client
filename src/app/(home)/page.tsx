@@ -11,7 +11,7 @@ const images = ['/assets/home/home-hero1.png', '/assets/home/home-hero2.png'];
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState('UX');
-  const { challengeInfo } = useUserStore();
+  const { challengeInfo, memberId } = useUserStore();
   const router = useRouter();
 
   // challengeInfo가 있을 경우 페이지 이동 처리 - > challenges로 변경해야됨.

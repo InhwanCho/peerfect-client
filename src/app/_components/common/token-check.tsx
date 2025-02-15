@@ -4,13 +4,18 @@ import { useEffect } from 'react';
 import { reissueToken } from '@/api/reissue-api';
 import { getAuthToken, removeAuthToken } from '@/lib/token';
 import { useUserStore } from '@/store/use-user-store';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import { fetchMemberInfo } from '@/hooks/use-member-info';
 
 export default function TokenCheck() {
   const router = useRouter();
+  const pathname = usePathname();
+
   useEffect(() => {
+    // 현재 경로가 /auth이면 토큰 체크 로직을 실행하지 않음
+    if (pathname === '/auth') return;
+
     const checkToken = async () => {
-      console.log('실행1');
       const token = getAuthToken();
       if (!token) {
         console.log('🔴 토큰이 없습니다. 로그아웃 처리');
@@ -19,7 +24,6 @@ export default function TokenCheck() {
         router.push('/auth');
         return;
       }
-      console.log('실행2');
 
       try {
         // 토큰 만료 여부 확인
@@ -31,7 +35,6 @@ export default function TokenCheck() {
         if (new Date().getTime() > expiresAt) {
           console.log('🔄 토큰 만료됨, 갱신 시도');
           const newAccessToken = await reissueToken(token);
-          console.log('실행3');
 
           if (!newAccessToken) {
             console.log('🔴 토큰 재발급 실패, 로그아웃 처리');
@@ -40,6 +43,16 @@ export default function TokenCheck() {
             router.push('/auth');
           } else {
             console.log('✅ 토큰이 성공적으로 재발급됨');
+
+            // 새 토큰의 payload 디코딩
+            // JWT 포맷: header.payload.signature
+            const payloadBase64 = newAccessToken.split('.')[1];
+            const decodedPayload = JSON.parse(atob(payloadBase64));
+            const memberIdFromToken = decodedPayload.sub;
+
+            // memberId로 회원정보 fetch 후 업데이트
+            const memberInfo = await fetchMemberInfo(memberIdFromToken);
+            useUserStore.getState().setUserInfo(memberInfo);
           }
         } else {
           console.log('✅ 토큰이 유효합니다.');
@@ -77,7 +90,7 @@ export default function TokenCheck() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleWindowFocus);
     };
-  }, [router]);
+  }, [router, pathname]);
 
   return null; // UI를 렌더링하지 않음
 }

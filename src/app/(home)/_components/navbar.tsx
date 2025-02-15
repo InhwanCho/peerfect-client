@@ -21,6 +21,10 @@ export default function Navbar() {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const handleMenuItemClick = () => {
+    setIsMenuOpen(false);
+  };
+
   const toggleChallengeDropdown = () => {
     setIsChallengeOpen(!isChallengeOpen);
   };
@@ -169,7 +173,7 @@ export default function Navbar() {
 
                       {/* 드롭다운 메뉴 */}
                       {isMenuOpen && (
-                        <div className="absolute -left-2 top-[58px] w-[335px] rounded-b-lg bg-[#282828]">
+                        <div className="absolute -left-2 top-[56px] w-[335px] rounded-b-lg bg-[#282828]">
                           {/* 프로필 영역 */}
                           <div className="flex h-[90px] items-center p-6">
                             <img
@@ -191,19 +195,22 @@ export default function Navbar() {
                           {/* 메뉴 리스트 */}
                           <div className="py-1 text-buttonM">
                             <Link
-                              href="/my-challenges"
+                              href="/mypage"
+                              onClick={handleMenuItemClick}
                               className="flex h-[48px] items-center px-6 text-gray-50 hover:bg-gray-800"
                             >
                               나의 챌린지
                             </Link>
                             <Link
-                              href="/my-works"
+                              href="/mypage"
+                              onClick={handleMenuItemClick}
                               className="flex h-[48px] items-center px-6 text-gray-50 hover:bg-gray-800"
                             >
                               나의 작업물
                             </Link>
                             <Link
                               href="/mypage"
+                              onClick={handleMenuItemClick}
                               className="flex h-[48px] items-center px-6 text-[#AB6BFF] hover:bg-gray-800"
                             >
                               마이페이지
@@ -301,7 +308,7 @@ export default function Navbar() {
                 )}
               </div>
               <Link
-                href="/work"
+                href="#"
                 onClick={closeDrawer}
                 className="w-full text-lg font-medium"
               >

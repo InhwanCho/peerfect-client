@@ -5,7 +5,7 @@ export async function startChallenge(
   userId: string
 ): Promise<void> {
   try {
-    const endpoint = `/api/challenges/${challengeNo}/member/${userId}/start`;
+    const endpoint = `/api/member/${userId}/challenges/${challengeNo}/start`;
     const response = await apiClient.put(endpoint, {
       challengeNo: challengeNo,
       memberId: userId,
