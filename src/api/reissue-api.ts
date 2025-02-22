@@ -4,19 +4,13 @@ import { useUserStore } from '@/store/use-user-store';
 
 const REISSUE_ENDPOINT = 'api/member/regenerate-access';
 
-/**
- * 🔄 토큰 재발급 요청
- * @param {string} token 기존 액세스 토큰 (null 처리 전에 호출하는 곳에서 검사)
- * @returns {Promise<string>} 새 액세스 토큰 반환
- */
-export async function reissueToken(token: string): Promise<string> {
+export async function reissueToken() {
   try {
     // 🔄 API 요청: 토큰 재발급
     const response = await axios.post(
       process.env.NEXT_PUBLIC_API_URL + REISSUE_ENDPOINT,
       {},
       {
-        headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       }
     );
@@ -46,10 +40,9 @@ export async function reissueToken(token: string): Promise<string> {
     console.log('✅ 토큰 재발급 성공:', newAccessToken);
     return newAccessToken;
   } catch (error) {
-    console.error('🔴 토큰 재발급 실패:', error);
+    console.log('🔴 토큰 재발급 실패:', error);
     removeAuthToken();
     useUserStore.getState().clearAuthToken();
     useUserStore.persist.clearStorage();
-    throw new Error('토큰 재발급 중 오류가 발생했습니다.');
   }
 }

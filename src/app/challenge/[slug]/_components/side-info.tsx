@@ -67,7 +67,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-sm text-gray-600">등록날짜</span>
                 <time className="text-sm font-bold text-text-primary">
-                  2024-11-10
+                  {challenge.challengeReg.split(' ')[0]}
                 </time>
               </div>
               <div className="mt-2 flex items-center justify-between">
@@ -141,7 +141,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600">등록날짜</span>
                   <time className="text-sm font-bold text-text-primary">
-                    2024-10-10
+                    {challenge.challengeReg.split(' ')[0]}
                   </time>
                 </div>
                 <div className="flex items-center space-x-2">

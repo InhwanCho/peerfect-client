@@ -21,13 +21,13 @@ export default function AdminList() {
       <table className="w-full table-auto text-left text-foreground">
         <thead>
           <tr className="font-semibold">
-            <th className="pl-2.5 h-[44px]">순서</th>
-            <th className="pl-2.5 h-[44px]">카테고리</th>
-            <th className="pl-2.5 h-[44px]">구성단위</th>
-            <th className="pl-2.5 h-[44px]">챌린지 제목</th>
-            <th className="pl-2.5 h-[44px]">등록날짜</th>
-            <th className="pl-2.5 h-[44px]">상태</th>
-            <th className="pl-2.5 h-[44px]">
+            <th className="h-[44px] pl-2.5">순서</th>
+            <th className="h-[44px] pl-2.5">카테고리</th>
+            <th className="h-[44px] pl-2.5">구성단위</th>
+            <th className="h-[44px] pl-2.5">챌린지 제목</th>
+            <th className="h-[44px] pl-2.5">등록날짜</th>
+            <th className="h-[44px] pl-2.5">상태</th>
+            <th className="h-[44px] pl-2.5">
               <SvgCheckEmptyCircle />
             </th>
           </tr>
@@ -35,18 +35,18 @@ export default function AdminList() {
         <tbody>
           {Array.from({ length: 7 }, (_, index) => (
             <tr key={index} className="border-b">
-              <td className="pl-2.5 h-[44px] font-semibold">{`0${index + 1}`}</td>
-              <td className="pl-2.5 h-[44px]">UX</td>
-              <td className="pl-2.5 h-[44px]">Main</td>
+              <td className="h-[44px] pl-2.5 font-semibold">{`0${index + 1}`}</td>
+              <td className="h-[44px] pl-2.5">UX</td>
+              <td className="h-[44px] pl-2.5">Main</td>
               <td
-                className="pl-2.5 h-[44px] truncate cursor-pointer underline-offset-4 hover:underline"
+                className="h-[44px] cursor-pointer truncate pl-2.5 underline-offset-4 hover:underline"
                 onClick={handleModalOpen}
               >
                 UX 초심자를 위한, 초심자에 의한, 챌린지
               </td>
-              <td className="pl-2.5 h-[44px]">2024.09.11</td>
-              <td className="pl-2.5 h-[44px]">업로드 완료</td>
-              <td className="pl-2.5 h-[44px]">
+              <td className="h-[44px] pl-2.5">2024.09.11</td>
+              <td className="h-[44px] pl-2.5">업로드 완료</td>
+              <td className="h-[44px] pl-2.5">
                 <SvgCheckEmptyCircle filledColor="#9e9e9e" />
               </td>
             </tr>

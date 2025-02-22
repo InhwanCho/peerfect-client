@@ -10,7 +10,8 @@ interface ChallengeDetail {
   challengeLevel: number; // 레벨 (예: 0)
   challengeTitle: string; // 챌린지 타이틀
   ruleDetail?: null; // 상세 규칙 (예: "11111")
-  //  challengeDay, 등록날짜, 참여자 수, 난이도 항목 추가 필요
+  challengeReg: string; // 등록 날짜
+  //  challengeDay, 참여자 수, 난이도 항목 추가 필요
 }
 
 export function useChallengeDetail(id: string, active: string) {

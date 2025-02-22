@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { reissueToken } from '@/api/reissue-api';
-import { getAuthToken, removeAuthToken } from '@/lib/token';
+import { getAuthToken, removeAuthToken, setAuthToken } from '@/lib/token';
 import { useUserStore } from '@/store/use-user-store';
 import { useRouter } from 'next/navigation';
 import { fetchMemberInfo } from '@/hooks/use-member-info';
@@ -14,39 +14,30 @@ export default function TokenCheck() {
   useEffect(() => {
     const checkToken = async () => {
       const token = getAuthToken();
+
       if (!token) {
-        console.log('🔴 토큰이 없습니다. 로그아웃 처리');
-        removeAuthToken();
-        clearAuthToken();
-        clearUserInfo();
-        router.push('/auth');
-        return;
-      }
-
-      try {
-        // 토큰 만료 여부 확인
-        const tokenDataStr = localStorage.getItem('AuthorizationToken');
-        if (!tokenDataStr) return;
-
-        const { expiresAt } = JSON.parse(tokenDataStr) as { expiresAt: number };
-
-        if (new Date().getTime() > expiresAt) {
-          console.log('🔄 토큰 만료됨, 갱신 시도');
-          const newAccessToken = await reissueToken(token);
+        try {
+          // 토큰이 없으면 재발급 요청
+          const newAccessToken = await reissueToken();
 
           if (!newAccessToken) {
             console.log('🔴 토큰 재발급 실패, 로그아웃 처리');
             removeAuthToken();
             clearAuthToken();
             clearUserInfo();
-
-            router.push('/auth');
+            // router.push('/auth');
           } else {
             console.log('✅ 토큰이 성공적으로 재발급됨');
 
-            // 새 토큰의 payload 디코딩
-            // JWT 포맷: header.payload.signature
-            const payloadBase64 = newAccessToken.split('.')[1];
+            // 새 토큰 저장 (필요시 setAuthToken 호출)
+            setAuthToken(newAccessToken);
+
+            // 새 토큰의 payload 디코딩 (JWT 포맷: header.payload.signature)
+            const tokenParts = newAccessToken.split('.');
+            if (tokenParts.length !== 3) {
+              throw new Error('Invalid token format');
+            }
+            const payloadBase64 = tokenParts[1];
             const decodedPayload = JSON.parse(atob(payloadBase64));
             const memberIdFromToken = decodedPayload.sub;
 
@@ -54,15 +45,15 @@ export default function TokenCheck() {
             const memberInfo = await fetchMemberInfo(memberIdFromToken);
             setUserInfo(memberInfo);
           }
-        } else {
-          console.log('✅ 토큰이 유효합니다.');
+        } catch (error) {
+          console.error('🔴 토큰 검증 중 오류 발생:', error);
+          removeAuthToken();
+          clearAuthToken();
+          clearUserInfo();
+          // router.push('/auth');
         }
-      } catch (error) {
-        console.error('🔴 토큰 검증 중 오류 발생:', error);
-        removeAuthToken();
-        clearAuthToken();
-        clearUserInfo();
-        router.push('/auth');
+      } else {
+        console.log('✅ 토큰이 유효합니다.');
       }
     };
 
@@ -91,7 +82,7 @@ export default function TokenCheck() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('focus', handleWindowFocus);
     };
-  }, [router]);
+  }, [router, clearUserInfo, clearAuthToken, setUserInfo]);
 
   return null; // UI를 렌더링하지 않음
 }
