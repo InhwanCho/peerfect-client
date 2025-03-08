@@ -8,8 +8,9 @@ import SideInfo from './side-info';
 import TabMenu from './tab-menu';
 import WorkGallery from './work-gallery';
 import ChallengeRequirements from './challenge-requirements';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useChallengeDetail } from '@/hooks/use-challenge-detail';
+import { useUserStore } from '@/store/use-user-store';
 
 interface ChallengeContentProps {
   slug: string;
@@ -18,7 +19,9 @@ interface ChallengeContentProps {
 export default function ChallengeContent({ slug }: ChallengeContentProps) {
   const [activeTab, setActiveTab] = useState('챌린지설명');
   const searchParams = useSearchParams();
+  const { challengeInfo } = useUserStore();
   const active = searchParams.get('active') || 'ux';
+  const router = useRouter();
 
   const {
     data: challengeDetailData,
@@ -26,9 +29,13 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
     isError,
   } = useChallengeDetail(slug, active);
 
+  if (!challengeInfo) {
+    router.push('/');
+  }
   if (isLoading) return <div>Loading...</div>;
   if (isError || !challengeDetailData)
     return <div>Error loading challenge details</div>;
+  console.log('challengeDetailData :', challengeDetailData);
 
   return (
     <section className="flex w-full justify-center">

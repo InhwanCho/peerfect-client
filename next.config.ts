@@ -1,4 +1,18 @@
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 's3.ap-northeast-2.amazonaws.com',
+        pathname: '/peerfect.kr/profile-images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'peerfect.kr.s3.ap-northeast-2.amazonaws.com',
+        pathname: '/profile-images/**',
+      },
+    ],
+  },
   // async rewrites() {
   //   return [
   //     {

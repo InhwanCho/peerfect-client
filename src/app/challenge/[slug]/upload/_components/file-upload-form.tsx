@@ -6,23 +6,26 @@ import { useState } from 'react';
 import SvgX from '@/app/_components/icons/M/X';
 
 interface UploadedFile {
+  file: File;
   name: string;
-  size: number; // 크기 (bytes)
+  size: number; // bytes
 }
 
-export default function FileUploadForm() {
+interface FileUploadFormProps {
+  onFilesChange?: (files: File[]) => void;
+}
+
+export default function FileUploadForm({ onFilesChange }: FileUploadFormProps) {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const maxTotalSize = 10 * 1024 * 1024; // 10MB
-  const allowedFormats = ['image/jpeg', 'image/png', 'image/gif']; // 허용된 사진 포맷
+  const allowedFormats = ['image/jpeg', 'image/png', 'image/gif'];
 
-  // 총 파일 크기 계산
   const calculateTotalSize = (files: UploadedFile[]) =>
     files.reduce((total, file) => total + file.size, 0);
 
-  // 파일 업로드 처리
   const handleFiles = (files: FileList | null) => {
     if (!files) return;
 
@@ -42,11 +45,15 @@ export default function FileUploadForm() {
       }
 
       totalSize += file.size;
-      newFiles.push({ name: file.name, size: file.size });
+      newFiles.push({ file, name: file.name, size: file.size });
     }
 
-    setUploadedFiles([...uploadedFiles, ...newFiles]);
+    const updatedFiles = [...uploadedFiles, ...newFiles];
+    setUploadedFiles(updatedFiles);
     setErrorMessage(null);
+    if (onFilesChange) {
+      onFilesChange(updatedFiles.map((f) => f.file));
+    }
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -64,18 +71,21 @@ export default function FileUploadForm() {
     handleFiles(e.dataTransfer.files);
   };
 
-  // 파일 선택 처리
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleFiles(e.target.files);
   };
 
   const removeFile = (index: number) => {
-    setUploadedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    const updatedFiles = uploadedFiles.filter((_, i) => i !== index);
+    setUploadedFiles(updatedFiles);
+    if (onFilesChange) {
+      onFilesChange(updatedFiles.map((f) => f.file));
+    }
   };
 
   return (
     <div
-      className={`relative min-w-[320px] ${styles.fileUploadForm} ${
+      className={`relative min-w-[400px] md:min-w-[410px] ${styles.fileUploadForm} ${
         uploadedFiles.length > 0 ? styles.fileUploaded : ''
       } ${isDragging ? styles.dragging : ''}`}
       onDragOver={handleDragOver}
@@ -124,29 +134,45 @@ export default function FileUploadForm() {
           )}
         </>
       ) : (
-        <div className="absolute left-0 top-5 flex w-full select-none flex-col px-4">
-          <div className="flex items-center justify-end text-sm text-gray-800">
-            <span className="pr-4 font-bold">용량</span>
+        <div className="relative flex size-full flex-col rounded-[10px] bg-[#FDFBFF] p-4 shadow-sm">
+          <div className="mt-1 flex items-center justify-end text-sm text-gray-800">
+            <span className="pr-2.5 font-bold">용량</span>
             <span>
               {(calculateTotalSize(uploadedFiles) / 1024).toFixed(2)} KB / 10MB
             </span>
           </div>
-          <div className="flex w-full flex-col space-y-2 pt-5">
+
+          <div className="mt-4 flex w-full flex-1 flex-col space-y-3 overflow-y-auto">
             {uploadedFiles.map((file, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <span className="text-main-purple-1">{file.name}</span>
-                <span className="flex items-center text-sm text-gray-500">
-                  ({(file.size / 1024).toFixed(2)} KB)
-                  <button
-                    className="pl-4 pt-0.5"
-                    onClick={() => removeFile(index)}
-                  >
-                    <SvgX className="size-[18px]" />
+              <div
+                key={index}
+                className="flex max-h-[54px] items-center justify-between rounded-[6px] bg-gray-100 px-4 py-3 shadow-sm"
+              >
+                <div className="flex items-center">
+                  <div className="w-[48px] shrink-0">
+                    {index === 0 ? (
+                      <span className="flex h-[36px] w-[48px] items-center justify-center rounded-[2px] bg-white px-2 py-1 text-xs font-semibold text-main-primary">
+                        메인
+                      </span>
+                    ) : null}
+                  </div>
+                  <span className="ml-2 max-w-[150px] truncate text-secondary lg:max-w-[160px] xl:max-w-[200px]">
+                    {file.name}
+                  </span>
+                </div>
+                <div className="flex items-center text-sm text-gray-800">
+                  <span>({(file.size / 1024).toFixed(2)} KB)</span>
+                  <button className="ml-4" onClick={() => removeFile(index)}>
+                    <SvgX className="size-[18px] text-[#000]" />
                   </button>
-                </span>
+                </div>
               </div>
             ))}
           </div>
+
+          {errorMessage && (
+            <p className="mt-2 text-sm text-role-negative">{errorMessage}</p>
+          )}
         </div>
       )}
     </div>

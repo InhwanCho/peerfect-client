@@ -19,11 +19,11 @@ const signupRequest = async (data: SignupRequest) => {
   const authorizationHeader = response.headers['authorization'];
 
   if (authorizationHeader) {
-    // localStorage에 저장
+    // 쿠키에 저장
     setAuthToken(authorizationHeader);
 
     localStorage.setItem('recentLogin', 'email');
-    console.log('Token saved to localStorage');
+    console.log('Token saved to cookie');
   }
 
   return response.data; // API 응답 데이터 반환

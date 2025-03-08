@@ -1,18 +1,64 @@
-import CustomButton from '@/app/_components/common/custom-button';
+'use client';
+
+import React, { useState, Suspense } from 'react';
+import { useParams } from 'next/navigation';
 import InputField from '@/app/_components/common/input-field';
 import TextAreaField from '@/app/_components/common/textarea-field';
-import SvgArrowRight from '@/app/_components/icons/S/ArrowRight';
-import React, { Suspense } from 'react';
-import FileUploadForm from './_components/file-upload-form';
+import CustomButton from '@/app/_components/common/custom-button';
 import MultiInputs from '../_components/multi-inputs';
-import EffortInput from '@/app/challenge/[slug]/upload/_components/effort-input';
+import FileUploadForm from './_components/file-upload-form';
+import SvgArrowRight from '@/app/_components/icons/S/ArrowRight';
+import { useUploadChallenge } from '@/hooks/use-upload-challenge';
 
-interface UploadPageProps {
-  params: Promise<{ slug: string }>;
-}
+export default function UploadPage() {
+  // next/navigation 를 통해 slug 받기 (challenge_no)
+  const { slug } = useParams() as { slug: string };
 
-export default async function UploadPage({ params }: UploadPageProps) {
-  const { slug } = await params;
+  // 폼 상태 관리 (제목, 링크, 설명, 사용툴, 파일)
+  const [title, setTitle] = useState('');
+  const [link, setLink] = useState('');
+  const [description, setDescription] = useState('');
+  const [tools, setTools] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  console.log('link :', link);
+
+  // 모든 필드가 채워졌는지 확인 (빈 값 또는 길이가 0인 배열 체크)
+  const isFormValid =
+    title.trim() !== '' &&
+    link.trim() !== '' &&
+    description.trim() !== '' &&
+    tools.length > 0 &&
+    files.length > 0;
+
+  // 조건에 따라 버튼 색상을 결정
+  const buttonColor = isFormValid ? 'purple' : 'gray';
+
+  // useUploadChallenge 커스텀 훅 사용
+  const { mutate: uploadMutate } = useUploadChallenge();
+
+  // 업로드 버튼 클릭 시 호출될 핸들러
+  const handleUpload = () => {
+    if (!isFormValid) {
+      setErrorMsg('모든 필드를 입력해주세요.');
+      return;
+    }
+    setErrorMsg(null);
+    const formData = new FormData();
+    formData.append('challenge_no', slug);
+    formData.append('member_id', '123');
+    formData.append('title', title);
+    formData.append('link', link);
+    formData.append('description', description);
+    tools.forEach((tool) => {
+      formData.append('tools', tool);
+    });
+    files.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    uploadMutate(formData);
+  };
 
   return (
     <main className="my-16 h-full">
@@ -30,37 +76,52 @@ export default async function UploadPage({ params }: UploadPageProps) {
         </h1>
       </header>
 
-      {/* Upload Section */}
+      {/* 업로드 섹션 */}
       <section className="flex w-full flex-col gap-8 px-2 md:flex-row lg:gap-10 lg:px-14">
-        {/* File Upload Box */}
+        {/* FileUploadForm: 파일 업로드 상태를 부모로 전달 */}
         <Suspense fallback={<div>Loading File Upload...</div>}>
-          <FileUploadForm />
+          <FileUploadForm onFilesChange={setFiles} />
         </Suspense>
-        {/* Form Section */}
+        {/* 폼 입력 영역 */}
         <div className="w-full space-y-4 md:w-[510px]">
           <InputField
             label="제목"
             type="text"
             placeholder="제목을 입력해주세요."
+            props={{
+              value: title,
+              onChange: (e) => setTitle(e.target.value),
+            }}
           />
           <InputField
             label="링크"
             type="text"
             placeholder="작업물 링크  ex) figma file, github ..."
+            props={{
+              value: link,
+              onChange: (e) => setLink(e.target.value),
+            }}
           />
-          <MultiInputs />
-          {/* <InputField type="text" placeholder="사용하신 툴을 입력해주세요." /> */}
-          {/* <EffortInput /> */}
-          <TextAreaField placeholder="작업에 대한 간단한 설명 또는 소감을 적어주세요." />
+          <MultiInputs onToolsChange={setTools} />
+          <TextAreaField
+            placeholder="작업에 대한 간단한 설명 또는 소감을 적어주세요."
+            props={{
+              value: description,
+              onChange: (e) => setDescription(e.target.value),
+            }}
+          />
         </div>
       </section>
 
       {/* 업로드 버튼 */}
       <div className="my-20 flex justify-center">
-        <CustomButton color="gray" size="large">
+        <CustomButton color={buttonColor} size="large" onClick={handleUpload}>
           업로드하기
         </CustomButton>
       </div>
+      {errorMsg && (
+        <p className="mt-4 text-center text-role-negative">{errorMsg}</p>
+      )}
     </main>
   );
 }

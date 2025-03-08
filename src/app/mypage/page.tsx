@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ChangeEvent, useState, useRef } from 'react';
 import { NicknameInput } from '../_components/common/nickname-input';
 import CustomButton from '../_components/common/custom-button';
 import CustomToggle from '../_components/common/custom-toggle';
@@ -9,6 +9,7 @@ import MyChallengeRoadMap from './_components/my-challenge-loadmap';
 import { deleteMember } from '@/api/delete-member';
 import { useUserStore } from '@/store/use-user-store';
 import { fetchMemberInfo } from '@/hooks/use-member-info';
+import { uploadUserImage } from '@/api/upload-user-image';
 
 export default function Mypage() {
   const [error, setError] = useState('');
@@ -19,17 +20,17 @@ export default function Mypage() {
   const [feedbackEnabled, setFeedbackEnabled] = useState(false);
   const { memberId, memberImg, memberEmail, nickName } = useUserStore();
   const [nickname, setNickname] = useState(nickName || '');
+  const [uploadMessage, setUploadMessage] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const isValid = /^[a-zA-Z가-힣0-9]*$/.test(value);
-
     if (!isValid) {
       setError('특수문자는 사용할 수 없습니다.');
     } else {
       setError('');
     }
-
     setNickname(value);
   };
 
@@ -42,7 +43,6 @@ export default function Mypage() {
       try {
         await deleteMember(memberId);
         alert('회원 탈퇴가 완료되었습니다.');
-        // 필요한 후속 동작 수행 (예: 홈 화면으로 이동)
       } catch (error) {
         alert('회원 탈퇴 중 문제가 발생했습니다.');
       }
@@ -54,6 +54,27 @@ export default function Mypage() {
     const memberInfo = await fetchMemberInfo(memberId);
     console.log('memberInfo :', memberInfo);
   };
+
+  // 버튼 클릭 시 숨겨진 file input 클릭 트리거
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  // 파일 선택 시 단일 파일 업로드 (file와 memberId 전송)
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      try {
+        if (!memberId) throw new Error('회원 ID가 없습니다.');
+        const data = await uploadUserImage(file, memberId);
+        setUploadMessage(data.message);
+      } catch (error) {
+        console.error(error);
+        setUploadMessage('업로드 중 에러 발생');
+      }
+    }
+  };
+
   return (
     <main className="min-h-[calc(100vh-90px)] bg-gray-50">
       <div className="mx-auto px-20 xl:w-[70%] xl:px-0">
@@ -64,19 +85,31 @@ export default function Mypage() {
             <aside className="card-container mr-[110px] h-[300px] w-full min-w-[220px] rounded-2xl bg-background-primary pl-8 pt-[60px] transition-colors lg:w-fit">
               <ul className="space-y-[48px] text-subtitle2">
                 <li
-                  className={`cursor-pointer ${selectedMenu === MenuState.MyChallenge ? 'text-main-primary' : 'text-gray-400'}`}
+                  className={`cursor-pointer ${
+                    selectedMenu === MenuState.MyChallenge
+                      ? 'text-main-primary'
+                      : 'text-gray-400'
+                  }`}
                   onClick={() => setSelectedMenu(MenuState.MyChallenge)}
                 >
                   나의 챌린지 로드맵
                 </li>
                 <li
-                  className={`cursor-pointer ${selectedMenu === MenuState.Profile ? 'text-main-primary' : 'text-gray-400'}`}
+                  className={`cursor-pointer ${
+                    selectedMenu === MenuState.Profile
+                      ? 'text-main-primary'
+                      : 'text-gray-400'
+                  }`}
                   onClick={() => setSelectedMenu(MenuState.Profile)}
                 >
                   프로필 설정
                 </li>
                 <li
-                  className={`cursor-pointer ${selectedMenu === MenuState.Notification ? 'text-main-primary' : 'text-gray-400'}`}
+                  className={`cursor-pointer ${
+                    selectedMenu === MenuState.Notification
+                      ? 'text-main-primary'
+                      : 'text-gray-400'
+                  }`}
                   onClick={() => setSelectedMenu(MenuState.Notification)}
                 >
                   알림 설정
@@ -94,18 +127,35 @@ export default function Mypage() {
                       <img
                         src={memberImg}
                         alt={`${nickName} profile`}
-                        className="size-[130px] rounded-full object-cover"
+                        className="min-h-[130px] min-w-[130px] rounded-full object-cover"
                       />
                     ) : (
                       <div className="size-[130px] rounded-full bg-gray-200"></div>
                     )}
 
+                    {/* 숨김 처리된 파일 업로드 input */}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      id="upload-user-image"
+                      className="hidden"
+                      ref={fileInputRef}
+                      onChange={handleFileChange}
+                    />
+                    {/* 버튼 클릭 시 파일 선택창 열림 */}
                     <button
+                      type="button"
+                      onClick={handleButtonClick}
                       className="mt-6 w-[100px] rounded-full border border-[#AC6BFF] p-2.5 text-buttonS text-main-purple-1"
                       aria-label="upload picture"
                     >
                       사진업로드
                     </button>
+                    {uploadMessage && (
+                      <p className="mt-4 text-sm text-green-600">
+                        {uploadMessage}
+                      </p>
+                    )}
                   </div>
                   <div className="flex h-[196px] w-full flex-col justify-center gap-y-12 pl-[100px]">
                     <div className="flex">
@@ -113,7 +163,7 @@ export default function Mypage() {
                         이름
                       </p>
                       <span className="font-medium text-text-primary">
-                        김뫄뫄
+                        {nickName || '김뫄뫄'}
                       </span>
                     </div>
                     <div className="flex">
@@ -126,7 +176,6 @@ export default function Mypage() {
                     </div>
                   </div>
                 </div>
-
                 {/* 닉네임 입력 */}
                 <div className="py-20">
                   <NicknameInput
@@ -184,7 +233,7 @@ export default function Mypage() {
                   </div>
                 </div>
                 <div className="mt-20 flex gap-x-10">
-                  <button className=" bg-red-50" onClick={handleDelete}>
+                  <button className="bg-red-50" onClick={handleDelete}>
                     임시 - 회원 탈퇴 버튼
                   </button>
                   <button onClick={handleUserInfo}>임시 - api 호출</button>

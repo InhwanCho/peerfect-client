@@ -31,14 +31,13 @@
     background-image: url('/assets/challenge/border.png'); /* 업로드 전 이미지 */
     background-size: 100% 100%;
     background-repeat: no-repeat;
-  }
-  .fileUploadForm.fileUploaded {
-    border: none;
-    background-image: url('/assets/challenge/border2.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
+  }  
   .dragging {
     background-image: url('/assets/challenge/border2.png');
   }
+}
+
+.fileUploadForm.fileUploaded {
+  border: none;
+  background-image: none;
 }

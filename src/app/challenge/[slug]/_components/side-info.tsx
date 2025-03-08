@@ -25,7 +25,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   const { memberId, challengeInfo } = useUserStore();
   console.log('challengeInfo :', challengeInfo);
 
-  // useChallengeDetail 훅을 사용해 챌린지 상세 정보를 가져옴
+  // 챌린지 상세 정보를 가져옴
   const {
     data: challengeDetailData,
     isLoading,
@@ -35,9 +35,6 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
   if (isLoading) return <div>Loading...</div>;
   if (isError || !challengeDetailData)
     return <div>Error loading challenge detail</div>;
-
-  // challengeDetailData는 단일 객체로 반환됩니다.
-  const challenge = challengeDetailData;
 
   const handleStartChallenge = async () => {
     try {
@@ -50,6 +47,29 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
     }
   };
 
+  // 버튼 조건 결정
+  const isChallengeStarted =
+    challengeInfo &&
+    challengeDetailData.challengeType === challengeInfo.currentChallenge &&
+    challengeDetailData.challengeDay === challengeInfo.currentDay;
+
+  const isStartable =
+    !challengeInfo && challengeDetailData.challengeDay === '1';
+
+  let buttonText = '';
+  let buttonAction = () => {};
+  if (isChallengeStarted) {
+    buttonText = '업로드하기';
+    buttonAction = () =>
+      router.push(`/challenge/${challengeInfo.currentDay}/upload`);
+  } else if (isStartable) {
+    buttonText = '시작하기';
+    buttonAction = handleStartChallenge;
+  } else {
+    buttonText = '미리보기 중';
+    buttonAction = () => {};
+  }
+
   return (
     <>
       {location === 'side' ? (
@@ -57,23 +77,23 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
           <div className="card-container sticky top-32 rounded-lg bg-background-primary px-7 py-8">
             <div>
               <p className="mb-1 text-body text-gray-900">
-                #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
+                #챌린지 {challengeDetailData.challengeDay}
               </p>
               <h2 className="text-xl font-bold text-black">
-                {challenge.challengeTitle}
+                {challengeDetailData.challengeTitle}
               </h2>
             </div>
             <div>
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-sm text-gray-600">등록날짜</span>
                 <time className="text-sm font-bold text-text-primary">
-                  {challenge.challengeReg.split(' ')[0]}
+                  {challengeDetailData.challengeReg.split(' ')[0]}
                 </time>
               </div>
               <div className="mt-2 flex items-center justify-between">
                 <span className="text-sm text-gray-600">참여자 수</span>
                 <span className="text-sm font-bold text-main-primary">
-                  23 명 참가 중
+                  {challengeDetailData.challengeCountMember} 명 참가 중
                 </span>
               </div>
               <div className="mt-2 flex items-center justify-between">
@@ -87,26 +107,14 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
                 </div>
               </div>
             </div>
-            {challengeInfo ? (
-              <CustomButton
-                color="purple"
-                className="my-10"
-                onClick={() => {
-                  router.push(`/challenge/${challengeInfo.currentDay}/upload`);
-                }}
-              >
-                업로드하기
-              </CustomButton>
-            ) : (
-              <CustomButton
-                onClick={handleStartChallenge}
-                color="purple"
-                className="my-10"
-              >
-                시작하기
-              </CustomButton>
-            )}
-
+            <CustomButton
+              color="purple"
+              className="my-10"
+              onClick={buttonAction}
+              disabled={buttonText === '미리보기 중'}
+            >
+              {buttonText}
+            </CustomButton>
             <p className="mt-6 flex justify-center text-center text-sm text-text-caption ">
               <button
                 onClick={() => setModalOpen(!modalOpen)}
@@ -126,22 +134,20 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
       ) : (
         <aside className="sticky bottom-12 mx-auto block w-full sm:bottom-20 lg:hidden">
           <div className="card-container flex items-center justify-between rounded-lg bg-background-primary">
-            {/* 왼쪽 섹션: 챌린지 번호 및 타이틀 */}
             <div className="flex w-full items-center justify-between p-6 sm:px-10">
               <div className="flex flex-col">
                 <p className="text-sm text-gray-600">
-                  #챌린지 {slugNumber > 14 ? slugNumber - 14 : slugNumber}
+                  #챌린지 {challengeDetailData.challengeDay}
                 </p>
                 <h2 className="mt-1 text-xl font-bold text-black">
-                  {challenge.challengeTitle}
+                  {challengeDetailData.challengeTitle}
                 </h2>
               </div>
-              {/* 오른쪽 섹션: 등록날짜, 난이도 */}
               <div className="hidden flex-col items-start space-y-2 sm:flex">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-600">등록날짜</span>
                   <time className="text-sm font-bold text-text-primary">
-                    {challenge.challengeReg.split(' ')[0]}
+                    {challengeDetailData.challengeReg.split(' ')[0]}
                   </time>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -157,12 +163,13 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
               </div>
             </div>
             <CustomButton
-              onClick={handleStartChallenge}
+              onClick={buttonAction}
               color="purple"
               size="xs"
               className="mr-6 sm:mr-10"
+              disabled={buttonText === '미리보기 중'}
             >
-              {challengeInfo ? '업로드하기' : '시작하기'}
+              {buttonText}
             </CustomButton>
             <button className="mr-6 sm:mr-10">
               <SvgXCricleFill

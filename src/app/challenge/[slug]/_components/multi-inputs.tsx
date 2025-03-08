@@ -1,7 +1,5 @@
 'use client';
 
-import SvgCheck from '@/app/_components/icons/M/Check';
-import SvgX from '@/app/_components/icons/M/X';
 import { cn } from '@/lib/utils';
 import React, {
   useState,
@@ -10,8 +8,14 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
+import SvgCheck from '@/app/_components/icons/M/Check';
+import SvgX from '@/app/_components/icons/M/X';
 
-export default function MultiInputs() {
+interface MultiInputsProps {
+  onToolsChange?: (tools: string[]) => void;
+}
+
+export default function MultiInputs({ onToolsChange }: MultiInputsProps) {
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -29,6 +33,13 @@ export default function MultiInputs() {
     setActiveIndex(-1);
   };
 
+  // 부모 상태 업데이트는 selectedValues 변경 후 useEffect로 처리
+  useEffect(() => {
+    if (onToolsChange) {
+      onToolsChange(selectedValues);
+    }
+  }, [selectedValues, onToolsChange]);
+
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       const filteredOptions = options.filter(
@@ -44,23 +55,19 @@ export default function MultiInputs() {
             Math.min(prev + 1, filteredOptions.length - 1)
           );
           break;
-
         case 'ArrowUp':
           e.preventDefault();
           setActiveIndex((prev) => Math.max(prev - 1, 0));
           break;
-
         case 'Enter':
           e.preventDefault();
           if (activeIndex >= 0 && filteredOptions[activeIndex]) {
             toggleValue(filteredOptions[activeIndex]);
           }
           break;
-
         case 'Escape':
           setIsDropdownOpen(false);
           break;
-
         case 'Backspace':
           if (inputValue === '' && selectedValues.length > 0) {
             setSelectedValues((prev) => prev.slice(0, -1));
@@ -118,7 +125,6 @@ export default function MultiInputs() {
         )}
         onClick={() => inputRef.current?.focus()}
       >
-        {/* 셀렉된 메뉴 */}
         {selectedValues.map((value) => (
           <div
             key={value}
@@ -130,24 +136,22 @@ export default function MultiInputs() {
               className="ml-2 focus:outline-none"
             >
               <span className="sr-only">Remove {value} option</span>
-              <SvgX className="size-3.5 " filledColor="#fff" />
+              <SvgX className="size-3.5" filledColor="#fff" />
             </button>
           </div>
         ))}
-        {/* 인풋 */}
         <input
           ref={inputRef}
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onFocus={() => setIsDropdownOpen(true)}
-          className={`flex-1 border-none pl-4 outline-none placeholder:text-sm placeholder:text-gray-400 `}
+          className="flex-1 border-none pl-4 outline-none placeholder:text-sm placeholder:text-gray-400"
           placeholder={
             selectedValues.length > 2 ? '' : '사용한 툴을 선택해 주세요.'
           }
         />
       </div>
-      {/* 드롭다운 */}
       {isDropdownOpen && (
         <div
           ref={dropdownRef}

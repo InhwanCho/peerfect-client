@@ -22,6 +22,9 @@ export default function InputField({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHasValue(!!e.target.value);
+    if (props?.onChange) {
+      props.onChange(e);
+    }
   };
 
   return (
@@ -35,7 +38,7 @@ export default function InputField({
         type={type}
         placeholder={placeholder}
         className={cn(
-          'w-full h-[70px] px-5 border-gray-400 bg-background-primary rounded-2xl border placeholder:text-sm placeholder-gray-400 focus:outline-none focus:border-main-primary ',
+          'w-full h-[70px] px-5 border-gray-400 bg-background-primary rounded-2xl border placeholder:text-sm placeholder-gray-400 focus:outline-none focus:border-main-primary',
           hasValue && 'pt-5 outline-none border-main-primary',
           className
         )}

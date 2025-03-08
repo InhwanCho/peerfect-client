@@ -1,7 +1,10 @@
 'use client';
 
+import { stopChallenge } from '@/api/stop-challenge';
 import SvgX from '../../icons/M/X';
 import CustomButton from '../custom-button';
+import { useUserStore } from '@/store/use-user-store';
+import { useRouter } from 'next/navigation';
 
 interface ServiceModalProps {
   onClose: () => void;
@@ -19,6 +22,8 @@ export default function ServiceModal({
   onClose,
   serviceType,
 }: ServiceModalProps) {
+  const router = useRouter();
+  const { memberId, setUserInfo } = useUserStore();
   const modalContent = {
     error: {
       image: '/assets/modal-image/service_error.webp',
@@ -63,12 +68,27 @@ export default function ServiceModal({
         {
           text: '아니요, 계속 도전할래요',
           color: 'purple',
-          onClick: () => console.log('계속 도전 클릭'),
+          onClick: () => {
+            console.log('계속 도전 클릭');
+            onClose();
+          },
         },
         {
           text: '네, 중단할게요',
           color: 'outline-purple',
-          onClick: () => console.log('중단 클릭'),
+          onClick: async () => {
+            try {
+              if (memberId) {
+                await stopChallenge(memberId);
+                console.log('챌린지 중단 성공');
+                setUserInfo({ challengeInfo: null });
+                router.push('/');
+              }
+              onClose();
+            } catch (error) {
+              console.error('챌린지 중단 실패:', error);
+            }
+          },
         },
       ],
     },

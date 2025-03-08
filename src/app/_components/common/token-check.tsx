@@ -13,37 +13,23 @@ export default function TokenCheck() {
 
   useEffect(() => {
     const checkToken = async () => {
-      const token = getAuthToken();
+      let token = getAuthToken();
 
+      // 토큰이 없으면 재발급 요청
       if (!token) {
         try {
-          // 토큰이 없으면 재발급 요청
           const newAccessToken = await reissueToken();
-
           if (!newAccessToken) {
             console.log('🔴 토큰 재발급 실패, 로그아웃 처리');
             removeAuthToken();
             clearAuthToken();
             clearUserInfo();
             // router.push('/auth');
+            return;
           } else {
             console.log('✅ 토큰이 성공적으로 재발급됨');
-
-            // 새 토큰 저장 (필요시 setAuthToken 호출)
             setAuthToken(newAccessToken);
-
-            // 새 토큰의 payload 디코딩 (JWT 포맷: header.payload.signature)
-            const tokenParts = newAccessToken.split('.');
-            if (tokenParts.length !== 3) {
-              throw new Error('Invalid token format');
-            }
-            const payloadBase64 = tokenParts[1];
-            const decodedPayload = JSON.parse(atob(payloadBase64));
-            const memberIdFromToken = decodedPayload.sub;
-
-            // memberId로 회원정보 fetch 후 업데이트
-            const memberInfo = await fetchMemberInfo(memberIdFromToken);
-            setUserInfo(memberInfo);
+            token = newAccessToken;
           }
         } catch (error) {
           console.error('🔴 토큰 검증 중 오류 발생:', error);
@@ -51,9 +37,65 @@ export default function TokenCheck() {
           clearAuthToken();
           clearUserInfo();
           // router.push('/auth');
+          return;
         }
       } else {
-        console.log('✅ 토큰이 유효합니다.');
+        // 토큰이 존재하는 경우, 만료 여부를 확인
+        try {
+          const tokenParts = token.split('.');
+          if (tokenParts.length !== 3) {
+            throw new Error('Invalid token format');
+          }
+          const payloadBase64 = tokenParts[1];
+          const decodedPayload = JSON.parse(atob(payloadBase64));
+          const exp = decodedPayload.exp;
+          const currentTime = Math.floor(Date.now() / 1000);
+          if (currentTime >= exp) {
+            console.log('🔴 토큰이 만료되어 재발급을 요청합니다.');
+            const newAccessToken = await reissueToken();
+            if (!newAccessToken) {
+              console.log('🔴 토큰 재발급 실패, 로그아웃 처리');
+              removeAuthToken();
+              clearAuthToken();
+              clearUserInfo();
+              // router.push('/auth');
+              return;
+            } else {
+              console.log('✅ 토큰이 성공적으로 재발급됨');
+              setAuthToken(newAccessToken);
+              token = newAccessToken;
+            }
+          } else {
+            console.log('✅ 토큰이 유효합니다.');
+          }
+        } catch (error) {
+          console.error('🔴 토큰 검증 중 오류 발생:', error);
+          removeAuthToken();
+          clearAuthToken();
+          clearUserInfo();
+          // router.push('/auth');
+          return;
+        }
+      }
+
+      // 토큰이 정상적으로 존재하면 회원정보를 업데이트
+      try {
+        const tokenParts = token!.split('.');
+        if (tokenParts.length !== 3) {
+          throw new Error('Invalid token format');
+        }
+        const payloadBase64 = tokenParts[1];
+        const decodedPayload = JSON.parse(atob(payloadBase64));
+        const memberIdFromToken = decodedPayload.sub;
+
+        const memberInfo = await fetchMemberInfo(memberIdFromToken);
+        setUserInfo(memberInfo);
+      } catch (error) {
+        console.error('🔴 회원정보 업데이트 중 오류 발생:', error);
+        removeAuthToken();
+        clearAuthToken();
+        clearUserInfo();
+        // router.push('/auth');
       }
     };
 
@@ -84,5 +126,5 @@ export default function TokenCheck() {
     };
   }, [router, clearUserInfo, clearAuthToken, setUserInfo]);
 
-  return null; // UI를 렌더링하지 않음
+  return null; // UI 렌더링 없음
 }
