@@ -51,12 +51,12 @@ export default function ServiceModal({
         {
           text: '로그인하러 가기',
           color: 'purple',
-          onClick: () => console.log('로그인 클릭'),
+          onClick: () => router.push('/auth'),
         },
         {
           text: '회원가입',
           color: 'outline-purple',
-          onClick: () => console.log('회원가입 클릭'),
+          onClick: () => router.push('/auth'),
         },
       ],
     },
@@ -160,7 +160,7 @@ export default function ServiceModal({
         {
           text: '메인 챌린지 설정하기',
           color: 'purple',
-          onClick: () => console.log('메인 챌린지 설정 클릭'),
+          onClick: () => router.push('/'),
         },
         {
           text: '취소',

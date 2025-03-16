@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChallengeDescription from './challenge-description';
 import HowToParticipate from './how-to-participate';
 import ReviewSection from './review-section';
@@ -29,9 +29,13 @@ export default function ChallengeContent({ slug }: ChallengeContentProps) {
     isError,
   } = useChallengeDetail(slug, active);
 
-  if (!challengeInfo) {
-    router.push('/');
-  }
+  useEffect(() => {
+    if (Number(challengeDetailData?.challengeDay) > 4)
+      if (!challengeInfo?.currentDay) {
+        router.back();
+        alert('미리보기는 4일차 까지 가능합니다');
+      }
+  }, [challengeDetailData, challengeInfo?.currentDay, router]);
   if (isLoading) return <div>Loading...</div>;
   if (isError || !challengeDetailData)
     return <div>Error loading challenge details</div>;

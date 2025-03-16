@@ -8,6 +8,7 @@ import UpcomoingChallenges from './_components/upcomingChallenges';
 import { useUserStore } from '@/store/use-user-store';
 import { fetchMemberInfo } from '@/hooks/use-member-info';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ChallengesPageProps {
   params: Promise<{ slug: string }>;
@@ -15,7 +16,7 @@ interface ChallengesPageProps {
 export default function ChallengesPage({ params }: ChallengesPageProps) {
   const { memberId, setUserInfo, challengeInfo } = useUserStore();
   const [slug, setSlug] = useState<string | null>(null);
-
+  const router = useRouter();
   useEffect(() => {
     async function initializePage() {
       const resolvedParams = await params;

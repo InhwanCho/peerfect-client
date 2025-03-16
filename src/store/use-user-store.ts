@@ -4,6 +4,7 @@ import { removeAuthToken } from '@/lib/token';
 import { cookieStorage } from '@/lib/cookie-storage';
 
 interface ChallengeInfo {
+  challengeNo: string | null;
   currentChallenge: string | null;
   currentDay: string | null;
 }

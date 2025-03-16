@@ -16,7 +16,7 @@ export default function HomePage() {
 
   // challengeInfo가 있을 경우 페이지 이동 처리 - > challenges로 변경해야됨.
   useEffect(() => {
-    if (challengeInfo) {
+    if (challengeInfo?.challengeNo) {
       const targetPath = `/challenges/${challengeInfo.currentChallenge}?day=${challengeInfo.currentDay}`;
 
       router.push(targetPath);

@@ -4,6 +4,7 @@ import apiClient from '@/lib/api-client';
 interface ChallengeInfo {
   currentChallenge: string; // ex: "UI"
   currentDay: string; // ex: "day-2"
+  challengeNo: string;
 }
 
 interface MemberInfo {

@@ -20,7 +20,7 @@ export default function MainChallenge({ select }: MainChallengeProps) {
     isLoading: isMainChallengeLoading,
     isError: isMainChallengeError,
   } = useMainChallenge(memberId || '', {
-    enabled: !!challengeInfo && !!memberId,
+    enabled: !!challengeInfo?.challengeNo && !!memberId,
   });
   const {
     data: previewChallenges,
