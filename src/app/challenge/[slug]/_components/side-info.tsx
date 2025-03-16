@@ -54,7 +54,7 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
     challengeDetailData.challengeDay === challengeInfo.currentDay;
 
   const isStartable =
-    !challengeInfo && challengeDetailData.challengeDay === '1';
+    !challengeInfo?.challengeNo && challengeDetailData.challengeDay === '1';
 
   let buttonText = '';
   let buttonAction = () => {};

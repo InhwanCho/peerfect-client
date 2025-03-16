@@ -36,7 +36,9 @@ export default function MainChallenge({ select }: MainChallengeProps) {
 
   // 올바른 데이터 선택
   const challengeData =
-    challengeInfo && memberId ? mainChallengeData : previewChallenges?.[0];
+    challengeInfo?.challengeNo && memberId
+      ? mainChallengeData
+      : previewChallenges?.[0];
 
   if (isLoading) return <div>Loading...</div>;
   if (isError || !challengeData) return <div>Error loading challenge</div>;

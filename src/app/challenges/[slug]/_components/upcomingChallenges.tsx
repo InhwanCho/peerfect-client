@@ -38,7 +38,7 @@ export default function UpcomoingChallenges({
 
   // 데이터 선택
   const challengesData =
-    challengeInfo && memberId ? nextChallenges : previewChallenges;
+    challengeInfo?.challengeNo && memberId ? nextChallenges : previewChallenges;
 
   if (isLoading) return <div>Loading...</div>;
   if (isError || !challengesData) return <div>Error loading challenges</div>;
