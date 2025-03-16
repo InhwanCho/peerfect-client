@@ -49,19 +49,20 @@ export default function SideInfo({ slug, location }: SideInfoProps) {
 
   // 버튼 조건 결정
   const isChallengeStarted =
-    challengeInfo &&
+    challengeInfo?.challengeNo &&
     challengeDetailData.challengeType === challengeInfo.currentChallenge &&
     challengeDetailData.challengeDay === challengeInfo.currentDay;
 
   const isStartable =
     !challengeInfo?.challengeNo && challengeDetailData.challengeDay === '1';
 
+  console.log('challengeInfo :', challengeInfo);
+  console.log('challengeDetailData :', challengeDetailData);
   let buttonText = '';
   let buttonAction = () => {};
   if (isChallengeStarted) {
     buttonText = '업로드하기';
-    buttonAction = () =>
-      router.push(`/challenge/${challengeInfo.currentDay}/upload`);
+    buttonAction = () => router.push(`/challenge/${slug}/upload`);
   } else if (isStartable) {
     buttonText = '시작하기';
     buttonAction = handleStartChallenge;
